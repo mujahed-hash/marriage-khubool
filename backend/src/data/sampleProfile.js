@@ -1,0 +1,42 @@
+/**
+ * Sample profile data - used for seed script and GET /api/profiles/sample
+ * Single source of truth for dummy/test data
+ */
+module.exports = {
+    fullName: 'Mohammed Ahmed Khan',
+    gender: 'male',
+    dateOfBirth: '1995-06-15',
+    height: '175',
+    motherTongue: 'Hindi/Urdu',
+    maritalStatus: 'never_married',
+    religion: 'muslim',
+    caste: 'Sunni',
+    gothra: '',
+    manglik: 'no',
+    country: 'India',
+    state: 'TS',
+    district: 'Hyderabad',
+    city: 'Hyderabad',
+    locality: 'Bhadurpura',
+    pinCode: '500064',
+    nativePlace: 'Hyderabad',
+    highestEducation: 'bachelors',
+    degree: 'B.Tech',
+    occupation: 'Software Engineer',
+    company: 'Tech Corp',
+    monthlyIncome: '50k-1L',
+    fatherStatus: 'Businessman',
+    motherStatus: 'Homemaker',
+    siblings: '1 Brother, 1 Sister',
+    familyType: 'nuclear',
+    familyValues: 'moderate',
+    diet: 'non_veg',
+    smoking: 'no',
+    drinking: 'no',
+    hobbies: ['Reading', 'Traveling', 'Cricket'],
+    bio: 'Software professional looking for a life partner. Family-oriented and values-driven.',
+    email: 'ahmed.khan@example.com',
+    contactNo: '9876543210',
+    alternateNo: '9876543211',
+    membershipTier: 'bronze'
+};

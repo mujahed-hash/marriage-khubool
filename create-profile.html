@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Khubool Hai</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="responsive.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,700,1,0" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" />
+    </head>
+    <body>
+        <header>
+            <nav class="nav">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo.png" alt="Khubool Hai">
+                    </a>
+                </div>
+                <form action="" class="search-bar">
+                    <input type="text" placeholder="Search by location or place">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="icon-bar">
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-comments"></i>
+                    <div class="dropdown">
+                        <span>
+                            <a href="#" id="userButton"><i class="fa-solid fa-circle-user"></i></a>
+                        </span>
+                        <div class="dropdown-content" id="dropdownContent">
+                            <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Homepage</a>
+                            <a href="myprofile-diamond.html"><i class="fa-solid fa-address-card"></i> My Profile</a>
+                            <a href="profilevisitor.html"><i class="fa-solid fa-eye"></i> Profile visitors (0)</a>
+                            <a href="membership.html"><i class="fa-brands fa-web-awesome"></i> Membership</a>
+                            <a href="setting.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                            <a href="login.html"><i class="fa-solid fa-power-off"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="leftsidebar">
+                <div class="leftSideBar-links">
+                    <a href="index.html" class="nav-link"><span class="material-symbols-outlined">family_home </span> Home</a>
+                    <a href="profile.html"> <span class="material-symbols-outlined">diagnosis</span> My Profile</a>
+                    <a href="profilevisitor.html"> <span class="material-symbols-outlined">mystery</span> Profile visitors (0)</a>
+                    <a href="membership.html"><span class="material-symbols-outlined"> workspace_premium </span> Membership</a>
+                    <a href="setting.html"> <span class="material-symbols-outlined">settings_heart</span> Settings</a>
+                    <a href="login.html"><span class="material-symbols-outlined">move_item</span> Logout</a>
+                </div>
+            </div>
+    <div class="center-page">
+        <div class="create-profile">
+            <div class="instructions">
+            <h1>Profile Creation Instructions:</h1>
+            <p>1. Fill Out the Details:  Enter your information in the fields provided. You can add as much or as little information as you prefer.</p>
+            <p>2. Leave Fields Blank:  If you don’t wish to update a particular field, you can leave it empty.</p>
+            <p>3. Photo Privacy: You can choose to make your photo visible or share it upon request. Manage this setting on the My Profile page as needed.</p>
+        </div>
+        
+        <div class="creating-pro-section">
+            <div class="photo-privacy">
+            <div class="upload-container">
+                <h2>Upload Your Photo</h2>
+                <input type="file" id="upload" accept="image/*">
+                <div class="preview-container">
+                    <img src ="" id="preview" src="" alt="Image Preview">
+                </div>
+                <div class="controls">
+                    <button id="rotate-btn">Rotate</button>
+                    <button id="crop-btn">Crop</button>
+                    <button id="upload-btn">Upload</button>
+                </div>
+            </div>  
+                <div class="privacy-img">
+                    <img src="privacy-img.png" alt="privacy-img" height="200px" width="auto">
+                </div>
+            </div>
+            <div class="create-personal-details">
+                <h2>Personal Details</h2>
+                <form action="profile.html" method="POST">
+                    <div class="create-input">
+                        <label for="name">Full Name
+                            <input type="text" id="name" class="name" name="name" placeholder="Enter your full name">
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <label for="day">Date Of Birth
+                        <select class="options" id="day" name="day">
+                            <script>
+                                for (let day = 1; day <= 31; day++) {
+                                    document.write('<option value="' + (day < 10 ? '0' + day : day) + '">' + day + '</option>');
+                                }
+                            </script>
+                        </select>
+                       </label>
+                        <label for="month">Month Of Birth
+                        <select class="options" id="month" name="month">
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </label>
+                    
+                        <label for="year">Year Of Birth
+                        <select class="options" id="year" name="year">
+                            <script>
+                                let currentYear = new Date().getFullYear();
+                                for (let year = currentYear; year >= 1900; year--) {
+                                    document.write('<option value="' + year + '">' + year + '</option>');
+                                }
+                            </script>
+                        </select>
+                    </label>
+                        <label for="gender">Select Gender
+                        <select class="options" id="gender" name="gender">
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </label>
+                    </div>
+                    <div class="create-input">
+                        <label for="religion">Religion & (Maslak)
+                            <select  class ="options" id="religion" name="religion">
+                                <option value="">Select Sect</option>
+                                <option value="Muslim">Muslim</option>
+                                <option value="Sunni Muslim">Sunni Muslim</option>
+                                <option value="Shia Muslim">Shia Muslim</option>
+                                <option value="Ahle Hadees Muslim">Ahle Hadees Muslim</option>
+                                <option value="Deobandi Muslim">Deobandi Muslim</option>
+                                <option value="Barelvi Muslim">Barelvi Muslim</option>
+                                <option value="Salafi Muslim">Salafi Muslim</option>
+                                <option value="Sufi Muslim">Sufi Muslim</option>
+                                <option value="Bohra Muslim">Bohra Muslim</option>
+                                <option value="others">Others</option>
+                            </select>
+                        </label>
+                        <label for="dargha-fateha">Visit Dargha & Fateha
+                            <select class ="options" name="dargha-fateha" id="dargha-fateha">
+                                <option value="">Select Preference</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                                <option value="sometimes">Neutral</option>
+                            </select>
+                        </label>
+                        <label for="mother-tongue">Mother Tongue
+                          <select class ="options" name="mother-tongue" id="mother-tongue">
+                                <option value="">Select Mother Tongue</option>
+                                <option value="Hindi/Urdu">Hindi/Urdu</option>
+                                <option value="Assamese">Assamese</option>
+                                <option value="Bengali">Bengali</option>
+                                <option value="Bodo">Bodo</option>
+                                <option value="Dogri">Dogri</option>
+                                <option value="Gujarati">Gujarati</option>
+                                <option value="Kannada">Kannada</option>
+                                <option value="Kashmiri">Kashmiri</option>
+                                <option value="Konkani">Konkani</option>
+                                <option value="Maithili">Maithili</option>
+                                <option value="Malayalam">Malayalam</option>
+                                <option value="Manipuri">Manipuri</option>
+                                <option value="Marathi">Marathi</option>
+                                <option value="Nepali">Nepali</option>
+                                <option value="Odia">Odia</option>
+                                <option value="Punjabi">Punjabi</option>
+                                <option value="Sanskrit">Sanskrit</option>
+                                <option value="Santali">Santali</option>
+                                <option value="Sindhi">Sindhi</option>
+                                <option value="Tamil">Tamil</option>
+                                <option value="Telugu">Telugu</option>
+                                <option value="Tulu">Tulu</option>
+                                <option value="Rajasthani">Rajasthani</option>
+                                <option value="Bhojpuri">Bhojpuri</option>
+                                <option value="Garhwali">Garhwali</option>
+                                <option value="Haryanvi">Haryanvi</option>
+                                <option value="Sikkimese">Sikkimese</option>
+                                <option value="Mizo">Mizo</option>
+                                <option value="Khasi">Khasi</option>
+                                <option value="Nagamese">Nagamese</option>
+                                <option value="Bhili">Bhili</option>
+                                <option value="Gondi">Gondi</option>
+                                <option value="Kumaoni">Kumaoni</option>
+                                <option value="Ladakhi">Ladakhi</option>
+                        </select> 
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <label for="marital-status">Marital Status
+                            <select class ="options" name="marital-status" id="marital-status">
+                                <option value="yes">Select Preference</option>
+                                <option value="never-married">Never Married</option>
+                                <option value="married">Married</option>
+                                <option value="divorced">Divorced</option>
+                                <option value="widowed">Widowed</option>
+                            </select>
+                        </label>
+                        <label for="complextion">Complextion
+                            <select class ="options" name="complextion" id="complextion">
+                            <option value="">Select Complexion</option>
+                            <option value="Very Fair">Very Fair</option>
+                            <option value="Fair">Fair</option>
+                            <option value="Wheatish">Wheatish</option>
+                            <option value="Wheatish Brown">Wheatish Brown</option>
+                            <option value="Dark">Dark</option>  
+                        </select>
+                        </label>
+                        <label for="height">Height
+                            <select  class ="options" id="height" class="height" name="height">
+                                <option value="">Select Height</option>
+                                <option value="4'0\" (122 cm)">4'0" (122 cm)</option>
+                                <option value="4'1\" (125 cm)">4'1" (125 cm)</option>
+                                <option value="4'2\" (127 cm)">4'2" (127 cm)</option>
+                                <option value="4'3\" (130 cm)">4'3" (130 cm)</option>
+                                <option value="4'4\" (132 cm)">4'4" (132 cm)</option>
+                                <option value="4'5\" (135 cm)">4'5" (135 cm)</option>
+                                <option value="4'6\" (137 cm)">4'6" (137 cm)</option>
+                                <option value="4'7\" (140 cm)">4'7" (140 cm)</option>
+                                <option value="4'8\" (142 cm)">4'8" (142 cm)</option>
+                                <option value="4'9\" (145 cm)">4'9" (145 cm)</option>
+                                <option value="4'10\" (147 cm)">4'10" (147 cm)</option>
+                                <option value="4'11\" (150 cm)">4'11" (150 cm)</option>
+                                <option value="5'0\" (152 cm)">5'0" (152 cm)</option>
+                                <option value="5'1\" (155 cm)">5'1" (155 cm)</option>
+                                <option value="5'2\" (157 cm)">5'2" (157 cm)</option>
+                                <option value="5'3\" (160 cm)">5'3" (160 cm)</option>
+                                <option value="5'4\" (163 cm)">5'4" (163 cm)</option>
+                                <option value="5'5\" (165 cm)">5'5" (165 cm)</option>
+                                <option value="5'6\" (168 cm)">5'6" (168 cm)</option>
+                                <option value="5'7\" (170 cm)">5'7" (170 cm)</option>
+                                <option value="5'8\" (173 cm)">5'8" (173 cm)</option>
+                                <option value="5'9\" (175 cm)">5'9" (175 cm)</option>
+                                <option value="5'10\" (178 cm)">5'10" (178 cm)</option>
+                                <option value="5'11\" (180 cm)">5'11" (180 cm)</option>
+                                <option value="6'0\" (183 cm)">6'0" (183 cm)</option>
+                                <option value="6'1\" (185 cm)">6'1" (185 cm)</option>
+                                <option value="6'2\" (188 cm)">6'2" (188 cm)</option>
+                                <option value="6'3\" (191 cm)">6'3" (191 cm)</option>
+                                <option value="6'4\" (193 cm)">6'4" (193 cm)</option>
+                                <option value="6'5\" (196 cm)">6'5" (196 cm)</option>
+                                <option value="6'6\" (198 cm)">6'6" (198 cm)</option>
+                                <option value="6'7\" (201 cm)">6'7" (201 cm)</option>
+                                <option value="6'8\" (203 cm)">6'8" (203 cm)</option>
+                                <option value="6'9\" (206 cm)">6'9" (206 cm)</option>
+                                <option value="6'10\" (208 cm)">6'10" (208 cm)</option>
+                                <option value="6'11\" (211 cm)">6'11" (211 cm)</option>
+                                <option value="7'0\" (213 cm)">7'0" (213 cm)</option>
+                            </select>  
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <label for="extra-details">Additional Information
+                            <textarea id="extra-details" name="extra-details" placeholder="Provide additional details, hobbies, or interests" rows="4"></textarea>
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <input type="submit" value="Update Personal Details">
+                    </div>
+                </form>
+            </div> 
+            <div class="create-contact-details">
+                <h2>Contact Details</h2>
+                <form action="profile.html" method="POST">
+                    <div class="create-input">
+                        <label for="email">Email Id
+                            <input type="email" id="email" name="email" placeholder="Enter your email id">
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <label for="contact-num">Contact Number
+                            <input type="tel" id="contact-num" name="contact-num" placeholder="10 digit number">
+                        </label>
+                        <label for="contact-num2">Alternate Number
+                            <input type="tel" id="contact-num2" name="contact-num2" placeholder="10 digit number">
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <input type="submit" value="Update Contact Details">
+                    </div>
+                </form>
+            </div>
+            <div class="create-education-occupation-details">
+                <h2>Education & Occupation Details</h2>
+                <form action="profile.html" method="POST">
+                    <!-- Educational Details -->
+                    <div class="create-input">
+                        <label for="highest-qualification">Highest Qualification
+                            <input type="text" id="highest-qualification" class="highest-qualification" name="highest-qualification" placeholder="Enter your highest qualification">
+                        </label>
+                    </div>
+                    <!-- Occupation Details -->
+                    <div class="create-input">
+                        <label for="occupation">Occupation
+                            <input type="text" id="occupation" name="occupation" placeholder="Enter your occupation">
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <label for="place-of-occupation">Place of Occupation
+                            <input type="text" id="place-of-occupation" name="place-of-occupation" placeholder="Enter the place of occupation">
+                        </label>
+                        <label for="salary">Salary
+                            <input type="text" id="salary" name="salary" placeholder="Enter your salary">
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <input type="submit" value="Update Education & Career Details">
+                    </div>
+                 </form>
+            </div>
+            <div class="create-family-details">
+                <h2>Family Details</h2>
+                <form action="profile.html" method="POST">
+                    <div class="create-input">
+                        <label for="father-name">Father's Name
+                            <input type="text" id="father-name" name="father-name" placeholder="Father's Name">
+                        </label>
+                        <label for="father-occupation">Father's Occupation
+                            <input type="text" id="father-occupation" name="father-occupation" placeholder="Father's occupation">
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <label for="mother-name">Mother's Name
+                            <input type="text" id="mother-name" name="mother-name" placeholder="Mother's Name">
+                        </label>
+                        <label for="mother-occupation">Mother's Occupation
+                            <select class ="options" id="mother-status-" name="mother-status-1">
+                                <option>Select Preference</option>
+                                <option value="Homemaker">Homemaker</option>
+                                <option value="Profession">Profession</option>
+                            </select>
+                        </label>
+                    </div>
+                    <!-- Siblings section-->
+                    <div id="siblings-container">
+                        <!-- Brother Section -->
+                        <div class="siblings-section" id="brothers-container">
+                            <h3>Brothers</h3>
+                            <div class="sibling">
+                                <label for="brother-name-1">Name
+                                    <input type="text" id="brother-name-1" name="brother-name-1" placeholder="Enter brother's name">
+                                </label>
+                                <label for="brother-marital-status-1">Marital Status
+                                    <select class ="options" id="brother-marital-status-1" name="brother-marital-status-1">
+                                        <option>Select Preference</option>
+                                        <option value="married">Married</option>
+                                        <option value="unmarried">Unmarried</option>
+                                    </select>
+                                </label>
+                                <label for="brother-status-1">Status
+                                    <select class ="options" id="brother-status-1" name="brother-status-1">
+                                        <option>Select Preference</option>
+                                        <option value="occupation">Profession</option>
+                                        <option value="student">Student</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <button type="button" onclick="addSibling('brother')">Add Brother</button>
+                        <!-- Sister Section -->
+                        <div class="siblings-section" id="sisters-container">
+                            <h3>Sisters</h3>
+                            <div class="sibling">
+                                <label for="sister-name-1">Name
+                                    <input type="text" id="sister-name-1" name="sister-name-1" placeholder="Enter sister's name">
+                                </label>
+                                <label for="sister-marital-status-1">Marital Status
+                                    <select class ="options" id="sister-marital-status-1" name="sister-marital-status-1">
+                                        <option>Select Preference</option>
+                                        <option value="married">Married</option>
+                                        <option value="unmarried">Unmarried</option>
+                                    </select>
+                                </label>
+                                <label for="sister-status-1">Status
+                                    <select class ="options" id="sister-status-1" name="sister-status-1">
+                                        <option>Select Preference</option>
+                                        <option value="occupation">Profession</option>
+                                        <option value="student">Student</option>
+                                        <option value="student">Homemaker</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div> 
+                    <button type="button" onclick="addSibling('sister')">Add Sister </button>            
+                    <script>
+                    function addSibling(type) {
+                          const container = document.getElementById(type + 's-container');
+                          const siblingCount = container.getElementsByClassName('sibling').length + 1;
+                          const siblingDiv = document.createElement('div');  
+                          siblingDiv.classList.add('sibling');
+                          siblingDiv.innerHTML = `
+                              <label for="${type}-name-${siblingCount}">Name
+                                  <input type="text" id="${type}-name-${siblingCount}" name="${type}-name-${siblingCount}" placeholder="Enter ${type}'s name">
+                              </label>
+                            <label for="${type}-marital-status-${siblingCount}">Marital Status
+                                <select class="options" id="${type}-marital-status-${siblingCount}" name="${type}-marital-status-${siblingCount}">
+                                    <option>Select Preference</option>
+                                    <option value="married">Married</option>
+                                    <option value="unmarried">Unmarried</option>
+                                </select>
+                            </label>
+                            <label for="${type}-status-${siblingCount}">Status
+                                <select class="options" id="${type}-status-${siblingCount}" name="${type}-status-${siblingCount}">
+                                    <option>Select Preference</option>
+                                    <option value="occupation">Profession</option>
+                                    <option value="student">Student</option>
+                                </select>
+                            </label>
+                        `;
+                        container.appendChild(siblingDiv);
+                    }
+                    </script> 
+                       <div class="create-input" id="siblingsubmit">
+                        <input type="submit" value="Update Family Details">
+                    </div> 
+                </form>
+            </div>
+            <div class="address">
+                <h2>Residential Address</h2>
+                <form action="profile.html" method="POST">
+                    <div class="create-input">
+                        <label for="house-number">House/Apartment Number
+                            <input type="text" id="house-number" name="house-number" placeholder="house-number">
+                        </label>
+                        <label for="street">Street/Locality/City
+                            <input type="text" id="street" name="street" placeholder="street/city">
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <label for="state">State
+                            <select class ="options state" id="state" name="state">
+                                <option value="">Select State</option>
+                                <option value="AP">Andhra Pradesh</option>
+                                <option value="AR">Arunachal Pradesh</option>
+                                <option value="AS">Assam</option>
+                                <option value="BR">Bihar</option>
+                                <option value="CT">Chhattisgarh</option>
+                                <option value="GO">Goa</option>
+                                <option value="GJ">Gujarat</option>
+                                <option value="HR">Haryana</option>
+                                <option value="HP">Himachal Pradesh</option>
+                                <option value="JK">Jammu and Kashmir</option>
+                                <option value="JH">Jharkhand</option>
+                                <option value="KA">Karnataka</option>
+                                <option value="KL">Kerala</option>
+                                <option value="MP">Madhya Pradesh</option>
+                                <option value="MH">Maharashtra</option>
+                                <option value="MN">Manipur</option>
+                                <option value="ME">Meghalaya</option>
+                                <option value="MI">Mizoram</option>
+                                <option value="NL">Nagaland</option>
+                                <option value="OD">Odisha</option>
+                                <option value="PB">Punjab</option>
+                                <option value="RJ">Rajasthan</option>
+                                <option value="SK">Sikkim</option>
+                                <option value="TN">Tamil Nadu</option>
+                                <option value="TS">Telangana</option>
+                                <option value="TR">Tripura</option>
+                                <option value="UP">Uttar Pradesh</option>
+                                <option value="UT">Uttarakhand</option>
+                                <option value="WB">West Bengal</option>
+                                <option value="AN">Andaman and Nicobar Islands</option>
+                                <option value="CH">Chandigarh</option>
+                                <option value="DN">Dadra and Nagar Haveli and Daman and Diu</option>
+                                <option value="LD">Lakshadweep</option>
+                                <option value="PY">Puducherry</option>
+                            </select>                            
+                        </label>
+                        <label for="district">District
+                            <select class ="options" id="district" name="district">
+                               <option value="">Select District</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <label for="pincode">Pincode
+                            <input type="text" id="pincode" name="pincode" placeholder="pincode">
+                        </label>
+                        <label for="country">Country
+                            <select class ="options" name="country" id="country">
+                                <option value="india">India</option>
+                            </select>
+                        </label>
+                        <label for="native-place">Native Place
+                            <input type="text" id="native-place" name="native-place" placeholder="Enter if any native place">
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <input type="submit" value="Update Residential Information">
+                    </div>
+                </form>
+            </div>
+            <div class="partner-requirement">
+                <h2>Partner Requirement</h2>
+                <form action="profile.html" method="POST"> 
+                    <div class="create-input">
+                        <label for="partner-requires">Add Your Requirements For a Partner
+                            <textarea id="partner-requires" name="partner-requires" placeholder="Provide requirements for a partner" rows="4"></textarea>
+                        </label>
+                    </div>
+                    <div class="create-input">
+                        <input type="submit" value="Update Requirement">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="rightsidebar">
+    <div class="rightsidebarlink">
+        <div class="diamondprofiles">
+        </div>
+    </div>
+</div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

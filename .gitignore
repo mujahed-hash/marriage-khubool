@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+auth_token.txt
+admin_token.txt
+
+# Environment variables
+.env
+.env.local
+
+# Sensitive files
+*.pem
+*.key
+
+# Compiled output
+dist/
+tmp/
+out-tsc/
+
+# IDEs and editors
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Subdirectory specific overrides (if root initialized)
+backend/node_modules/
+admin/node_modules/
+frontend/node_modules/
+admin/.angular/cache
+frontend/.angular/cache

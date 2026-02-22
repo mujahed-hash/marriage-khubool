@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khubool Hai</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,700,1,0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <i class="ri-menu-2-fill menu"></i>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="Khubool Hai">
+                </a>
+            </div>
+            <form action="" class="search-bar">
+                <input type="text" placeholder="Search by location or place">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <div class="icon-bar">
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-comments"></i>
+                <div class="dropdown">
+                    <span>
+                        <a href="#" id="userButton"><i class="fa-solid fa-bars"></i></a>
+                    </span>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Homepage</a>
+                        <a href="myprofile-diamond.html"><i class="fa-solid fa-address-card"></i> My Profile</a>
+                        <a href="profilevisitor.html"><i class="fa-solid fa-eye"></i> Profile visitors (0)</a>
+                        <a href="membership.html"><i class="fa-brands fa-web-awesome"></i> Membership</a>
+                        <a href="setting.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                        <a href="login.html"><i class="fa-solid fa-power-off"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="leftsidebar">
+            <div class="leftSideBar-links">
+                <a href="index.html" class="nav-link"><span class="material-symbols-outlined">family_home</span> Home</a>
+                <a href="myprofile-diamond.html"><span class="material-symbols-outlined">diagnosis</span> My Profile</a>
+                <a href="profilevisitor.html"><span class="material-symbols-outlined">mystery</span> Profile visitors (0)</a>
+                <a href="membership.html"><span class="material-symbols-outlined">workspace_premium</span> Membership</a>
+                <a href="setting.html"><span class="material-symbols-outlined">settings_heart</span> Settings</a>
+                <a href="login.html"><span class="material-symbols-outlined">move_item</span> Logout</a>
+            </div>
+        </div>
+        <div class="center-page">
+            <div class="cover-pic">
+                <img src="cover.png" alt="Cover Pic" class="cover-pic1">
+                <img src="cover-pic2.png" alt="Cover Pic" class="cover-pic2">
+
+            </div>
+            <span id="create-profile">
+                <h1>Create a Profile to post an Ad & Find a Perfect Match Today! <i class="fa-solid fa-star"></i></h1>
+                <p>Don't miss out on the opportunity! Creating your profile is the first step to finding your perfect life partner. Start now and begin your journey to love!</p>
+                <a href="create-profile.html"><i class="fa-regular fa-pen-to-square"></i> Create Profile</a>  
+            </span>
+            <div class="membership">
+                <img src="membershippic.jpg" alt="membership" class="membership-img1">
+                <img src="membershipic2.png" alt="membership" class="membership-img2">
+                <a href="membership.html" class="visit-plans-btn">View Membership Plans</a>
+            </div>
+            <div class="profile-cards-container">
+                <h1 class="profile-card-h1 diamond-heading"><i class="fa-solid fa-gem"></i> Diamond profiles</h1>
+                <div class="diamond-profile-cards profile-cards"> <!--copy from here for different card section-->
+                     <!--diamond-card-->
+                    <div class="cards-container diamond-cc"> 
+                        <div class="card diamond-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay diamond-overlay"></span>
+                                <div class="card-image">
+                                    <img src="groom.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Mohammed Abdullah bin </h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="occupation">Software Engg</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Hyderabad</p>
+                                <a class="diamond-view-profile" href="userprofile-diamond.html">View Profile</a>
+                            </div>
+                        </div>        <!-- card end here-->
+                        <div class="card diamond-card">  <!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay diamond-overlay"></span>
+                                <div class="card-image">
+                                    <img src="groom.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Mohammed Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Telangana</p>
+                                <a class="diamond-view-profile" href="userprofile-diamond.html">View Profile</a>
+                            </div>
+                        </div>   
+                        <div class="card diamond-card">  <!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay diamond-overlay"></span>
+                                <div class="card-image">
+                                    <img src="groom.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Mohammed Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Telangana</p>
+                                <a class="diamond-view-profile" href="userprofile-diamond.html">View Profile</a>
+                            </div>
+                        </div>   
+                        <div class="card diamond-card">  <!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay diamond-overlay"></span>
+                                <div class="card-image">
+                                    <img src="groom.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Mohammed Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Telangana</p>
+                                <a class="diamond-view-profile" href="userprofile-diamond.html">View Profile</a>
+                            </div>
+                        </div>   
+                    </div>  
+  <!--second row of profile-cards-->   
+                    <div class="cards-container diamond-cc"> 
+                        <div class="card diamond-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay diamond-overlay"></span>
+                                <div class="card-image">
+                                    <img src="bride.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Sana Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Hyderabad</p>
+                                <a class="diamond-view-profile" href="userprofile-diamond.html">View Profile</a>
+                            </div>
+                        </div>        <!-- card end here-->
+                        <div class="card diamond-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay diamond-overlay"></span>
+                                <div class="card-image">
+                                    <img src="bride.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Sana Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Hyderabad</p>
+                                <a class="diamond-view-profile" href="userprofile-diamond.html">View Profile</a>
+                            </div>
+                        </div>      <!-- card end here-->
+                        <div class="card diamond-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay diamond-overlay"></span>
+                                <div class="card-image">
+                                    <img src="bride.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Sana Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Hyderabad</p>
+                                <a class="diamond-view-profile" href="userprofile-diamond.html">View Profile</a>
+                            </div>
+                        </div>    
+                        <div class="card diamond-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay diamond-overlay"></span>
+                                <div class="card-image">
+                                    <img src="bride.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Sana Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Hyderabad</p>
+                                <a class="diamond-view-profile" href="userprofile-diamond.html">View Profile</a>
+                            </div>
+                        </div>    
+                    </div>  
+                </div>
+                <div class="more-profiles diamond-more-profiles"> <!-- view more porfiles page-->
+                        <a href="/diamondprofiles.html" class=" more-profiles more-diamond-profiles diamond-profile-styled-link">View More Profiles</a>
+                </div>        
+            </div> <!--Closing div - profile-cards-container--> 
+    <!--DIAMOND PROFILES ENDS HERE-->
+
+    <!--GOLD PROFILES STARTS HERE-->
+            <div class="profile-cards-container">
+                <h1 class="profile-card-h1 gold-heading"><i class="fa-solid fa-trophy"></i> Gold profiles</h1> <!--diamond-card-->
+                <div class="gold-profile-cards profile-cards"> <!--copy from here for different card section-->
+                    <div class="cards-container gold-cc"> 
+                        <div class="card gold-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay gold-overlay"></span>
+                                <div class="card-image">
+                                    <img src="groom.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Mohammed Khan bin mubammad</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Telangana</p>
+                                <a class="gold-view-profile" href="userprofile-gold.html">View Profile</a>
+                            </div>
+                        </div>        <!-- card end here-->
+                        <div class="card gold-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay gold-overlay"></span>
+                                <div class="card-image">
+                                    <img src="groom.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Mohammed Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Telangana</p>
+                                <a class="gold-view-profile" href="userprofile-gold.html">View Profile</a>
+                            </div>
+                        </div>  
+                        <div class="card gold-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay gold-overlay"></span>
+                                <div class="card-image">
+                                    <img src="groom.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Mohammed Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Telangana</p>
+                                <a class="gold-view-profile" href="userprofile-gold.html">View Profile</a>
+                            </div>
+                        </div> <!--end of card-->  
+                        <div class="card gold-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay gold-overlay"></span>
+                                <div class="card-image">
+                                    <img src="groom.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Mohammed Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Telangana</p>
+                                <a class="gold-view-profile" href="userprofile-gold.html">View Profile</a>
+                            </div>
+                        </div> <!--end of card-->  
+                    </div>  
+    <!--second row of profile-cards-->                  
+                    <div class="cards-container gold-cc"> 
+                        <div class="card gold-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay gold-overlay"></span>
+                                <div class="card-image">
+                                    <img src="bride.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Sana Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Hyderabad</p>
+                                <a class="gold-view-profile" href="userprofile-gold.html">View Profile</a>
+                            </div>
+                        </div>        <!-- card end here-->
+                        <div class="card gold-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay gold-overlay"></span>
+                                <div class="card-image">
+                                    <img src="bride.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Sana Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Hyderabad</p>
+                                <a class="gold-view-profile" href="userprofile-gold.html">View Profile</a>
+                            </div>
+                        </div>    
+                        <div class="card gold-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay gold-overlay"></span>
+                                <div class="card-image">
+                                    <img src="bride.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Sana Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Hyderabad</p>
+                                <a class="gold-view-profile" href="userprofile-gold.html">View Profile</a>
+                            </div>
+                        </div>     
+                        <div class="card gold-card"><!--copy from here for adding other card-->
+                            <div class="image-content">
+                                <span class="overlay gold-overlay"></span>
+                                <div class="card-image">
+                                    <img src="bride.png" alt="groom-img" class="card-image">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="full-name card-name">Sana Khan</h2>
+                                <p class="dob">DOB: 7-12-1997</p>
+                                <p class="highest-qualification">Qualification: B.Ed</p>
+                                <p class="height">Height: 5'3</p>
+                                <p class="state">Location: Hyderabad</p>
+                                <a class="gold-view-profile" href="userprofile-gold.html">View Profile</a>
+                            </div>
+                        </div>    
+                    </div>           
+                </div>
+                <div class="gold-more-profiles"> <!-- view more porfiles page-->
+                        <a href="/goldprofiles.html" class=" more-profiles more-gold-profiles gold-profile-styled-link">View More Profiles</a>
+                </div>        
+            </div> 
+    <!--GOLD PROFILES ENDS HERE-->
+    
+    <!--SILVER PROFILES STARTS HERE-->
+    <div class="profile-cards-container">
+        <h1 class="profile-card-h1 silver-heading"><i class="fa-solid fa-award"></i> Silver profiles</h1>
+        <div class="silver-profile-cards profile-cards"> <!--copy from here for different card section-->
+            <div class="cards-container silver-cc"> 
+                <div class="card silver-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay silver-overlay"></span>
+                        <div class="card-image">
+                            <img src="groom.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="silver-view-profile" href="userprofile-silver.html">View Profile</a>
+                    </div>
+                </div>        <!-- card end here-->
+                <div class="card silver-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay silver-overlay"></span>
+                        <div class="card-image">
+                            <img src="groom.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="silver-view-profile" href="userprofile-silver.html">View Profile</a>
+                    </div>
+                </div>        <!-- card end here-->
+                <div class="card silver-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay silver-overlay"></span>
+                        <div class="card-image">
+                            <img src="groom.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="silver-view-profile" href="userprofile-silver.html">View Profile</a>
+                    </div>
+                </div>        <!-- card end here-->
+                <div class="card silver-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay silver-overlay"></span>
+                        <div class="card-image">
+                            <img src="groom.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="silver-view-profile" href="userprofile-silver.html">View Profile</a>
+                    </div>
+                </div>        <!-- card end here-->
+            </div>  
+<!--second row of profile-cards-->                        
+            <div class="cards-container silver-cc"> 
+                <div class="card silver-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay silver-overlay"></span>
+                        <div class="card-image">
+                            <img src="bride.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Sana Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Mumbai</p>
+                        <a class="silver-view-profile" href="userprofile-silver.html">View Profile</a>
+                    </div>
+                </div>        <!-- card end here-->
+                <div class="card silver-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay silver-overlay"></span>
+                        <div class="card-image">
+                            <img src="bride.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Sana Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Mumbai</p>
+                        <a class="silver-view-profile" href="userprofile-silver.html">View Profile</a>
+                    </div>
+                </div>      <!-- card end here-->
+                <div class="card silver-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay silver-overlay"></span>
+                        <div class="card-image">
+                            <img src="bride.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Sana Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Mumbai</p>
+                        <a class="silver-view-profile" href="userprofile-silver.html">View Profile</a>
+                    </div>
+                </div>     <!-- card end here-->
+                <div class="card silver-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay silver-overlay"></span>
+                        <div class="card-image">
+                            <img src="bride.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Sana Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Mumbai</p>
+                        <a class="silver-view-profile" href="userprofile-silver.html">View Profile</a>
+                    </div>
+                </div>    <!-- card end here-->
+            </div>
+        </div>
+        <div class="silver-more-profiles"> <!-- view more porfiles page-->
+                <a href="/silverprofiles.html" class=" more-profiles more-silver-profiles silver-profile-styled-link">View More Profiles</a>
+        </div>        
+    </div> 
+    <!--SILVER PROFILES ENDS HERE-->
+
+    <!--CROWN PROFILES STARTS HERE-->
+    <div class="profile-cards-container">
+        <h1 class="profile-card-h1 crown-heading"><i class="fa-solid fa-crown "></i> Crown profiles</h1>
+        <div class="crown-profile-cards profile-cards"> <!--copy from here for different card section-->
+            <div class="cards-container crown-cc"> 
+                <div class="card crown-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay"></span>
+                        <div class="card-image">
+                            <img src="groom.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="crown-view-profile" href="userprofile-crown.html">View Profile</a>
+                    </div>
+                </div>        <!-- card end here-->
+                <div class="card crown-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay"></span>
+                        <div class="card-image">
+                            <img src="groom.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="crown-view-profile" href="userprofile-crown.html">View Profile</a>
+                    </div>
+                </div>        <!-- card end here-->
+                <div class="card crown-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay"></span>
+                        <div class="card-image">
+                            <img src="groom.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="crown-view-profile" href="userprofile-crown.html">View Profile</a>
+                    </div>
+                </div>        <!-- card end here-->
+                <div class="card crown-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay"></span>
+                        <div class="card-image">
+                            <img src="groom.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="crown-view-profile" href="userprofile-crown.html">View Profile</a>
+                    </div>
+                </div>        <!-- card end here--> 
+            </div>
+<!--second row of profile-cards-->                              
+            <div class="cards-container crown-cc"> 
+                <div class="card crown-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay"></span>
+                        <div class="card-image">
+                            <img src="bride.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Sana Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="crown-view-profile" href="userprofile-crown.html">View Profile</a>
+                    </div>
+                </div>        <!-- card end here-->
+                <div class="card crown-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay"></span>
+                        <div class="card-image">
+                            <img src="bride.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Sana Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="crown-view-profile" href="userprofile-crown.html">View Profile</a>
+                    </div>
+                </div>     <!-- card end here-->
+                <div class="card crown-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay"></span>
+                        <div class="card-image">
+                            <img src="bride.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name"> Sana Khan </h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="crown-view-profile" href="userprofile-crown.html">View Profile</a>
+                    </div>
+                </div>     <!-- card end here-->
+                <div class="card crown-card"><!--copy from here for adding other card-->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay"></span>
+                        <div class="card-image">
+                            <img src="bride.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Sana Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="crown-view-profile" href="userprofile-crown.html">View Profile</a>
+                    </div>
+                </div>      <!-- card end here--> 
+            </div>      
+        </div>
+        <div class="crown-more-profiles"> <!-- view more porfiles page-->
+                <a href="/crownprofiles.html" class="more-profiles more-crown-profiles crown-profile-styled-link">View More Profiles</a>
+        </div>        
+    </div> 
+    <!--cROWN PROFILES ENDS HERE-->
+</div>
+</div>  <!-- CENTER PAGE END-->
+        <div class="rightsidebar">
+            <div class="rightsidebarlink">
+                <h3><i class="fa-solid fa-bahai"></i> Profiles Suggestion </h3>
+                <div class="card crown-card sidecard-crown"> <!-- crowm profile -->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay sidecard-overlay-crown"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="groom.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="side-proview crown-side-profile" href="userprofile-crown.html">View Profile</a>
+                    </div>
+                </div>       
+                <div class="card diamond-card sidecard-diamond"> <!-- diamond -->
+                    <div class="image-content">
+                        <span class="overlay diamond-overlay sidecard-overlay-diamond"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="groom.png" alt="groom-img" class="sidecard-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="first-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="side-proview diamond-side-profile" href="userprofile-diamond.html">View Profile</a>
+                    </div>
+                </div>
+                <div class="card crown-card sidecard-crown"> <!-- Updated -->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay sidecard-overlay-crown"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="bride.png" alt="bride-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="full-name card-name">Sana khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Mumbai</p>
+                        <a class="side-proview crown-side-profile" href="userprofile-crown.html">View Profile</a>
+                    </div>
+                </div> 
+                <div class="card diamond-card sidecard-diamond"> <!-- diamond -->
+                    <div class="image-content">
+                        <span class="overlay diamond-overlay sidecard-overlay-diamond"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="bride.png" alt="groom-img" class="sidecard-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="first-name card-name">Sana khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Hyderabad</p>
+                        <a class="side-proview diamond-side-profile" href="userprofile-diamond.html">View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="bottom-nav-bar">
+            <a href="index.html" class="active"><i class="fa-solid fa-house"></i></a>
+            <a href="search.html"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="membership.html"><i class="fa-solid fa-crown"></i></a>       
+             <a href="bookmarkprofiles.html"><i class="fa-solid fa-bookmark"></i></a>
+            <a href="myprofile-bronze.html"><i class="fa-solid fa-circle-user"></i></a>
+        </div>  
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khubool Hai</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,700,1,0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="Khubool Hai">
+                </a>
+            </div>
+            <form action="" class="search-bar">
+                <input type="text" placeholder="Search by location or place">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <div class="icon-bar">
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-comments"></i>
+                <div class="dropdown">
+                    <span>
+                        <a href="#" id="userButton"><i class="fa-solid fa-circle-user"></i></a>
+                    </span>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Homepage</a>
+                        <a href="myprofile-diamond.html"><i class="fa-solid fa-address-card"></i> My Profile</a>
+                        <a href="profilevisitor.html"><i class="fa-solid fa-eye"></i> Profile visitors (0)</a>
+                        <a href="membership.html"><i class="fa-brands fa-web-awesome"></i> Membership</a>
+                        <a href="setting.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                        <a href="login.html"><i class="fa-solid fa-power-off"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="leftsidebar">
+            <div class="leftSideBar-links">
+                <a href="index.html" class="nav-link"><span class="material-symbols-outlined">family_home</span> Home</a>
+                <a href="myprofile-diamond.html"><span class="material-symbols-outlined">diagnosis</span> My Profile</a>
+                <a href="profilevisitor.html"><span class="material-symbols-outlined">mystery</span> Profile visitors (0)</a>
+                <a href="membership.html"><span class="material-symbols-outlined">workspace_premium</span> Membership</a>
+                <a href="setting.html"><span class="material-symbols-outlined">settings_heart</span> Settings</a>
+                <a href="login.html"><span class="material-symbols-outlined">move_item</span> Logout</a>
+            </div>
+        </div>
+        <div class="center-page">
+            <style>
+                .photo-privacy {
+                    padding: 50px;
+                    border-radius: 8px;
+                    max-width: 1000px;
+                    margin: 0 auto;
+                    display: flex;
+                    flex-direction: column;
+                }
+        
+                h2 {
+                    text-align: center;
+                    margin-bottom: 20px;
+                    color: #c80a0a;
+                    font-family: "poppins", sans-serif, Arial, Helvetica, sans-serif;
+                }
+        
+                .upload-container {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    gap: 30px;
+                    width: 100%;
+                }
+        
+                .preview-container {
+                    border: 2px dashed #ff7300;
+                    border-radius: 10px;
+                    padding: 10px;
+                    width: 250px; /* Increased width */
+                    height: 250px; /* Increased height */
+                    position: relative;
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #fff8e4;
+                }
+        
+                .preview-container img {
+                    max-width: 100%;
+                    max-height: 100%;
+                    border-radius: 5px;
+                    display: none; /* Initially hidden */
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+        
+                .preview-container img.set-dp {
+                    border-radius: 50%; /* Circle shape for set as DP image */
+                }
+        
+                .upload-icon {
+                    font-size: 80px; /* Increased icon size */
+                    cursor: pointer;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+        
+                .action-buttons {
+                    position: absolute;
+                    bottom: 10px;
+                    left: 10px;
+                    display: none;
+                    gap: 5px;
+                    width: calc(100% - 20px);
+                    justify-content: space-around; /* Space between buttons */
+                }
+        
+                .action-buttons button {
+                    padding: 8px 12px;
+                    border: none;
+                    border-radius: 5px;
+                    background-color: #ac0412;
+                    color: white;
+                    cursor: pointer;
+                    font-size: 14px;
+                    transition: background-color 0.3s ease;
+                }
+        
+                .action-buttons button:hover {
+                    background-color: #800000;
+                }
+        
+                .remove {
+                    background-color: rgb(231, 1, 1);
+                }
+        
+                .remove:hover {
+                    background-color: darkred;
+                }
+        
+                .cropper-container {
+                    display: none;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: white;
+                    padding: 20px;
+                    z-index: 1000;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                }
+        
+                .cropper-container img {
+                    max-width: 100%;
+                    max-height: 400px;
+                }
+        
+                .cropper-buttons {
+                    margin-top: 10px;
+                    text-align: center;
+                }
+        
+                button.save {
+                    padding: 10px 15px;
+                    border: none;
+                    background-color: #b31c24;
+                    color: white;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    font-size: 16px; /* Increased font size */
+                    display: block;
+                    margin: 20px auto 0; /* Center the button */
+                    transition: background-color 0.3s ease;
+                }
+        
+                button.save:hover {
+                    background-color: #a2020a;
+                }
+            </style>
+        </head>
+        <body>
+           
+            <div class="photo-privacy">
+                <h2>Upload Your Photos</h2>
+                <div class="upload-container">
+                    <!-- First Box -->
+                    <div class="preview-container">
+                        <span class="upload-icon">📤</span>
+                        <input type="file" id="upload1" accept="image/*" style="display: none;">
+                        <img src="" id="preview1" alt="Image Preview">
+                        <div class="action-buttons">
+                            <button class="set-dp" data-preview="preview1">Set as DP</button>
+                            <button class="remove" data-preview="preview1">Remove</button>
+                        </div>
+                    </div>
+        
+                    <!-- Second Box -->
+                    <div class="preview-container">
+                        <span class="upload-icon">📤</span>
+                        <input type="file" id="upload2" accept="image/*" style="display: none;">
+                        <img src="" id="preview2" alt="Image Preview">
+                        <div class="action-buttons">
+                            <button class="set-dp" data-preview="preview2">Set as DP</button>
+                            <button class="remove" data-preview="preview2">Remove</button>
+                        </div>
+                    </div>
+        
+                    <!-- Third Box -->
+                    <div class="preview-container">
+                        <span class="upload-icon">📤</span>
+                        <input type="file" id="upload3" accept="image/*" style="display: none;">
+                        <img src="" id="preview3" alt="Image Preview">
+                        <div class="action-buttons">
+                            <button class="set-dp" data-preview="preview3">Set as DP</button>
+                            <button class="remove" data-preview="preview3">Remove</button>
+                        </div>
+                    </div>
+        
+                    <!-- Fourth Box -->
+                    <div class="preview-container">
+                        <span class="upload-icon">📤</span>
+                        <input type="file" id="upload4" accept="image/*" style="display: none;">
+                        <img src="" id="preview4" alt="Image Preview">
+                        <div class="action-buttons">
+                            <button class="set-dp" data-preview="preview4">Set as DP</button>
+                            <button class="remove" data-preview="preview4">Remove</button>
+                        </div>
+                    </div>
+        
+                    <!-- Fifth Box - New Box Added -->
+                    <div class="preview-container">
+                        <span class="upload-icon">📤</span>
+                        <input type="file" id="upload5" accept="image/*" style="display: none;">
+                        <img src="" id="preview5" alt="Image Preview">
+                        <div class="action-buttons">
+                            <button class="set-dp" data-preview="preview5">Set as DP</button>
+                            <button class="remove" data-preview="preview5">Remove</button>
+                        </div>
+                    </div>
+                    <button class="save">Save All Photos</button>
+                </div>
+            </div>
+        
+            <!-- Cropper Modal -->
+            <div class="cropper-container" id="cropperModal">
+                <h3>Crop Your Image</h3>
+                <img id="cropImage" alt="Crop Image">
+                <div class="cropper-buttons">
+                    <button id="crop-btn">Crop</button>
+                    <button id="save-btn">Save</button>
+                    <button id="cancel-btn">Cancel</button>
+                </div>
+            </div>
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" />
+        
+            <script>
+                let cropper;
+                let currentPreviewId = '';
+        
+                function setupCropper(previewId, uploadId) {
+                    const uploadInput = document.getElementById(uploadId);
+                    const previewElement = document.getElementById(previewId);
+                    const actionButtons = previewElement.parentElement.querySelector('.action-buttons');
+        
+                    previewElement.parentElement.querySelector('.upload-icon').onclick = () => {
+                        uploadInput.click();
+                    };
+        
+                    uploadInput.addEventListener('change', function(event) {
+                        const file = event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                previewElement.src = e.target.result;
+                                previewElement.style.display = 'block'; // Show the image
+                                actionButtons.style.display = 'flex'; // Show action buttons
+                                previewElement.parentElement.querySelector('.upload-icon').style.display = 'none'; // Hide the upload icon
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                }
+        
+                // Setup cropper for each upload
+                setupCropper('preview1', 'upload1');
+                setupCropper('preview2', 'upload2');
+                setupCropper('preview3', 'upload3');
+                setupCropper('preview4', 'upload4');
+                setupCropper('preview5', 'upload5'); // New box setup
+        
+                // Set as DP button functionality
+                document.querySelectorAll('.set-dp').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const previewId = this.getAttribute('data-preview');
+                        const imgElement = document.getElementById(previewId);
+                        const cropImage = document.getElementById('cropImage');
+                        cropImage.src = imgElement.src;
+                        currentPreviewId = previewId;
+        
+                        // Show cropper modal
+                        document.getElementById('cropperModal').style.display = 'block';
+                        if (cropper) {
+                            cropper.destroy();
+                        }
+                        cropper = new Cropper(cropImage, {
+                            aspectRatio: 1,
+                            viewMode: 1,
+                            autoCropArea: 1,
+                            responsive: true,
+                            background: false,
+                        });
+                    });
+                });
+        
+                // Crop button functionality
+                document.getElementById('crop-btn').addEventListener('click', function() {
+                    if (cropper) {
+                        const canvas = cropper.getCroppedCanvas();
+                        const img = document.getElementById(currentPreviewId);
+                        img.src = canvas.toDataURL();
+                        img.classList.add('set-dp'); // Add circle shape class
+                        cropper.destroy();
+                        document.getElementById('cropperModal').style.display = 'none'; // Hide cropper modal
+                    }
+                });
+        
+                // Cancel button functionality
+                document.getElementById('cancel-btn').addEventListener('click', function() {
+                    document.getElementById('cropperModal').style.display = 'none';
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+                });
+        
+                // Remove button functionality
+                document.querySelectorAll('.remove').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const previewId = this.getAttribute('data-preview');
+                        const img = document.getElementById(previewId);
+                        img.src = '';
+                        img.style.display = 'none'; // Hide the image
+                        const uploadInput = document.getElementById(previewId.replace('preview', 'upload'));
+                        uploadInput.value = ''; // Clear file input
+                        this.parentElement.style.display = 'none'; // Hide action buttons
+                        img.classList.remove('set-dp'); // Remove circle shape
+                        img.parentElement.querySelector('.upload-icon').style.display = 'block'; // Show upload icon again
+                    });
+                });
+        
+                // Save button functionality
+                document.querySelector('.save').addEventListener('click', function() {
+                    alert('All photos saved successfully!');
+                });
+            </script>
+        </div>
+        <div class="rightsidebar">
+            <div class="rightsidebarlink">
+                <h3><i class="fa-solid fa-bahai"></i> Profiles Suggestion </h3>
+                <div class="card crown-card sidecard-crown"> <!-- crowm profile -->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay sidecard-overlay-crown"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="groom.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <button class="card-btn crown-card-btn sidecard-btn">View Profile</button>
+                    </div>
+                </div>       
+                <div class="card diamond-card sidecard-diamond"> <!-- diamond -->
+                    <div class="image-content">
+                        <span class="overlay diamond-overlay sidecard-overlay-diamond"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="groom.png" alt="groom-img" class="sidecard-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="first-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <button class="card-btn diamond-card-btn sidecard-btn">View Profile</button>
+                    </div>
+                </div>
+                <div class="card crown-card sidecard-crown"> <!-- Updated -->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay sidecard-overlay-crown"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="bride.png" alt="bride-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="full-name card-name">Sana khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Mumbai</p>
+                        <button class="card-btn crown-card-btn sidecard-btn">View Profile</button>
+                    </div>
+                </div> 
+                <div class="card diamond-card sidecard-diamond"> <!-- diamond -->
+                    <div class="image-content">
+                        <span class="overlay diamond-overlay sidecard-overlay-diamond"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="bride.png" alt="groom-img" class="sidecard-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="first-name card-name">Sana khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Hyderabad</p>
+                        <button class="card-btn diamond-card-btn sidecard-btn">View Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>   
+</body>
+</html>

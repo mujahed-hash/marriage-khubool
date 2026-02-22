@@ -1,0 +1,16 @@
+---
+description: Complete assigned tasks fully; never defer or leave for others
+alwaysApply: true
+---
+
+# Task Completion
+
+When given a task, **complete it fully** in the current session.
+
+- **Never leave work for "next time"** – finish what you start
+- **Never defer to others** – do not say "Antigravity will do X" or "this can be done later"
+- **Implement end-to-end** – backend + frontend, all related files, tests if applicable
+- **Verify it works** – run builds, fix errors, ensure integration is complete
+- **Handle edge cases** – empty states, errors, auth checks as needed
+
+If a task spans multiple features, complete all of them unless the user explicitly asks to pause or prioritize.

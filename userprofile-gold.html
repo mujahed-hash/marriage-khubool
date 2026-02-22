@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User-Gold-Profile</title>
+</head>
+<body>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,700,1,0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <header>
+        <nav class="nav">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="Khubool Hai">
+                </a>
+            </div>
+            <form action="" class="search-bar">
+                <input type="text" placeholder="Search by location or place">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <div class="icon-bar">
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-comments"></i>
+                <div class="dropdown">
+                    <span>
+                        <a href="#" id="userButton"><i class="fa-solid fa-circle-user"></i></a>
+                    </span>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Homepage</a>
+                        <a href="myprofile-diamond.html"><i class="fa-solid fa-address-card"></i> My Profile</a>
+                        <a href="profilevisitor.html"><i class="fa-solid fa-eye"></i> Profile visitors (0)</a>
+                        <a href="membership.html"><i class="fa-brands fa-web-awesome"></i> Membership</a>
+                        <a href="setting.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                        <a href="login.html"><i class="fa-solid fa-power-off"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="leftsidebar">
+            <div class="leftSideBar-links">
+                <a href="index.html" class="nav-link"><span class="material-symbols-outlined">family_home</span> Home</a>
+                <a href="myprofile.html"><span class="material-symbols-outlined">diagnosis</span> My Profile</a>
+                <a href="profilevisitor.html"><span class="material-symbols-outlined">mystery</span> Profile visitors (0)</a>
+                <a href="membership.html"><span class="material-symbols-outlined">workspace_premium</span> Membership</a>
+                <a href="setting.html"><span class="material-symbols-outlined">settings_heart</span> Settings</a>
+                <a href="login.html"><span class="material-symbols-outlined">move_item</span> Logout</a>
+            </div>
+        </div>
+        <div class="center-page">
+            <div class="myprofilesection">
+                <div class="golduser-profile-nav linksone">
+                    <a href="myphotos.html"><i class="fa-solid fa-file-image"></i> View Photos</a>
+                    <a href="myrequirements.html"><i class="fa-solid fa-file-circle-check"></i> View Requirements <i class="fa-solid fa-lock"></i></a>
+                    <a href="biodata.html"><i class="fa-solid fa-file-lines"></i> View Biodata</a>
+                </div> 
+                <span class="linkstwo">
+                    <a href="biodata.html"><i class="fa-solid fa-bookmark"></i> Shortlist This Profile</a>
+                    <a href="biodata.html"><i class="fa-solid fa-heart"></i> Send Interest</a>
+                    <a href="biodata.html"><i class="fa-solid fa-comments"></i> Chat</a>
+                    <a href="biodata.html"><i class="fa-solid fa-triangle-exclamation"></i> Report</a>
+                </span> 
+                <h4 id="profile-id">Profile ID: 1002 <i class="fa-solid fa-circle-check"></i></h4>           
+                <div class="golduser-displaypic-container">
+                    <img src="bride.png" alt="groom-img" height="300px" width="300px" class="displaypic">
+                    <h1 class="name">Sana Khan</h1>
+                <section class="personal-details">
+                    <h2><i class="fa-solid fa-circle-user"></i> Personal Details</h2>
+                    <p>Name: Sana Khan</p>
+                    <p>Date of Birth: 02/28/1999</p> 
+                    <p>Religion: Muslim</p>
+                    <p>Visit Dargha & Fateha: Yes</p>
+                    <p>Mother Tongue: Hindi/Urdu</p>
+                    <p>Complextion: Fair</p>
+                    <p>Height: 5`4</p>
+                    <p>Marital Status: Never Married</p>
+                </section>
+                <section class="education-occupation">
+                    <h2><i class="fa-solid fa-graduation-cap"></i> Education and Occupation</h2>
+                    <p>Education: B.com</p>
+                    <p>Occupation: NA</p>
+                    <p>Salary: NA</p>
+                </section>
+                <section class="contact-details">
+                    <h2><i class="fa-solid fa-mobile-button"></i> Contact Details</h2>
+                    <p>Email: sana.khan@example.com</p>
+                    <p>Contact No: 1234567890</p>
+                    <p>Alternate No: 1234567890</p>
+                </section>
+                <section class="family-details">
+                    <h2><i class="fa-solid fa-people-roof"></i> Family Details</h2>
+                    <p>Father: Mr. Khan (Businessman)</p>
+                    <p>Mother: Mrs. Khan (Homemaker)</p>
+                    <p>Siblings: 1 Brother (Student)</p>
+                    <p>Siblings: 1 Sister (Married)</p>
+                </section>
+                <section class="residential-address">
+                    <h2><i class="fa-solid fa-house-chimney"></i> Residential Address</h2>
+                    <p>Street: 123 Main St</p>
+                    <p>City: Hyderabad</p>
+                    <p>Locality: Bhadurpura</p>
+                    <p>Pin Code: 500064</p>
+                    <p>Native Place: Hyderabad</p>
+                </section>
+            </div>
+        </div>
+        <div class="rightsidebar">
+            <div class="rightsidebarlink">
+                <h3><i class="fa-solid fa-bahai"></i> Profiles Suggestion </h3>
+                <div class="card crown-card sidecard-crown"> <!-- crowm profile -->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay sidecard-overlay-crown"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="groom.png" alt="groom-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <button class="card-btn crown-card-btn sidecard-btn">View Profile</button>
+                    </div>
+                </div>       
+                <div class="card diamond-card sidecard-diamond"> <!-- diamond -->
+                    <div class="image-content">
+                        <span class="overlay diamond-overlay sidecard-overlay-diamond"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="groom.png" alt="groom-img" class="sidecard-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="first-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <button class="card-btn diamond-card-btn sidecard-btn">View Profile</button>
+                    </div>
+                </div>
+                <div class="card crown-card sidecard-crown"> <!-- Updated -->
+                    <div class="image-content">
+                        <span class="overlay crown-overlay sidecard-overlay-crown"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="bride.png" alt="bride-img" class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="full-name card-name">Sana khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Mumbai</p>
+                        <button class="card-btn crown-card-btn sidecard-btn">View Profile</button>
+                    </div>
+                </div> 
+                <div class="card diamond-card sidecard-diamond"> <!-- diamond -->
+                    <div class="image-content">
+                        <span class="overlay diamond-overlay sidecard-overlay-diamond"></span>
+                        <div class="card-image sidecard-image"> <!-- Updated -->
+                            <img src="bride.png" alt="groom-img" class="sidecard-image">
+                        </div>
+                    </div>
+                    <div class="card-content sidecard-content"> <!-- Updated -->
+                        <h2 class="first-name card-name">Sana khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="highest-qualification">Qualification: B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Hyderabad</p>
+                        <button class="card-btn diamond-card-btn sidecard-btn">View Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </main>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=SUSE:wght@100..800&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #ffebab; 
+}
+::-webkit-scrollbar-thumb {
+  background-color: #d11616;  
+  border-radius: 10px;         
+  border: 3px solid #f1f1f1;  
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b91212; 
+}
+::-webkit-scrollbar-button {
+  background: #ffebab;
+}
+
+.options {
+  appearance: none; /* Removes default dropdown arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #ffffff; /* Background color */
+  border: 1px solid #ccc; /* Border */
+  padding: 10px;
+  width: 100%; /* Full width */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px;
+  color: #333; /* Text color */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="grey"><polygon points="0,0 20,0 10,10"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  font-family: "lato", sans-serif, Arial, Helvetica, sans-serif;
+}
+
+.options:focus {
+  border-color: #777; /* Border color when focused */
+  outline: none; /* Removes default outline */
+}
+
+.options::-ms-expand {
+  display: none; /* Removes dropdown icon in Internet Explorer */
+}
+
+html,body {
+  margin: 0; 
+  width: 100%;
+  min-height: 100vh;
+  margin-top: 4.7rem;
+  background-color:  #fff7e6;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  font-family: sans-serif,Arial, Helvetica, sans-serif;
+} 
+
+
+.golduser-profile-nav {
+    width: 1100px;
+    height: 300px;
+    color: white;
+    background: linear-gradient(145deg, #f1d18a, #f1d18a, #e8bf65 40%, #d4a24e 60%, #c49e63); 
+    box-shadow: 0px 4px 15px rgba(90, 53, 35, 0.4), inset 0px 2px 5px rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background-size: 200% 200%;
+    animation: shine 7s infinite ease-in-out;
+    justify-content: flex-end; /* Aligns items to the right */
+}
+
+@keyframes shine {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.golduser-profile-nav a {
+    text-decoration: none;
+    background-color: rgb(255, 255, 255);
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-family: "Lato", sans-serif;
+    color: #cd0c0c;
+    font-size: 18px;
+    font-weight: 900;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    text-align: center;
+    display: inline-block;
+}
+
+.golduser-profile-nav a:hover {
+    background-color: #cd0c0c;
+    color: white;
+    box-shadow: 0px 6px 12px rgba(238, 206, 206, 0.822);
+    transform: scale(1.05);
+}
+
+
+.linkstwo{
+  position: relative;
+  right: -515px;
+  top: -50px;
+  display: flex;
+  gap: 1rem;
+}
+
+.linkstwo a{
+    text-decoration: none;
+    background-color: rgb(255, 255, 255);
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-family: "Lato", sans-serif;
+    color: #cd0c0c;
+    font-size: 14px;
+    font-weight: 900;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: inline-block;
+    letter-spacing: 0.5px;
+
+}
+
+.linkstwo a:hover {
+    background-color: #cd0c0c;
+    color: white;
+    box-shadow: 0px 6px 12px rgba(238, 206, 206, 0.822);
+    transform: scale(1.05);
+}
+
+.displaypic{
+    top: 1;
+    left: 1;
+    margin-top: -13rem;
+    margin-left: 2rem;
+    border: 5px solid rgb(222, 159, 0);
+    object-fit: cover;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;  
+    border-radius: 50%;
+}
+.displaypic:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 15px 30px rgba(202, 148, 39, 0.5);
+}
+
+#profile-id{
+    position: relative;
+    left: 350px;
+    color: #7a7878;
+}
+
+.golduser-displaypic-container h1{
+    margin-left: 12rem;
+    margin-top: -5rem;
+    font-size: 3rem;
+    color: #fff; /* Primary text color */
+    text-align: center; /* Center align the text */
+    font-family: Arial, Helvetica, sans-serif sans-serif; /* Consistent font */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    letter-spacing: 1px; /* Slightly spaced letters */
+    transition: color 0.3s ease; 
+    position: relative;
+}
+
+
+/* Add a glowing effect */
+.golduser-displaypic-container h1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #e0ac69; /* Light glow effect */
+    border-radius: 10px; /* Rounded corners */
+    z-index: -1; /* Behind the text */
+    transition: background 0.3s ease; /* Transition effect for glow */
+}
+
+
+#verfied {
+    font-size: 30px; /* Font size for verified badge */
+    color: #fff; /* Color for verified badge */
+    margin-left: 10px; /* Space between name and badge */
+    vertical-align: middle; /* Align badge vertically */
+}
+
+/* General Card Styling */
+section {
+    background-color: #ffffff; 
+    border-radius: 15px; 
+    padding: 20px; 
+    margin-bottom: 20px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    max-width: 600px; /* Keep sections compact */
+    margin: 0 auto 30px auto; /* Center align sections */
+    position: relative; /* For advanced positioning */
+    overflow: hidden; /* Clip overflowing elements */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animations */
+}
+
+section:hover {
+    transform: translateY(-10px); /* Lift effect on hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+.personal-details {
+    margin-top: 3rem; /* Adjust this as per your needs */
+    background-color: #ffffff; /* Background for visual clarity */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    clear: both; /* Ensures it starts below floated or absolutely positioned elements */
+    position: relative; /* Relative positioning to avoid overlap */
+    z-index: 1; /* Keep it on top in case z-index of displaypic is higher */
+}
+
+
+/* Section Heading Styling */
+section h2 {
+    font-family: 'Lato', sans-serif; 
+    font-size: 1.8rem; 
+    color: #e7a725; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    margin-bottom: 10px; 
+    position: relative;
+    z-index: 1;
+}
+
+/* Underline Decoration for Headings */
+section h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #e7a725; 
+    margin-top: 5px;
+    border-radius: 2px;
+}
+
+/* Paragraph Styling */
+section p {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 10px 0; 
+    font-family: 'Open Sans', sans-serif; 
+    line-height: 1.6; /* Space between lines */
+}
+
+/* Advanced Visual Element */
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -80px; /* Positioning the element */
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(135deg, #b8860b 0%, #d4af37 50%, #f1c27d 100%); /* Dark Gold Gradient */
+    opacity: 0.5; 
+    z-index: 0;
+    transform: skewX(-10deg); /* Kept skew effect for shape */
+}
+
+/* Define the keyframes for shineAnimation if not already defined */
+
+/* Responsive Design for Mobile Screens */
+@media (max-width: 768px) {
+    section {
+        padding: 15px; /* Reduce padding for mobile */
+        max-width: 100%; /* Full width on mobile */
+    }
+
+    section h2 {
+        font-size: 1.5rem; /* Smaller headings on mobile */
+    }
+
+    section p {
+        font-size: 1rem; /* Adjust paragraph size */
+    }
+
+    section::before {
+        right: -30px; /* Adjust background element for mobile */
+    }
+}
+
+    </style>
+    <script src="script.js"></script>
+</body>
+</html>

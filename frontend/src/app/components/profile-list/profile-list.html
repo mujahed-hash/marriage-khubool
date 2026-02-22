@@ -1,0 +1,36 @@
+<div class="profile-list-container">
+    <h1 class="profile-list-heading" [ngClass]="'tier-' + tier">
+        <i [class]="tierIcon"></i> {{ tierTitle }}
+    </h1>
+    <div class="profile-list-content">
+        @for (p of profiles(); track p._id || p.profileId || $index) {
+        <a [routerLink]="['/profile', p.profileId || p._id]" class="profile-list-card">
+            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="" class="profile-list-img">
+            <div class="profile-list-info">
+                @if (p._id && getMatchScore(p._id) != null) {
+                <span class="match-badge">{{ getMatchScore(p._id!) }}% Match</span>
+                }
+                <h3>{{ p.fullName || 'Profile' }}</h3>
+                <p>DOB: {{ p.dateOfBirth || 'N/A' }}</p>
+                <p>{{ p.occupation || 'N/A' }}</p>
+                <p>Height: {{ p.height || 'N/A' }}</p>
+                <p>Location: {{ p.city || p.state || 'N/A' }}</p>
+            </div>
+        </a>
+        }
+        @empty {
+        <p>No {{ tier }} profiles yet.</p>
+        }
+    </div>
+    @if (pages() > 1) {
+    <div class="pagination">
+        <button (click)="goToPage(page() - 1)" [disabled]="page() <= 1">
+            <i class="fa-solid fa-chevron-left"></i> Prev
+        </button>
+        <span class="page-info">Page {{ page() }} of {{ pages() }} ({{ total() }} total)</span>
+        <button (click)="goToPage(page() + 1)" [disabled]="page() >= pages()">
+            Next <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+    }
+</div>

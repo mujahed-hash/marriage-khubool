@@ -1,0 +1,192 @@
+<div class="requirements-container">
+    <h1 class="page-heading"><i class="fa-solid fa-file-circle-check"></i> My Requirements</h1>
+
+    @if (loading()) {
+    <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading requirements...</p>
+    </div>
+    } @else if (showForm) {
+    <form (ngSubmit)="saveRequirements()" class="req-form">
+
+        <!-- Age Range -->
+        <section class="req-section">
+            <h2><i class="fa-solid fa-calendar-days"></i> Age Preference</h2>
+            <div class="range-row">
+                <div class="field">
+                    <label>Min Age</label>
+                    <input type="number" [(ngModel)]="prefs.ageRange.min" name="minAge" min="18" max="60" class="input">
+                </div>
+                <span class="range-sep">to</span>
+                <div class="field">
+                    <label>Max Age</label>
+                    <input type="number" [(ngModel)]="prefs.ageRange.max" name="maxAge" min="18" max="60" class="input">
+                </div>
+            </div>
+        </section>
+
+        <!-- Marital Status -->
+        <section class="req-section">
+            <h2><i class="fa-solid fa-ring"></i> Marital Status</h2>
+            <div class="chip-group">
+                @for (opt of ['Never Married', 'Divorced', 'Widowed', 'Separated']; track opt) {
+                <button type="button" class="chip" [class.active]="isSelected(prefs.maritalStatus, opt)"
+                    (click)="toggleItem(prefs.maritalStatus, opt)">{{ opt }}</button>
+                }
+            </div>
+        </section>
+
+        <!-- Religion -->
+        <section class="req-section">
+            <h2><i class="fa-solid fa-mosque"></i> Religion</h2>
+            <div class="chip-group">
+                @for (opt of ['Muslim', 'Hindu', 'Christian', 'Sikh', 'Buddhist', 'Jain', 'Other']; track opt) {
+                <button type="button" class="chip" [class.active]="isSelected(prefs.religion, opt)"
+                    (click)="toggleItem(prefs.religion, opt)">{{ opt }}</button>
+                }
+            </div>
+        </section>
+
+        <!-- Diet -->
+        <section class="req-section">
+            <h2><i class="fa-solid fa-utensils"></i> Diet</h2>
+            <div class="chip-group">
+                @for (opt of ['Vegetarian', 'Non-Vegetarian', 'Eggetarian', 'Vegan', 'Jain']; track opt) {
+                <button type="button" class="chip" [class.active]="isSelected(prefs.diet, opt)"
+                    (click)="toggleItem(prefs.diet, opt)">{{ opt }}</button>
+                }
+            </div>
+        </section>
+
+        <!-- Mother Tongue -->
+        <section class="req-section">
+            <h2><i class="fa-solid fa-language"></i> Mother Tongue</h2>
+            <div class="chip-group">
+                @for (opt of ['Hindi', 'Urdu', 'English', 'Tamil', 'Telugu', 'Kannada', 'Malayalam', 'Bengali',
+                'Marathi', 'Gujarati', 'Punjabi', 'Other']; track opt) {
+                <button type="button" class="chip" [class.active]="isSelected(prefs.motherTongue, opt)"
+                    (click)="toggleItem(prefs.motherTongue, opt)">{{ opt }}</button>
+                }
+            </div>
+        </section>
+
+        <!-- Location -->
+        <section class="req-section">
+            <h2><i class="fa-solid fa-location-dot"></i> Location Preference</h2>
+            <div class="field">
+                <label>Preferred City</label>
+                <input type="text" [(ngModel)]="prefs.city" name="city" placeholder="e.g. Hyderabad, Mumbai"
+                    class="input">
+            </div>
+        </section>
+
+        <!-- Annual Income -->
+        <section class="req-section">
+            <h2><i class="fa-solid fa-indian-rupee-sign"></i> Annual Income</h2>
+            <div class="field">
+                <label>Minimum Annual Income</label>
+                <select [(ngModel)]="prefs.annualIncome" name="annualIncome" class="input">
+                    <option value="">Any</option>
+                    <option value="2-4 Lakhs">2-4 Lakhs</option>
+                    <option value="4-6 Lakhs">4-6 Lakhs</option>
+                    <option value="6-10 Lakhs">6-10 Lakhs</option>
+                    <option value="10-15 Lakhs">10-15 Lakhs</option>
+                    <option value="15-25 Lakhs">15-25 Lakhs</option>
+                    <option value="25+ Lakhs">25+ Lakhs</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Complexion -->
+        <section class="req-section">
+            <h2><i class="fa-solid fa-palette"></i> Complexion</h2>
+            <div class="chip-group">
+                @for (opt of ['Very Fair', 'Fair', 'Wheatish', 'Dark']; track opt) {
+                <button type="button" class="chip" [class.active]="isSelected(prefs.complexion, opt)"
+                    (click)="toggleItem(prefs.complexion, opt)">{{ opt }}</button>
+                }
+            </div>
+        </section>
+
+        <!-- Save / Cancel -->
+        <div class="req-actions">
+            @if (hasRequirements) {
+            <button type="button" class="btn-cancel" (click)="cancelEditing()">Cancel</button>
+            }
+            <button type="submit" class="btn-save" [disabled]="saving()">
+                {{ saving() ? 'Saving...' : (hasRequirements ? 'Update Requirements' : 'Save Requirements') }}
+            </button>
+        </div>
+
+        @if (message()) {
+        <div class="req-toast">{{ message() }}</div>
+        }
+    </form>
+    } @else {
+    <!-- Read-only view of saved requirements -->
+    <div class="req-view">
+        <div class="req-view-header">
+            <p class="req-view-intro">Your partner preferences are set. You can edit them anytime.</p>
+            <button type="button" class="btn-edit" (click)="startEditing()">
+                <i class="fa-solid fa-pen"></i> Edit Requirements
+            </button>
+        </div>
+        <div class="req-view-grid">
+            @if (savedPrefs(); as sp) {
+            <div class="req-view-item">
+                <span class="req-view-label">Age</span>
+                <span class="req-view-value">{{ sp.ageRange.min }} - {{ sp.ageRange.max }} yrs</span>
+            </div>
+            @if (sp.maritalStatus && sp.maritalStatus.length) {
+            <div class="req-view-item">
+                <span class="req-view-label">Marital Status</span>
+                <span class="req-view-value">{{ sp.maritalStatus.join(', ') }}</span>
+            </div>
+            }
+            @if (sp.religion && sp.religion.length) {
+            <div class="req-view-item">
+                <span class="req-view-label">Religion</span>
+                <span class="req-view-value">{{ sp.religion.join(', ') }}</span>
+            </div>
+            }
+            @if (sp.motherTongue && sp.motherTongue.length) {
+            <div class="req-view-item">
+                <span class="req-view-label">Mother Tongue</span>
+                <span class="req-view-value">{{ sp.motherTongue.join(', ') }}</span>
+            </div>
+            }
+            @if (sp.diet && sp.diet.length) {
+            <div class="req-view-item">
+                <span class="req-view-label">Diet</span>
+                <span class="req-view-value">{{ sp.diet.join(', ') }}</span>
+            </div>
+            }
+            @if (sp.state && sp.state.length) {
+            <div class="req-view-item">
+                <span class="req-view-label">Location (State)</span>
+                <span class="req-view-value">{{ sp.state.join(', ') }}</span>
+            </div>
+            }
+            @if (sp.city) {
+            <div class="req-view-item">
+                <span class="req-view-label">City</span>
+                <span class="req-view-value">{{ sp.city }}</span>
+            </div>
+            }
+            @if (sp.annualIncome) {
+            <div class="req-view-item">
+                <span class="req-view-label">Annual Income</span>
+                <span class="req-view-value">{{ sp.annualIncome }}</span>
+            </div>
+            }
+            @if (sp.complexion && sp.complexion.length) {
+            <div class="req-view-item">
+                <span class="req-view-label">Complexion</span>
+                <span class="req-view-value">{{ sp.complexion.join(', ') }}</span>
+            </div>
+            }
+            }
+        </div>
+    </div>
+    }
+</div>

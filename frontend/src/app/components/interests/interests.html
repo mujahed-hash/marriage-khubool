@@ -1,0 +1,86 @@
+<div class="interests-container">
+    <h1 class="page-heading"><i class="fa-solid fa-heart"></i> My Interests</h1>
+
+    <div class="tabs">
+        <button class="tab" [class.active]="activeTab() === 'sent'" (click)="setTab('sent')">
+            <i class="fa-solid fa-paper-plane"></i> Interest Sent ({{ sentProfiles().length }})
+        </button>
+        <button class="tab" [class.active]="activeTab() === 'received'" (click)="setTab('received')">
+            <i class="fa-solid fa-inbox"></i> Interest Received ({{ receivedProfiles().length }})
+        </button>
+    </div>
+
+    @if (loading()) {
+    <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+    } @else if (activeTab() === 'sent') {
+    @if (sentProfiles().length === 0) {
+    <div class="empty-state">
+        <i class="fa-solid fa-heart"></i>
+        <p>You haven't sent any interests yet.</p>
+        <a routerLink="/profiles/diamond" class="btn-browse">Browse Profiles</a>
+    </div>
+    } @else {
+    <div class="interest-grid">
+        @for (p of sentProfiles(); track p._id || p.profileId || $index) {
+        <div class="interest-card">
+            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="" class="card-avatar">
+            <div class="card-info">
+                <h3>{{ p.fullName || 'N/A' }}</h3>
+                <p class="card-meta">{{ p.city || '' }} · {{ p.occupation || '' }}</p>
+                <p class="card-id">ID: {{ p.profileId || p._id }}</p>
+            </div>
+            <span class="status-badge" [class.pending]="p.interestStatus === 'pending'"
+                [class.accepted]="p.interestStatus === 'accepted'" [class.rejected]="p.interestStatus === 'rejected'">
+                {{ p.interestStatus || 'pending' }}
+            </span>
+            <a [routerLink]="['/profile', p.profileId || p._id]" class="btn-view">View Profile</a>
+        </div>
+        }
+    </div>
+    }
+    } @else {
+    @if (receivedProfiles().length === 0) {
+    <div class="empty-state">
+        <i class="fa-solid fa-inbox"></i>
+        <p>No one has sent you interest yet.</p>
+    </div>
+    } @else {
+    <div class="interest-grid">
+        @for (p of receivedProfiles(); track p._id || p.profileId || $index) {
+        <div class="interest-card">
+            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="" class="card-avatar">
+            <div class="card-info">
+                <h3>{{ p.fullName || 'N/A' }}</h3>
+                <p class="card-meta">{{ p.city || '' }} · {{ p.occupation || '' }}</p>
+                <p class="card-id">ID: {{ p.profileId || p._id }}</p>
+            </div>
+            @if (p.interestStatus === 'pending') {
+            <div class="action-buttons">
+                <button class="btn-accept" (click)="acceptInterest(p.interestId)" title="Accept">
+                    <i class="fa-solid fa-check"></i> Accept
+                </button>
+                <button class="btn-reject" (click)="rejectInterest(p.interestId)" title="Reject">
+                    <i class="fa-solid fa-xmark"></i> Reject
+                </button>
+            </div>
+            } @else {
+            <span class="status-badge" [class.accepted]="p.interestStatus === 'accepted'"
+                [class.rejected]="p.interestStatus === 'rejected'">
+                {{ p.interestStatus }}
+            </span>
+            }
+            <a [routerLink]="['/profile', p.profileId || p._id]" class="btn-view">View Profile</a>
+        </div>
+        }
+    </div>
+    }
+    }
+
+    <!-- Action Toast -->
+    @if (actionMessage()) {
+    <div class="action-toast">{{ actionMessage() }}</div>
+    }
+</div>

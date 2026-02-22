@@ -1,0 +1,142 @@
+.nav {
+    width: 100%;
+    min-height: var(--navbar-height, 4.5rem);
+    padding: 0.5rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--tier-secondary);
+    box-shadow: 0 2px 12px var(--tier-glow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: all var(--transition-speed);
+    box-sizing: border-box;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--tier-primary);
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.menu-toggle:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.logo img {
+    height: 40px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 400px;
+    margin: 0 1rem;
+    background: white;
+    border-radius: 20px;
+    padding: 5px 0 5px 15px;
+}
+
+.search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    min-width: 0;
+}
+
+.search-bar .search-btn {
+    background: var(--tier-primary, #b32323);
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.search-bar .search-btn:hover {
+    opacity: 0.9;
+}
+
+.icon-bar {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    color: var(--tier-primary);
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-top: 10px;
+    z-index: 1;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--tier-secondary);
+}
+
+.notification-bell {
+    position: relative;
+    color: var(--tier-primary);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+}

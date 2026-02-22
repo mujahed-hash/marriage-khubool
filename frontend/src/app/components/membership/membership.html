@@ -1,0 +1,202 @@
+<div class="center-page-content">
+    @if (message) {
+    <div class="membership-message">{{ message }}</div>
+    }
+    <section class="membership-plans">
+        <div class="plan bronze">
+            <div class="plan-header">
+                <h2><i class="fa-solid fa-star"></i> Bronze Membership</h2>
+            </div>
+            <div class="price-container">
+                <p class="price">Free <span class="months"> / Basic Access</span></p>
+            </div>
+            <ul class="membership-features">
+                <li><i class="fa-solid fa-address-card"></i> Create Profile</li>
+                <li><i class="fa-solid fa-eye"></i> Browse Profiles</li>
+                <li><i class="fa-solid fa-lock"></i> Limited Access to Profile Details</li>
+                <li><i class="fa-solid fa-comment-dots"></i> Limited Interaction Options</li>
+                <li><i class="fa-solid fa-user-lock"></i> Contact Details Locked</li>
+                <li><i class="fa-solid fa-chalkboard-user"></i> Limited Profile Views</li>
+                <li><b>Profile Highlighting:</b>
+                    <ul><li><i class="fa-solid fa-circle-xmark"></i> No Highlighting Available</li></ul>
+                </li>
+            </ul>
+            <div class="subscribe">
+                <button>Upgrade to Silver</button>
+            </div>
+        </div>
+        <div class="plan silver">
+            <div class="plan-header">
+                <h2><i class="fa-solid fa-award"></i> Silver Membership</h2>
+            </div>
+            <div class="price-container">
+                <p class="price">₹299 <span class="months"> / 1 Month</span></p>
+                <p class="price">₹569 <span class="months"> / 2 Months</span> <span class="savings">(Save ₹29)</span></p>
+                <p class="price">₹799 <span class="months"> / 3 Months</span> <span class="savings">(Save ₹98)</span></p>
+                <p class="price">₹1299 <span class="months"> / 6 Months</span> <span class="savings">(Save ₹495)</span></p>
+            </div>
+            <ul class="membership-features">
+                <li><i class="fa-solid fa-address-card"></i> Full Access to 12 Profiles/Day</li>
+                <li><i class="fa-solid fa-comments"></i> Chats per Profile: 15 messages</li>
+                <li><i class="fa-solid fa-image"></i> Photo Requests: 15 per day</li>
+                <li><i class="fa-solid fa-eye"></i> See Who Viewed Your Profile</li>
+                <li><i class="fa-solid fa-rocket"></i> Profile Boost: After 2 months</li>
+                <li><i class="fa-brands fa-searchengin"></i> Advanced Search Filters</li>
+                <li><i class="fa-solid fa-envelope-open-text"></i> Customer Support</li>
+                <li><b>Profile Highlighting:</b>
+                    <ul>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 7 Days (1 Month)</li>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 15 Days (2 Months)</li>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 30 Days (3 Months)</li>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 60 Days (6 Months)</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="subscribe">
+                <label for="silver-plan">Select Duration:</label>
+                <select class="options op" id="silver-plan" name="duration" #silverSelect>
+                    <option value="299">1 Month - ₹299</option>
+                    <option value="569">2 Months - ₹569</option>
+                    <option value="799">3 Months - ₹799</option>
+                    <option value="1299">6 Months - ₹1299</option>
+                </select>
+                <button (click)="subscribe('silver', +silverSelect.value)" [disabled]="loading">Subscribe</button>
+            </div>
+        </div>
+        <div class="plan gold">
+            <div class="plan-header">
+                <h2><i class="fa-solid fa-trophy"></i> Gold Membership</h2>
+            </div>
+            <div class="price-container">
+                <p class="price">₹499 <span class="months"> / 1 Month</span></p>
+                <p class="price">₹949 <span class="months"> / 2 Months</span> <span class="savings">(Save ₹49)</span></p>
+                <p class="price">₹1299 <span class="months"> / 3 Months</span> <span class="savings">(Save ₹198)</span></p>
+                <p class="price">₹2299 <span class="months"> / 6 Months</span> <span class="savings">(Save ₹999)</span></p>
+            </div>
+            <ul class="membership-features">
+                <li><i class="fa-solid fa-address-card"></i> Full Access to 25 Profiles/Day</li>
+                <li><i class="fa-solid fa-comments"></i> Chats per Profile: 30 messages</li>
+                <li><i class="fa-solid fa-image"></i> Photo Requests: 30 per day</li>
+                <li><i class="fa-solid fa-eye"></i> See Who Viewed Your Profile</li>
+                <li><i class="fa-solid fa-rocket"></i> Profile Boost: Monthly</li>
+                <li><i class="fa-solid fa-certificate"></i> Verified Badge on Profile</li>
+                <li><i class="fa-brands fa-searchengin"></i> Enhanced Search Filters</li>
+                <li><i class="fa-solid fa-envelope-open-text"></i> Priority Support</li>
+                <li><b>Profile Highlighting:</b>
+                    <ul>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 14 Days (1 Month)</li>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 30 Days (2 Months)</li>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 45 Days (3 Months)</li>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 90 Days (6 Months)</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="subscribe">
+                <label for="gold-plan">Select Duration:</label>
+                <select class="options op" id="gold-plan" name="duration" #goldSelect>
+                    <option value="499">1 Month - ₹499</option>
+                    <option value="949">2 Months - ₹949</option>
+                    <option value="1299">3 Months - ₹1299</option>
+                    <option value="2299">6 Months - ₹2299</option>
+                </select>
+                <button (click)="subscribe('gold', +goldSelect.value)" [disabled]="loading">Subscribe</button>
+            </div>
+        </div>
+        <div class="plan diamond">
+            <div class="plan-header">
+                <h2><i class="fa-solid fa-gem"></i> Diamond Membership</h2>
+            </div>
+            <div class="price-container">
+                <p class="price">₹699 <span class="months"> / 1 Month</span></p>
+                <p class="price">₹1299 <span class="months"> / 2 Months</span> <span class="savings">(Save ₹99)</span></p>
+                <p class="price">₹1799 <span class="months"> / 3 Months</span> <span class="savings">(Save ₹398)</span></p>
+                <p class="price">₹2999 <span class="months"> / 6 Months</span> <span class="savings">(Save ₹1395)</span></p>
+            </div>
+            <ul class="membership-features">
+                <li><i class="fa-solid fa-address-card"></i> Full Access to All Profiles</li>
+                <li><i class="fa-solid fa-chalkboard-user"></i> Unlimited Profile Viewing</li>
+                <li><i class="fa-solid fa-comments"></i> Unlimited Messaging</li>
+                <li><i class="fa-solid fa-eye"></i> See Who Viewed Your Profile</li>
+                <li><i class="fa-solid fa-rocket"></i> Profile Boost: Monthly</li>
+                <li><i class="fa-solid fa-certificate"></i> Verified Badge on Profile</li>
+                <li><i class="fa-brands fa-searchengin"></i> Enhanced Search Filters</li>
+                <li><i class="fa-solid fa-envelope-open-text"></i> Priority Support</li>
+                <li><i class="fas fa-user-check"></i> Partner Requirements Access</li>
+                <li><i class="fa-regular fa-id-card"></i> Personalized Profile Suggestions</li>
+                <li><i class="fa-solid fa-key"></i> Early Access to New Features</li>
+                <li><b>Profile Highlighting:</b>
+                    <ul>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 30 Days (1 Month)</li>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 60 Days (2 Months)</li>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 90 Days (3 Months)</li>
+                        <li><i class="fa-regular fa-hourglass-half"></i> 120 Days (6 Months)</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="subscribe">
+                <label for="diamond-plan">Select Duration:</label>
+                <select class="options op" id="diamond-plan" name="duration" #diamondSelect>
+                    <option value="699">1 Month - ₹699</option>
+                    <option value="1299">2 Months - ₹1299</option>
+                    <option value="1799">3 Months - ₹1799</option>
+                    <option value="2999">6 Months - ₹2999</option>
+                </select>
+                <button (click)="subscribe('diamond', +diamondSelect.value)" [disabled]="loading">Subscribe</button>
+            </div>
+        </div>
+        <div class="plan crown">
+            <div class="plan-header">
+                <h2><i class="fa-solid fa-crown"></i> Crown Membership</h2>
+            </div>
+            <div class="price-container">
+                <p class="price">₹9999 <span>/ Lifetime - Till Marry</span></p>
+            </div>
+            <ul class="membership-features">
+                <li><i class="fa-solid fa-address-card"></i> Full Access to All Profiles</li>
+                <li><i class="fa-solid fa-chalkboard-user"></i> Unlimited Profile Viewing</li>
+                <li><i class="fa-solid fa-comments"></i> Unlimited Messaging</li>
+                <li><i class="fa-solid fa-eye"></i> See Who Viewed Your Profile</li>
+                <li><i class="fa-brands fa-searchengin"></i> Enhanced Search Filters</li>
+                <li><i class="fa-solid fa-envelope-open-text"></i> Priority Support</li>
+                <li><i class="fa-solid fa-rocket"></i> Profile Boost: Monthly</li>
+                <li><i class="fa-solid fa-certificate"></i> Verified Badge on Profile</li>
+                <li><i class="fas fa-user-check"></i> Partner Requirements Access</li>
+                <li><i class="fa-regular fa-id-card"></i> Personalized Profile Suggestions</li>
+                <li><i class="fa-solid fa-key"></i> Early Access to New Features</li>
+                <li><b>Profile Highlighting:</b>
+                    <ul><li><i class="fa-regular fa-hourglass-half"></i> 120 Days (Lifetime)</li></ul>
+                </li>
+            </ul>
+            <div class="subscribe">
+                <button (click)="subscribe('crown', 9999)" [disabled]="loading">Subscribe</button>
+            </div>
+        </div>
+    </section>
+    <section class="membership-benefits">
+        <div class="benefits-header">
+            <h2><i class="fa-solid fa-people-group"></i> Membership Benefits</h2>
+        </div>
+        <div class="benefits-content">
+            <div class="benefit-item">
+                <i class="fa-solid fa-star"></i>
+                <h3>Exclusive Discounts</h3>
+                <p>Enjoy special discounts on subscription plans and premium features.</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fa-solid fa-heart"></i>
+                <h3>Priority Support</h3>
+                <p>Receive priority support and faster response times from our customer service team.</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fa-solid fa-shield-alt"></i>
+                <h3>Enhanced Security</h3>
+                <p>Benefit from advanced security features to keep your profile and personal data safe.</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fa-solid fa-star-half-alt"></i>
+                <h3>Profile Boosts</h3>
+                <p>Get extra visibility with profile boosts and enhanced search filters.</p>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,1 @@
+export { ShortlistComponent } from './shortlist';

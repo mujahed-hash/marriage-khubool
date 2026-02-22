@@ -1,0 +1,142 @@
+<div class="myprofilesection">
+    <div class="profile-nav">
+        <a routerLink="/my-photos"><i class="fa-solid fa-file-image"></i> My Photos</a>
+        <a routerLink="/my-requirements"><i class="fa-solid fa-file-circle-check"></i> My Requirements</a>
+        <a href="javascript:void(0)" (click)="openRequirementsModal()"><i class="fa-solid fa-file-lines"></i> View
+            Biodata</a>
+    </div>
+    <span class="edit-del-profile">
+        <a routerLink="/shortlist"><i class="fa-solid fa-bookmark"></i> Shortlisted Profiles</a>
+        <a routerLink="/interests"><i class="fa-solid fa-heart"></i> My Interests</a>
+        <a routerLink="/create-profile"><i class="fa-solid fa-file-pen"></i> Edit Profile</a>
+        <a href="javascript:void(0)" (click)="openDeleteModal()"><i class="fa-solid fa-file-circle-minus"></i> Delete
+            Profile</a>
+    </span>
+    <h4 id="profile-id">Profile ID: {{ profile.profileId || 'N/A' }} <i class="fa-solid fa-circle-check"
+            *ngIf="profile.verificationDocUrl"></i></h4>
+    <div class="displaypic-container">
+        <img [src]="(profile.profilePhotoUrl | photoUrl) || getPlaceholderImg(profile.gender)" alt="profile"
+            class="displaypic">
+        <h1 class="name">{{ profile.fullName || 'N/A' }}<span class="material-symbols-outlined"
+                id="verfied">verified</span></h1>
+    </div>
+    <section class="personal-details">
+        <h2><i class="fa-solid fa-circle-user"></i> Personal Details</h2>
+        <p>Name: {{ profile.fullName || 'N/A' }}</p>
+        <p>Date of Birth: {{ profile.dateOfBirth || 'N/A' }}</p>
+        <p>Gender: {{ (profile.gender || 'N/A') | titlecase }}</p>
+        <p>Religion: {{ (profile.religion || 'N/A') | titlecase }}</p>
+        <p>Mother Tongue: {{ profile.motherTongue || 'N/A' }}</p>
+        <p>Height: {{ profile.height || 'N/A' }}</p>
+        <p>Marital Status: {{ (profile.maritalStatus || 'N/A') | titlecase }}</p>
+    </section>
+    <section class="education-occupation">
+        <h2><i class="fa-solid fa-graduation-cap"></i> Education and Occupation</h2>
+        <p>Education: {{ profile.highestEducation || 'N/A' }}</p>
+        <p>Occupation: {{ profile.occupation || 'N/A' }}</p>
+        <p>Salary: {{ profile.monthlyIncome || 'N/A' }}</p>
+    </section>
+    <section class="contact-details">
+        <h2><i class="fa-solid fa-mobile-button"></i> Contact Details</h2>
+        <p>Email: {{ profile.email || 'N/A' }}</p>
+        <p>Contact No: {{ profile.contactNo || 'N/A' }}</p>
+        <p>Alternate No: {{ profile.alternateNo || 'N/A' }}</p>
+    </section>
+    <section class="family-details">
+        <h2><i class="fa-solid fa-people-roof"></i> Family Details</h2>
+        <p>Father: {{ profile.fatherStatus || profile.fatherName || 'N/A' }}</p>
+        <p>Mother: {{ profile.motherStatus || profile.motherName || 'N/A' }}</p>
+        <p>Siblings: {{ profile.siblings || 'N/A' }}</p>
+    </section>
+    <section class="residential-address">
+        <h2><i class="fa-solid fa-house-chimney"></i> Residential Address</h2>
+        <p>City: {{ profile.city || 'N/A' }}</p>
+        <p>Locality: {{ profile.locality || 'N/A' }}</p>
+        <p>Pin Code: {{ profile.pinCode || 'N/A' }}</p>
+        <p>Native Place: {{ profile.nativePlace || 'N/A' }}</p>
+    </section>
+</div>
+
+<!-- Delete Profile Modal -->
+@if (showDeleteModal()) {
+<div class="modal-overlay" (click)="closeDeleteModal()">
+    <div class="modal-dialog" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h3><i class="fa-solid fa-triangle-exclamation"></i> Delete Profile</h3>
+            <button type="button" class="modal-close" (click)="closeDeleteModal()" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete your profile? This action cannot be undone. You can create a new profile
+                anytime.</p>
+            @if (deleteError()) {
+            <p class="modal-error">{{ deleteError() }}</p>
+            }
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-cancel" (click)="closeDeleteModal()">Cancel</button>
+            <button type="button" class="btn-delete" (click)="confirmDelete()" [disabled]="isDeleting()">
+                @if (isDeleting()) {
+                <i class="fa-solid fa-spinner fa-spin"></i> Deleting...
+                } @else {
+                <i class="fa-solid fa-trash"></i> Delete Profile
+                }
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+<!-- Requirements Modal -->
+@if (showRequirementsModal()) {
+<div class="modal-overlay" (click)="closeRequirementsModal()">
+    <div class="modal-dialog requirements-dialog" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h3 style="color: #db2777;"><i class="fa-solid fa-file-circle-check" style="color: #db2777;"></i> Partner
+                Requirements</h3>
+            <button type="button" class="modal-close" (click)="closeRequirementsModal()" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body req-body">
+            @if (profile.partnerPreferences) {
+            <div class="req-grid">
+                <div class="req-item">
+                    <span class="req-label">Age</span>
+                    <span class="req-value">{{ profile.partnerPreferences.ageRange?.min || 18 }} - {{
+                        profile.partnerPreferences.ageRange?.max || 40 }} yrs</span>
+                </div>
+                <div class="req-item" *ngIf="profile.partnerPreferences.maritalStatus?.length">
+                    <span class="req-label">Marital Status</span>
+                    <span class="req-value">{{ profile.partnerPreferences.maritalStatus?.join(', ') }}</span>
+                </div>
+                <div class="req-item" *ngIf="profile.partnerPreferences.religion?.length">
+                    <span class="req-label">Religion</span>
+                    <span class="req-value">{{ profile.partnerPreferences.religion }}</span>
+                </div>
+                <div class="req-item" *ngIf="profile.partnerPreferences.diet?.length">
+                    <span class="req-label">Diet</span>
+                    <span class="req-value">{{ profile.partnerPreferences.diet?.join(', ') }}</span>
+                </div>
+                <div class="req-item" *ngIf="profile.partnerPreferences.annualIncome">
+                    <span class="req-label">Annual Income</span>
+                    <span class="req-value">{{ profile.partnerPreferences.annualIncome }}</span>
+                </div>
+            </div>
+            } @else {
+            <div class="empty-req">
+                <i class="fa-solid fa-clipboard-list"
+                    style="font-size: 3rem; color: #cbd5e1; margin-bottom: 1rem; display: block; text-align: center;"></i>
+                <p style="text-align: center;">You haven't added any partner requirements yet. Edit your profile to set
+                    them.</p>
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <a routerLink="/create-profile" class="btn-primary" (click)="closeRequirementsModal()"
+                        style="text-decoration: none; display: inline-block;">Update Profile</a>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+}

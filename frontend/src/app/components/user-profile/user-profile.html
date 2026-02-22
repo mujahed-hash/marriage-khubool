@@ -1,0 +1,224 @@
+<div class="profile-container">
+    @if (loading()) {
+    <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading profile details...</p>
+    </div>
+    } @else if (profile(); as p) {
+    <!-- Cover Photo & Top Nav -->
+    <div class="profile-header">
+        <div class="header-actions">
+            <button class="btn-action" (click)="scrollToPhotos()"><i class="fa-solid fa-file-image"></i> Photos</button>
+            <button class="btn-action" (click)="showRequirementsModal.set(true)"><i
+                    class="fa-solid fa-file-circle-check"></i> Requirements</button>
+            <button class="btn-action" (click)="scrollToBiodata()"><i class="fa-solid fa-file-lines"></i>
+                Biodata</button>
+        </div>
+    </div>
+
+    <!-- Main Info Bar -->
+    <div class="profile-main-info">
+        <div class="profile-avatar-container" id="profile-photos">
+            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="Profile Pic"
+                class="profile-avatar">
+        </div>
+
+        <div class="profile-title">
+            <h1 class="name">{{ p.fullName || 'Profile Details' }}
+                @if (matchScore() != null) {
+                <span class="match-badge clickable" (click)="openMatchBreakdown()" title="Click to see match details">{{ matchScore() }}% Match</span>
+                }
+                <i class="fa-solid fa-circle-check verified-badge" *ngIf="p.verificationDocUrl" title="Verified"></i>
+            </h1>
+            <p class="profile-id">ID: {{ p.profileId || profileId() }}</p>
+        </div>
+
+        <div class="profile-quick-actions">
+            <button class="btn-primary" (click)="sendInterest()" [disabled]="interestSent()">
+                <i class="fa-solid fa-heart"></i> {{ interestSent() ? 'Interest Sent' : 'Send Interest' }}
+            </button>
+            <button class="btn-secondary" (click)="toggleShortlist()">
+                <i class="fa-solid fa-bookmark"></i> {{ shortlisted() ? 'Shortlisted ✓' : 'Shortlist' }}
+            </button>
+            <button class="btn-icon" title="Chat" (click)="onChatClick()"><i class="fa-solid fa-comments"></i></button>
+            <button class="btn-icon text-danger" title="Report" (click)="openReportModal()">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </button>
+            <button class="btn-icon" [class.text-danger]="isBlocked()" title="{{ isBlocked() ? 'Unblock' : 'Block' }}"
+                (click)="toggleBlock()">
+                <i class="fa-solid fa-ban"></i>
+            </button>
+        </div>
+
+        <!-- Action message toast -->
+        @if (actionMessage()) {
+        <div class="action-toast">{{ actionMessage() }}</div>
+        }
+    </div>
+
+    <!-- Report Modal -->
+    @if (showReportModal()) {
+    <div class="modal-overlay" (click)="showReportModal.set(false)">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <h3><i class="fa-solid fa-triangle-exclamation"></i> Report Profile</h3>
+            <p>Why are you reporting this profile?</p>
+            <textarea [(ngModel)]="reportReason" placeholder="Describe the issue..." rows="4"></textarea>
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="showReportModal.set(false)">Cancel</button>
+                <button class="btn-primary" (click)="submitReport()" [disabled]="!reportReason.trim()">Submit
+                    Report</button>
+            </div>
+        </div>
+    </div>
+    }
+
+    <!-- Detailed Sections Grid -->
+    <div class="profile-content-grid" id="biodata">
+        <!-- Personal Details -->
+        <section class="info-card">
+            <div class="card-header">
+                <h2><i class="fa-solid fa-user"></i> Personal Overview</h2>
+            </div>
+            <div class="card-body">
+                <div class="info-item"><span>Date of Birth</span><strong>{{ p.dateOfBirth || 'N/A' }}</strong></div>
+                <div class="info-item"><span>Religion</span><strong>{{ p.religion || 'N/A' }}</strong></div>
+                <div class="info-item"><span>Visit Dargha/Fateha</span><strong>{{ p.visitDarghaFateha || 'N/A'
+                        }}</strong></div>
+                <div class="info-item"><span>Mother Tongue</span><strong>{{ p.motherTongue || 'N/A' }}</strong></div>
+                <div class="info-item"><span>Complexion</span><strong>{{ p.complexion || 'N/A' }}</strong></div>
+                <div class="info-item"><span>Height</span><strong>{{ p.height || 'N/A' }}</strong></div>
+                <div class="info-item"><span>Marital Status</span><strong>{{ p.maritalStatus || 'N/A' }}</strong></div>
+            </div>
+        </section>
+
+        <!-- Education & Career -->
+        <section class="info-card">
+            <div class="card-header">
+                <h2><i class="fa-solid fa-briefcase"></i> Education & Career</h2>
+            </div>
+            <div class="card-body">
+                <div class="info-item"><span>Education</span><strong>{{ p.highestEducation || 'N/A' }}</strong></div>
+                <div class="info-item"><span>Occupation</span><strong>{{ p.occupation || 'N/A' }}</strong></div>
+                <div class="info-item"><span>Monthly Income</span><strong>{{ p.monthlyIncome || 'N/A' }}</strong></div>
+            </div>
+        </section>
+
+        <!-- Contact & Location -->
+        <section class="info-card">
+            <div class="card-header">
+                <h2><i class="fa-solid fa-address-card"></i> Contact & Location</h2>
+            </div>
+            <div class="card-body">
+                <div class="info-item"><span>Email</span><strong>{{ p.email || 'N/A' }}</strong></div>
+                <div class="info-item"><span>Mobile No</span><strong>{{ p.contactNo || 'N/A' }}</strong></div>
+                <div class="info-item"><span>Alternate No</span><strong>{{ p.alternateNo || 'N/A' }}</strong></div>
+                <div class="info-item"><span>City</span><strong>{{ p.city || 'N/A' }}</strong></div>
+                <div class="info-item"><span>Locality</span><strong>{{ p.locality || 'N/A' }}</strong></div>
+                <div class="info-item"><span>State/Pin</span><strong>{{ p.state || 'N/A' }} - {{ p.pinCode || 'N/A'
+                        }}</strong></div>
+                <div class="info-item"><span>Native Place</span><strong>{{ p.nativePlace || 'N/A' }}</strong></div>
+            </div>
+        </section>
+
+        <!-- Family Details -->
+        <section class="info-card">
+            <div class="card-header">
+                <h2><i class="fa-solid fa-people-roof"></i> Family Background</h2>
+            </div>
+            <div class="card-body">
+                <div class="info-item"><span>Father</span><strong>{{ p.fatherStatus || p.fatherName || 'N/A' }}</strong>
+                </div>
+                <div class="info-item"><span>Mother</span><strong>{{ p.motherStatus || p.motherName || 'N/A' }}</strong>
+                </div>
+                <div class="info-item"><span>Siblings</span><strong>{{ p.siblings || 'N/A' }}</strong></div>
+            </div>
+        </section>
+    </div>
+    } @else {
+    <div class="empty-state">
+        <i class="fa-solid fa-user-xmark"></i>
+        <p>Profile not found or unavailable.</p>
+    </div>
+    }
+
+    <!-- Match Breakdown Modal -->
+    @if (showMatchBreakdownModal()) {
+    <div class="modal-overlay" (click)="showMatchBreakdownModal.set(false)">
+        <div class="modal-content match-breakdown-dialog" (click)="$event.stopPropagation()">
+            <div class="modal-header-row">
+                <h3><i class="fa-solid fa-heart"></i> Match Breakdown</h3>
+                <button type="button" class="modal-close" (click)="showMatchBreakdownModal.set(false)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            @if (matchBreakdown(); as mb) {
+            <p class="match-summary">{{ mb.matchScore }}% match based on your partner preferences</p>
+            @if (mb.breakdown.length) {
+            <div class="breakdown-list">
+                @for (item of mb.breakdown; track item.label) {
+                <div class="breakdown-item" [class.matched]="item.matched" [class.unmatched]="!item.matched">
+                    <span class="breakdown-icon">{{ item.matched ? '✓' : '○' }}</span>
+                    <div class="breakdown-details">
+                        <strong>{{ item.label }}</strong>
+                        <span class="breakdown-pref">Your preference: {{ item.yourPreference || '—' }}</span>
+                        <span class="breakdown-their">Their profile: {{ item.theirValue || '—' }}</span>
+                    </div>
+                </div>
+                }
+            </div>
+            } @else {
+            <p class="breakdown-empty">No specific preferences set to compare.</p>
+            }
+            }
+        </div>
+    </div>
+    }
+
+    <!-- Requirements Modal -->
+    @if (showRequirementsModal()) {
+    <div class="modal-overlay" (click)="showRequirementsModal.set(false)">
+        <div class="modal-content requirements-dialog" (click)="$event.stopPropagation()">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+                <h3 style="margin: 0; color: #db2777; font-size: 1.25rem;"><i class="fa-solid fa-file-circle-check"
+                        style="color: #db2777;"></i> Partner Requirements</h3>
+                <button type="button" (click)="showRequirementsModal.set(false)"
+                    style="background: none; border: none; font-size: 1.25rem; color: #64748b; cursor: pointer;">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            @if (profile()?.partnerPreferences) {
+            <div class="req-grid">
+                <div class="req-item">
+                    <span class="req-label">Age</span>
+                    <span class="req-value">{{ profile()!.partnerPreferences!.ageRange?.min || 18 }} - {{
+                        profile()!.partnerPreferences!.ageRange?.max || 40 }} yrs</span>
+                </div>
+                <div class="req-item" *ngIf="profile()!.partnerPreferences!.maritalStatus?.length">
+                    <span class="req-label">Marital Status</span>
+                    <span class="req-value">{{ profile()!.partnerPreferences!.maritalStatus?.join(', ') }}</span>
+                </div>
+                <div class="req-item" *ngIf="profile()!.partnerPreferences!.religion?.length">
+                    <span class="req-label">Religion</span>
+                    <span class="req-value">{{ profile()!.partnerPreferences!.religion }}</span>
+                </div>
+                <div class="req-item" *ngIf="profile()!.partnerPreferences!.diet?.length">
+                    <span class="req-label">Diet</span>
+                    <span class="req-value">{{ profile()!.partnerPreferences!.diet?.join(', ') }}</span>
+                </div>
+                <div class="req-item" *ngIf="profile()!.partnerPreferences!.annualIncome">
+                    <span class="req-label">Annual Income</span>
+                    <span class="req-value">{{ profile()!.partnerPreferences!.annualIncome }}</span>
+                </div>
+            </div>
+            } @else {
+            <div class="empty-req" style="padding: 2rem 0; text-align: center;">
+                <i class="fa-solid fa-clipboard-list"
+                    style="font-size: 3rem; color: #cbd5e1; margin-bottom: 1rem; display: block;"></i>
+                <p style="color: #64748b;">This user hasn't specified any specific partner requirements yet.</p>
+            </div>
+            }
+        </div>
+    </div>
+    }
+</div>

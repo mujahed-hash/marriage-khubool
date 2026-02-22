@@ -1,0 +1,33 @@
+<div class="rightsidebar">
+    <div class="rightsidebarlink">
+        <h3><i class="fa-solid fa-sparkles"></i> Suggested Profiles</h3>
+
+        @for (p of suggestions(); track p._id || p.profileId || $index) {
+        <a [routerLink]="['/profile', p.profileId || p._id]" class="card sidebar-card"
+            [ngClass]="getTierCardClass($any(p).membershipTier)">
+            <div class="image-content">
+                <span class="overlay" [ngClass]="getTierOverlayClass($any(p).membershipTier)"></span>
+                <div class="card-image">
+                    <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="profile"
+                        class="card-image">
+                </div>
+            </div>
+            <div class="card-content">
+                <h2 class="full-name card-name">{{ p.fullName || 'Profile' }}</h2>
+                <p class="dob">DOB: {{ p.dateOfBirth || 'N/A' }}</p>
+                <p class="occupation">{{ p.occupation || 'N/A' }}</p>
+                <p class="height">Height: {{ p.height || 'N/A' }}</p>
+                <p class="state">Location: {{ p.city || p.state || 'N/A' }}</p>
+                <span class="sidebar-view-profile" [ngClass]="getTierViewClass($any(p).membershipTier)">View
+                    Profile</span>
+            </div>
+        </a>
+        }
+        @empty {
+        <div class="suggestion-empty">
+            <p>No suggestions yet</p>
+            <a routerLink="/profiles/diamond">Browse profiles</a>
+        </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,188 @@
+/* Settings Page */
+.settings-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.page-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.page-heading i {
+    color: #64748b;
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.settings-section {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.settings-section h2 {
+    margin: 0 0 1.25rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.settings-section h2 i {
+    color: #db2777;
+    font-size: 1rem;
+}
+
+/* Toggle Rows */
+.toggle-row,
+.select-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.toggle-row:last-child,
+.select-row:last-child {
+    border-bottom: none;
+}
+
+.toggle-row label,
+.select-row label {
+    font-size: 0.9rem;
+    color: #334155;
+    flex: 1;
+}
+
+/* Custom Toggle */
+.toggle {
+    appearance: none;
+    width: 44px;
+    height: 24px;
+    background: #cbd5e1;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.toggle::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggle:checked {
+    background: #db2777;
+}
+
+.toggle:checked::before {
+    transform: translateX(20px);
+}
+
+/* Select */
+.select-input {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #334155;
+    background: #f8fafc;
+    cursor: pointer;
+    outline: none;
+}
+
+.select-input:focus {
+    border-color: #db2777;
+}
+
+/* Save Button */
+.settings-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-save {
+    padding: 0.65rem 1.75rem;
+    background: #db2777;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-save:hover {
+    background: #be185d;
+    transform: translateY(-1px);
+}
+
+.btn-save:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Toast */
+.settings-toast {
+    text-align: center;
+    padding: 0.5rem;
+    background: #ecfdf5;
+    color: #059669;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Loading */
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    color: #64748b;
+}
+
+.spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid #f3f4f6;
+    border-top-color: #db2777;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 0.75rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

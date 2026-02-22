@@ -1,0 +1,126 @@
+/* Cropper.js for My Photos */
+@import 'cropperjs/dist/cropper.css';
+
+/* Global Design System based on Membership Tiers */
+
+:root {
+  /* Layout */
+  --navbar-height: 4.5rem;
+  --sidebar-left-width: 12%;
+  --sidebar-right-width: 20%;
+
+  /* Responsive Breakpoints */
+  --breakpoint-mobile: 768px;
+  --breakpoint-tablet: 1024px;
+
+  /* Default Theme (Bronze) */
+  --tier-primary: #8a5a44;
+  --tier-secondary: #fff7e6;
+  --tier-accent: #d11616;
+  --tier-bg: #fffbf0;
+  --tier-card-bg: #ffffff;
+  --tier-text: #333333;
+  --tier-glow: rgba(138, 90, 68, 0.1);
+  --tier-heading: #5d4037;
+
+  /* Shared transitions */
+  --transition-speed: 0.3s;
+}
+
+/* Base mobile-first adjustments */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+[data-tier="silver"] {
+  --tier-primary: #8a8a8a;
+  --tier-secondary: #f2f2f2;
+  --tier-accent: #607d8b;
+  --tier-bg: #f5f5f5;
+  --tier-glow: rgba(192, 192, 192, 0.3);
+  --tier-heading: #455a64;
+}
+
+[data-tier="gold"] {
+  --tier-primary: #dfa000;
+  --tier-secondary: #fff9e6;
+  --tier-accent: #e4a812;
+  --tier-bg: #fffdf5;
+  --tier-glow: rgba(255, 230, 88, 0.4);
+  --tier-heading: #b8860b;
+}
+
+[data-tier="diamond"] {
+  --tier-primary: #e80367;
+  --tier-secondary: #fff0f6;
+  --tier-accent: #ff416c;
+  --tier-bg: #fffafd;
+  --tier-glow: rgba(255, 0, 136, 0.2);
+  --tier-heading: #c2185b;
+}
+
+[data-tier="crown"] {
+  --tier-primary: #a30909;
+  --tier-secondary: #fff5f5;
+  --tier-accent: #d32f2f;
+  --tier-bg: #fffefe;
+  --tier-glow: rgba(198, 78, 84, 0.4);
+  --tier-heading: #7d0606;
+}
+
+/* Global Reset & Base Styles */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  background-color: var(--tier-bg);
+  color: var(--tier-text);
+  transition: background-color var(--transition-speed);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Scrollbar Theming */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--tier-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tier-primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tier-accent);
+}
+
+/* Utility Classes */
+.tier-color {
+  color: var(--tier-primary);
+}
+
+.tier-bg {
+  background-color: var(--tier-primary);
+  color: white;
+}
+
+.tier-border {
+  border: 1px solid var(--tier-primary);
+}
+
+.tier-glow {
+  box-shadow: 0 4px 15px var(--tier-glow);
+}

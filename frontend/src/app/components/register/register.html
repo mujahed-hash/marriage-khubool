@@ -1,0 +1,47 @@
+<div class="auth-container">
+    <div class="auth-card tier-glow">
+        <div class="auth-header">
+            <h2 class="tier-color">Join Khubool Hai</h2>
+            <p>Start your journey to find your perfect partner</p>
+        </div>
+
+        <form (ngSubmit)="onRegister()" #registerForm="ngForm" class="auth-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" [(ngModel)]="name" required placeholder="e.g. John Doe"
+                    class="custom-input">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" [(ngModel)]="email" required placeholder="Enter your email"
+                    class="custom-input">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Create Password</label>
+                <input type="password" id="password" name="password" [(ngModel)]="password" required
+                    placeholder="••••••••" class="custom-input">
+            </div>
+
+            <div *ngIf="error" class="error-message">
+                {{ error }}
+            </div>
+
+            <div class="terms">
+                <p>By registering, you agree to our <a routerLink="/terms" class="tier-color">Terms</a> and <a routerLink="/privacy" class="tier-color">Privacy Policy</a>.</p>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="tier-bg submit-btn" [disabled]="!registerForm.form.valid || loading">
+                    <span *ngIf="!loading">Create Account <i class="fa-solid fa-user-plus"></i></span>
+                    <span *ngIf="loading">Please wait...</span>
+                </button>
+            </div>
+        </form>
+
+        <div class="auth-footer">
+            <p>Already have an account? <a routerLink="/login" class="tier-color">Login here</a></p>
+        </div>
+    </div>
+</div>

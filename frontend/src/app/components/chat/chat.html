@@ -1,0 +1,85 @@
+<div class="chat-container">
+    <!-- Sidebar: Conversations List -->
+    <div class="chat-sidebar" [class.hidden-on-mobile]="activeConversation()">
+        <h2 class="chat-heading"><i class="fa-solid fa-comments"></i> Messages</h2>
+
+        @if (loading()) {
+        <div class="chat-loading">
+            <div class="spinner"></div>
+        </div>
+        } @else if (conversations().length === 0) {
+        <div class="chat-empty">
+            <i class="fa-solid fa-comment-dots"></i>
+            <p>No conversations yet</p>
+            <p class="hint">Start chatting from a user's profile!</p>
+        </div>
+        } @else {
+        <div class="conversation-list">
+            @for (conv of conversations(); track conv._id) {
+            <div class="conversation-item" [class.active]="activeConversation()?._id === conv._id"
+                (click)="selectConversation(conv)">
+                <img [src]="(conv.otherUser?.profilePhotoUrl | photoUrl) || getPlaceholderImg(conv.otherUser?.gender)"
+                    alt="" class="conv-avatar">
+                <div class="conv-info">
+                    <h4>{{ conv.otherUser?.fullName || 'Unknown' }}</h4>
+                    <p class="last-msg">{{ conv.lastMessage || 'No messages yet' }}</p>
+                </div>
+                <div class="conv-meta">
+                    <span class="time">{{ getTimeAgo(conv.lastMessageAt) }}</span>
+                    @if (conv.unreadCount > 0) {
+                    <span class="unread-badge">{{ conv.unreadCount }}</span>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+        }
+    </div>
+
+    <!-- Main: Messages Panel -->
+    <div class="chat-main" [class.hidden-on-mobile]="!activeConversation()">
+        @if (!activeConversation()) {
+        <div class="no-chat-selected">
+            <i class="fa-solid fa-message"></i>
+            <p>Select a conversation to start chatting</p>
+        </div>
+        } @else {
+        <!-- Header -->
+        <div class="chat-header">
+            <button class="btn-back" (click)="activeConversation.set(null)">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <img [src]="(activeConversation().otherUser?.profilePhotoUrl | photoUrl) || getPlaceholderImg(activeConversation().otherUser?.gender)"
+                alt="" class="header-avatar">
+            <div class="header-info">
+                <h3>{{ activeConversation().otherUser?.fullName || 'Unknown' }}</h3>
+                @if (chatService.typingUser()) {
+                <span class="typing-indicator">typing...</span>
+                }
+            </div>
+            <a [routerLink]="['/profile', activeConversation().otherUser?._id || activeConversation().otherUser?.profileId]"
+                class="btn-view-profile">View Profile</a>
+        </div>
+
+        <!-- Messages -->
+        <div class="messages-container" #messagesContainer>
+            @for (msg of chatService.messages(); track msg._id || $index) {
+            <div class="message-bubble" [class.mine]="msg.senderId === currentUserId"
+                [class.theirs]="msg.senderId !== currentUserId">
+                <p class="msg-text">{{ msg.text }}</p>
+                <span class="msg-time">{{ getTimeAgo(msg.createdAt) }}</span>
+            </div>
+            }
+        </div>
+
+        <!-- Input -->
+        <div class="chat-input-bar">
+            <input type="text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" (input)="onTyping()"
+                placeholder="Type a message..." class="chat-input" autocomplete="off">
+            <button class="btn-send" (click)="sendMessage()" [disabled]="!newMessage.trim()">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+        }
+    </div>
+</div>

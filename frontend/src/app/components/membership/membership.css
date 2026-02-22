@@ -1,0 +1,87 @@
+.membership-container {
+    text-align: center;
+}
+
+.membership-message {
+    background: #dcfce7;
+    color: #166534;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.membership-plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.plan {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.plan:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.plan h2 {
+    margin-bottom: 1rem;
+}
+
+.plan button {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.bronze {
+    border-top: 5px solid #8a5a44;
+}
+
+.silver {
+    border-top: 5px solid #8a8a8a;
+}
+
+.gold {
+    border-top: 5px solid #dfa000;
+}
+
+.diamond {
+    border-top: 5px solid #e80367;
+}
+
+.crown {
+    border-top: 5px solid #a30909;
+}
+
+.preview-notice {
+    margin-top: 4rem;
+    padding: 1.5rem;
+    background: var(--tier-secondary);
+    border-radius: 10px;
+}
+@media (max-width: 768px) {
+    .membership-plans {
+        grid-template-columns: 1fr;
+    }
+
+    .plan {
+        padding: 1.5rem 1rem;
+    }
+
+    .benefits-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}

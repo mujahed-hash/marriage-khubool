@@ -1,0 +1,34 @@
+<div class="shortlist-container">
+    <h1 class="page-heading"><i class="fa-solid fa-bookmark"></i> Shortlisted Profiles</h1>
+
+    @if (loading()) {
+    <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading shortlist...</p>
+    </div>
+    } @else if (profiles().length === 0) {
+    <div class="empty-state">
+        <i class="fa-solid fa-bookmark"></i>
+        <p>No profiles shortlisted yet.</p>
+        <a routerLink="/" class="btn-browse">Browse Profiles</a>
+    </div>
+    } @else {
+    <div class="shortlist-grid">
+        @for (p of profiles(); track p._id) {
+        <div class="shortlist-card">
+            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="Profile"
+                class="card-avatar">
+            <div class="card-info">
+                <h3>{{ p.fullName || 'N/A' }}</h3>
+                <p class="card-meta">{{ p.city || 'N/A' }} · {{ p.occupation || '' }}</p>
+                <p class="card-id">ID: {{ p.profileId || p._id }}</p>
+            </div>
+            <div class="card-actions">
+                <a [routerLink]="['/profile', p.profileId || p._id]" class="btn-view">View</a>
+                <button class="btn-remove" (click)="remove(p._id)"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+        }
+    </div>
+    }
+</div>

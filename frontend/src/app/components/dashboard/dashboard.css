@@ -1,0 +1,370 @@
+/* Dashboard / My Profile Styles - matches myprofile-diamond.html */
+.myprofilesection {
+    padding: 0 1rem 1rem;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.profile-nav {
+    width: 100%;
+    min-height: 120px;
+    padding: 30px;
+    background: linear-gradient(145deg, #f9b5ce, #f9b5ce, #ff94bf 40%, #ff79ad 60%, #ffb3cf);
+    box-shadow: 0px 4px 15px rgba(90, 53, 35, 0.4), inset 0px 2px 5px rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    position: relative;
+    background-size: 200% 200%;
+    animation: shine 7s infinite ease-in-out;
+}
+
+@keyframes shine {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.profile-nav a {
+    text-decoration: none;
+    background-color: cornsilk;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-family: "Lato", sans-serif;
+    color: #c7004f;
+    font-size: 1.2rem;
+    font-weight: 900;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+.profile-nav a:hover {
+    background-color: #c7004f;
+    color: white;
+    box-shadow: 0px 6px 12px rgba(199, 0, 79, 0.4);
+    transform: scale(1.05);
+}
+
+.edit-del-profile {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.edit-del-profile a {
+    text-decoration: none;
+    background-color: cornsilk;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-family: "Lato", sans-serif;
+    color: #c7004f;
+    font-size: 14px;
+    font-weight: 900;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.edit-del-profile a:hover {
+    background-color: #c7004f;
+    color: white;
+    transform: scale(1.05);
+}
+
+#profile-id {
+    text-align: right;
+    color: #7a7878;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+.displaypic-container {
+    text-align: center;
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.displaypic {
+    width: 200px;
+    height: 200px;
+    border: 5px solid white;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.displaypic:hover {
+    transform: scale(1.05);
+}
+
+.name {
+    font-size: 2rem;
+    color: #333;
+    /* Fallback */
+    margin-top: 1rem;
+    font-family: Arial, sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#verfied {
+    color: #006b62;
+    /* Greenish for verified */
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+section {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 2.5rem 2rem;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+}
+
+section h2 {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5rem;
+    color: #ff416c;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    border-bottom: 3px solid #ff416c;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+section p {
+    font-size: 1.05rem;
+    color: #444;
+    margin: 0.8rem 0;
+    line-height: 1.6;
+}
+
+section i {
+    margin-right: 10px;
+}
+
+/* Decorative background for sections */
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -50px;
+    width: 150px;
+    height: 100%;
+    background: linear-gradient(135deg, #ff79ad 0%, #ff94bf 50%, #ffcce1 100%);
+    opacity: 0.2;
+    transform: skewX(-20deg);
+    z-index: 0;
+}
+
+/* Delete Profile Modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-dialog {
+    background: #fff;
+    border-radius: 16px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.modal-header h3 i {
+    margin-right: 0.5rem;
+    color: #dc3545;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: #666;
+    font-size: 1.25rem;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.modal-close:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-body p {
+    margin: 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.modal-error {
+    margin-top: 1rem !important;
+    color: #dc3545 !important;
+    font-size: 0.9rem;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #eee;
+    background: #fafafa;
+    border-radius: 0 0 16px 16px;
+}
+
+.btn-cancel {
+    padding: 0.6rem 1.25rem;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #555;
+    transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+
+.btn-delete {
+    padding: 0.6rem 1.25rem;
+    border: none;
+    background: #dc3545;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.btn-delete:hover:not(:disabled) {
+    background: #c82333;
+}
+
+.btn-delete:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Requirements Modal specific */
+.req-body {
+    padding: 1.5rem;
+}
+
+.req-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+@media (max-width: 480px) {
+    .req-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.req-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #f1f5f9;
+}
+
+.req-label {
+    font-size: 0.8rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.req-value {
+    font-size: 0.95rem;
+    color: #1e293b;
+    font-weight: 500;
+}

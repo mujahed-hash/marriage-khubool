@@ -1,0 +1,116 @@
+<div class="center-page-content">
+    <div class="cover-pic">
+        <img src="assets/cover.png" alt="Cover Pic" class="cover-pic1">
+        <img src="assets/cover-pic2.png" alt="Cover Pic" class="cover-pic2">
+    </div>
+    <span id="create-profile">
+        <h1>Create a Profile to post an Ad & Find a Perfect Match Today! <i class="fa-solid fa-star"></i></h1>
+        <p>Don't miss out on the opportunity! Creating your profile is the first step to finding your perfect life
+            partner. Start now and begin your journey to love!</p>
+        <a routerLink="/create-profile"><i class="fa-regular fa-pen-to-square"></i> Create Profile</a>
+    </span>
+    <div class="membership">
+        <img src="assets/membershippic.jpg" alt="membership" class="membership-img1">
+        <img src="assets/membershipic2.png" alt="membership" class="membership-img2">
+        <a routerLink="/membership" class="visit-plans-btn">View Membership Plans</a>
+    </div>
+    <div class="profile-cards-container">
+        <h1 class="profile-card-h1 diamond-heading"><i class="fa-solid fa-gem"></i> Diamond profiles</h1>
+        <div class="diamond-profile-cards profile-cards">
+            <div class="cards-container diamond-cc">
+                @for (p of diamondProfiles(); track p._id || $index) {
+                <div class="card diamond-card">
+                    <div class="image-content">
+                        <span class="overlay diamond-overlay"></span>
+                        <div class="card-image">
+                            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="profile"
+                                class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        @if (p._id && getMatchScore(p._id) != null) {
+                        <span class="match-badge">{{ getMatchScore(p._id!) }}% Match</span>
+                        }
+                        <h2 class="full-name card-name">{{ p.fullName || 'Profile' }}</h2>
+                        <p class="dob">DOB: {{ p.dateOfBirth || 'N/A' }}</p>
+                        <p class="occupation">{{ p.occupation || 'N/A' }}</p>
+                        <p class="height">Height: {{ p.height || 'N/A' }}</p>
+                        <p class="state">Location: {{ p.city || p.state || 'N/A' }}</p>
+                        <a class="diamond-view-profile" [routerLink]="['/profile', p.profileId || p._id]">View
+                            Profile</a>
+                    </div>
+                </div>
+                }
+                @empty {
+                <div class="card diamond-card">
+                    <div class="image-content">
+                        <span class="overlay diamond-overlay"></span>
+                        <div class="card-image"><img src="assets/groom.png" alt="groom" class="card-image"></div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="occupation">Software Engg</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Hyderabad</p>
+                        <a class="diamond-view-profile" routerLink="/profiles/diamond">View Profiles</a>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="more-profiles diamond-more-profiles">
+            <a routerLink="/profiles/diamond"
+                class="more-profiles more-diamond-profiles diamond-profile-styled-link">View More Profiles</a>
+        </div>
+    </div>
+    <div class="profile-cards-container">
+        <h1 class="profile-card-h1 gold-heading"><i class="fa-solid fa-trophy"></i> Gold profiles</h1>
+        <div class="gold-profile-cards profile-cards">
+            <div class="cards-container gold-cc">
+                @for (p of goldProfiles(); track p._id || $index) {
+                <div class="card gold-card">
+                    <div class="image-content">
+                        <span class="overlay gold-overlay"></span>
+                        <div class="card-image">
+                            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="profile"
+                                class="card-image">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        @if (p._id && getMatchScore(p._id) != null) {
+                        <span class="match-badge">{{ getMatchScore(p._id!) }}% Match</span>
+                        }
+                        <h2 class="full-name card-name">{{ p.fullName || 'Profile' }}</h2>
+                        <p class="dob">DOB: {{ p.dateOfBirth || 'N/A' }}</p>
+                        <p class="occupation">{{ p.occupation || 'N/A' }}</p>
+                        <p class="height">Height: {{ p.height || 'N/A' }}</p>
+                        <p class="state">Location: {{ p.city || p.state || 'N/A' }}</p>
+                        <a class="gold-view-profile" [routerLink]="['/profile', p.profileId || p._id]">View Profile</a>
+                    </div>
+                </div>
+                }
+                @empty {
+                <div class="card gold-card">
+                    <div class="image-content">
+                        <span class="overlay gold-overlay"></span>
+                        <div class="card-image"><img src="assets/groom.png" alt="groom" class="card-image"></div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Mohammed Khan</h2>
+                        <p class="dob">DOB: 7-12-1997</p>
+                        <p class="occupation">B.Ed</p>
+                        <p class="height">Height: 5'3</p>
+                        <p class="state">Location: Telangana</p>
+                        <a class="gold-view-profile" routerLink="/profiles/gold">View Profiles</a>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="more-profiles gold-more-profiles">
+            <a routerLink="/profiles/gold" class="more-profiles more-gold-profiles gold-profile-styled-link">View More
+                Profiles</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+export { PrivacyComponent } from './privacy';

@@ -1,0 +1,40 @@
+<div class="search-container">
+    <h1 class="search-heading"><i class="fa-solid fa-magnifying-glass"></i> Search Profiles</h1>
+    <form class="search-form" (ngSubmit)="onSearch()">
+        <div class="search-input-group">
+            <input type="text" [(ngModel)]="searchQuery" name="searchQuery"
+                placeholder="Search by name, city, occupation..." class="search-input" />
+            <select [(ngModel)]="filterState" name="filterState" class="search-filter">
+                <option value="">All States</option>
+                @for (s of states; track s) {
+                <option [value]="s">{{ stateLabels[s] || s }}</option>
+                }
+            </select>
+            <select [(ngModel)]="filterGender" name="filterGender" class="search-filter">
+                <option value="">All Genders</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="others">Others</option>
+            </select>
+            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        </div>
+    </form>
+    <div class="search-results">
+        @for (p of results(); track p._id || p.profileId || $index) {
+        <a [routerLink]="['/profile', p.profileId || p._id]" class="search-result-card">
+            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="" class="search-result-img">
+            <div class="search-result-info">
+                <h3>{{ p.fullName || 'Profile' }}</h3>
+                <p>DOB: {{ p.dateOfBirth || 'N/A' }}</p>
+                <p>{{ p.occupation || 'N/A' }}</p>
+                <p>Location: {{ p.city || p.state || 'N/A' }}</p>
+            </div>
+        </a>
+        }
+        @empty {
+        @if (hasSearched) {
+        <p class="search-empty">No profiles found.</p>
+        }
+        }
+    </div>
+</div>

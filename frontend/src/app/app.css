@@ -1,0 +1,20 @@
+.main-container {
+    display: flex;
+    margin-top: 70px;
+    /* Navbar height */
+}
+
+.content {
+    flex: 1;
+    margin-left: 250px;
+    /* Sidebar width */
+    padding: 2rem;
+    transition: margin-left var(--transition-speed);
+}
+
+@media (max-width: 480px) {
+    .content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+}

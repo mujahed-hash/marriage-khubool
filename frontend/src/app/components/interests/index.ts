@@ -1,0 +1,1 @@
+export { InterestsComponent } from './interests';

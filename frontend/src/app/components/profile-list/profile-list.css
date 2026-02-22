@@ -1,0 +1,120 @@
+.profile-list-container {
+    padding: 0 0 1.5rem;
+    width: 100%;
+}
+
+.profile-list-heading {
+    margin: 0 0 1rem;
+}
+
+.profile-list-heading i {
+    margin-right: 0.5rem;
+}
+
+.profile-list-heading.tier-gold {
+    color: #d4af37;
+}
+
+.profile-list-heading.tier-diamond {
+    color: #b9f2ff;
+}
+
+.profile-list-heading.tier-silver {
+    color: #c0c0c0;
+}
+
+.profile-list-heading.tier-bronze {
+    color: #cd7f32;
+}
+
+.profile-list-heading.tier-crown {
+    color: #d11616;
+}
+
+.profile-list-content {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.profile-list-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.profile-list-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.profile-list-info .match-badge {
+    display: inline-block;
+    background: var(--tier-primary, #db2777);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    margin-bottom: 0.25rem;
+}
+
+.profile-list-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.profile-list-info h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+}
+
+.profile-list-info p {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: var(--tier-secondary, #fff7e6);
+    border-color: var(--tier-primary, #8a5a44);
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination .page-info {
+    font-size: 0.9rem;
+    color: #666;
+}

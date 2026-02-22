@@ -1,0 +1,82 @@
+<div class="settings-container">
+    <h1 class="page-heading"><i class="fa-solid fa-gear"></i> Settings</h1>
+
+    @if (loading()) {
+    <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading settings...</p>
+    </div>
+    } @else {
+    <form (ngSubmit)="saveSettings()" class="settings-form">
+
+        <!-- Notifications -->
+        <section class="settings-section">
+            <h2><i class="fa-solid fa-bell"></i> Notifications</h2>
+            <div class="toggle-row">
+                <label for="emailInterest">Email me when someone sends interest</label>
+                <input type="checkbox" id="emailInterest" [(ngModel)]="notifications.emailOnInterest"
+                    name="emailOnInterest" class="toggle">
+            </div>
+            <div class="toggle-row">
+                <label for="emailVisitor">Email me when someone views my profile</label>
+                <input type="checkbox" id="emailVisitor" [(ngModel)]="notifications.emailOnVisitor"
+                    name="emailOnVisitor" class="toggle">
+            </div>
+            <div class="toggle-row">
+                <label for="emailShortlist">Email me when someone shortlists me</label>
+                <input type="checkbox" id="emailShortlist" [(ngModel)]="notifications.emailOnShortlist"
+                    name="emailOnShortlist" class="toggle">
+            </div>
+        </section>
+
+        <!-- Privacy -->
+        <section class="settings-section">
+            <h2><i class="fa-solid fa-shield-halved"></i> Privacy</h2>
+            <div class="toggle-row">
+                <label for="showContact">Show contact information on profile</label>
+                <input type="checkbox" id="showContact" [(ngModel)]="privacy.showContactInfo" name="showContactInfo"
+                    class="toggle">
+            </div>
+            <div class="toggle-row">
+                <label for="showLastSeen">Show when I was last active</label>
+                <input type="checkbox" id="showLastSeen" [(ngModel)]="privacy.showLastSeen" name="showLastSeen"
+                    class="toggle">
+            </div>
+            <div class="select-row">
+                <label for="visibility">Who can see my profile</label>
+                <select id="visibility" [(ngModel)]="privacy.profileVisibility" name="profileVisibility"
+                    class="select-input">
+                    <option value="everyone">Everyone</option>
+                    <option value="members">Members Only</option>
+                    <option value="premium">Premium Members Only</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Account -->
+        <section class="settings-section">
+            <h2><i class="fa-solid fa-user-gear"></i> Account</h2>
+            <div class="toggle-row">
+                <label for="profileActive">
+                    Profile active <span style="font-weight:400; color: #64748b;">(Deactivate to hide from
+                        search)</span>
+                </label>
+                <input type="checkbox" id="profileActive" [ngModel]="profileActive()"
+                    (ngModelChange)="toggleProfileActive()" name="profileActive" class="toggle"
+                    [disabled]="togglingActive()">
+            </div>
+        </section>
+
+        <!-- Save Button -->
+        <div class="settings-actions">
+            <button type="submit" class="btn-save" [disabled]="saving()">
+                {{ saving() ? 'Saving...' : 'Save Settings' }}
+            </button>
+        </div>
+
+        @if (message()) {
+        <div class="settings-toast">{{ message() }}</div>
+        }
+    </form>
+    }
+</div>

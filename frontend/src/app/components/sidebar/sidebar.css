@@ -1,0 +1,58 @@
+/* Sidebar - matches original style.css leftsidebar */
+.leftsidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: var(--navbar-height, 4.5rem);
+  left: 0;
+  height: calc(100vh - var(--navbar-height, 4.5rem));
+  width: var(--sidebar-left-width, 10%);
+  min-width: 120px;
+  box-shadow: 0 3px 15px rgba(255, 0, 0, 0.2);
+  background-color: #fef4db;
+  z-index: 50;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.leftSideBar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+.leftSideBar-links a {
+  text-decoration: none;
+  color: #b32323;
+  font-family: 'suse', 'poppins', 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.leftSideBar-links a:hover {
+  border-radius: 5px;
+  background-color: #ffe7c9;
+}
+
+.leftSideBar-links a.logout-link {
+  cursor: pointer;
+}
+
+.leftSideBar-links span,
+.leftSideBar-links i {
+  color: #a4130c;
+  font-size: 1.3rem;
+  margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .leftsidebar {
+    display: none;
+  }
+}

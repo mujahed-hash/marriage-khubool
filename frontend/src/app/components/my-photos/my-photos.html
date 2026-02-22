@@ -1,0 +1,33 @@
+<div class="photo-privacy">
+    <h2>Upload Your Photos</h2>
+    <p class="upload-hint">Click the upload icon to add a photo. Use "Set as DP" to crop and set as your profile picture.</p>
+    <input #fileInput type="file" accept="image/*" style="display: none;" (change)="onFileSelected($event)">
+    <div class="upload-container">
+        <div class="preview-container" *ngFor="let slot of slots()">
+            <span class="upload-icon" *ngIf="!slot.previewUrl" (click)="triggerFileInput(slot.id)">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </span>
+            <img [src]="slot.previewUrl" [id]="'preview' + slot.id" alt="Image Preview" *ngIf="slot.previewUrl">
+            <div class="action-buttons" *ngIf="slot.previewUrl">
+                <button class="set-dp" (click)="setAsDp(slot.id)">Set as DP</button>
+                <button class="remove" (click)="removePhoto(slot.id)">Remove</button>
+            </div>
+        </div>
+        <p class="save-message" [class.error]="saveMessage && (saveMessage.includes('failed') || saveMessage.includes('Error'))" *ngIf="saveMessage">{{ saveMessage }}</p>
+        <button class="save" (click)="saveAllPhotos()" [disabled]="isSaving()">{{ isSaving() ? 'Saving...' : 'Save All Photos' }}</button>
+    </div>
+</div>
+
+<!-- Cropper Modal -->
+<div class="cropper-container" [class.show]="isCropperOpen" *ngIf="isCropperOpen">
+    <h3>Crop Your Image</h3>
+    <div class="img-wrapper">
+        <img #cropImage id="cropImage" alt="Crop Image">
+    </div>
+    <div class="cropper-buttons">
+        <button id="crop-btn" (click)="performCrop()">Crop</button>
+        <button id="cancel-btn" (click)="closeCropper()">Cancel</button>
+    </div>
+</div>
+<!-- Overlay background for modal -->
+<div class="modal-overlay" *ngIf="isCropperOpen" (click)="closeCropper()"></div>

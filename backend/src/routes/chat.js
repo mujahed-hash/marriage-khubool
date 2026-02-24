@@ -72,28 +72,47 @@ router.post('/conversations', protect, async (req, res) => {
     }
 });
 
-// GET /api/chat/conversations/:id/messages – get messages for a conversation
+// GET /api/chat/conversations/:id/messages – get messages (cursor-based pagination)
+// Query: limit (default 50, max 100), before (ISO date or message _id) for loading older messages
 router.get('/conversations/:id/messages', protect, async (req, res) => {
     try {
         const conversation = await Conversation.findById(req.params.id);
         if (!conversation) return res.status(404).json({ message: 'Conversation not found.' });
 
-        // Check user is participant
         if (!conversation.participants.some(p => p.toString() === req.user._id.toString())) {
             return res.status(403).json({ message: 'Access denied.' });
         }
 
-        const messages = await Message.find({ conversationId: req.params.id })
-            .sort({ createdAt: 1 })
+        const limit = Math.min(Number(req.query.limit) || 50, 100);
+        const before = req.query.before; // cursor: createdAt ISO string or message _id
+
+        let query = { conversationId: req.params.id };
+        if (before) {
+            const beforeDate = new Date(before);
+            if (!isNaN(beforeDate.getTime())) {
+                query.createdAt = { $lt: beforeDate };
+            }
+        }
+
+        const messages = await Message.find(query)
+            .sort({ createdAt: -1 })
+            .limit(limit)
             .lean();
 
-        // Mark messages as read
+        messages.reverse(); // Return chronological order (oldest first)
+
+        const hasMore = messages.length === limit;
+
         await Message.updateMany(
             { conversationId: req.params.id, senderId: { $ne: req.user._id }, read: false },
             { $set: { read: true } }
         );
 
-        res.json({ messages });
+        res.json({
+            messages,
+            hasMore,
+            nextCursor: messages.length ? messages[0].createdAt : null
+        });
     } catch (err) {
         res.status(500).json({ message: 'Failed to fetch messages.', error: err.message });
     }

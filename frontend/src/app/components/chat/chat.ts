@@ -16,8 +16,10 @@ export class ChatComponent implements OnInit, OnDestroy {
     chatService = inject(ChatService);
     conversations = signal<any[]>([]);
     activeConversation = signal<any | null>(null);
-    messages = signal<any[]>([]);
     loading = signal(true);
+    loadingOlder = signal(false);
+    hasMoreOlder = signal(true);
+    nextCursor = signal<string | null>(null);
     newMessage = '';
     currentUserId = '';
 
@@ -52,20 +54,20 @@ export class ChatComponent implements OnInit, OnDestroy {
     async selectConversation(conv: any) {
         this.activeConversation.set(conv);
         this.chatService.joinConversation(conv._id);
+        this.hasMoreOlder.set(true);
+        this.nextCursor.set(null);
 
-        // Load messages
         try {
             const res = await this.chatService.getMessages(conv._id);
-            this.messages.set(res.messages || []);
-            this.chatService.messages.set(res.messages || []);
+            const msgs = res.messages || [];
+            this.chatService.messages.set(msgs);
+            this.hasMoreOlder.set(res.hasMore);
+            this.nextCursor.set(res.nextCursor);
         } catch {
-            this.messages.set([]);
+            this.chatService.messages.set([]);
         }
 
         this.scrollToBottom();
-
-        // Subscribe to new messages reactively
-        this.chatService.messages.set(this.messages());
     }
 
     sendMessage() {
@@ -75,7 +77,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.chatService.sendMessage(convId, this.newMessage.trim());
 
         // Optimistically add message
-        this.messages.update(list => [...list, {
+        this.chatService.messages.update(list => [...list, {
             senderId: this.currentUserId,
             text: this.newMessage.trim(),
             createdAt: new Date().toISOString(),
@@ -85,6 +87,32 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.newMessage = '';
         this.chatService.emitStopTyping(convId);
         this.scrollToBottom();
+    }
+
+    async onMessagesScroll() {
+        const el = this.messagesContainer?.nativeElement as HTMLElement;
+        if (!el || this.loadingOlder() || !this.hasMoreOlder() || !this.activeConversation()) return;
+        if (el.scrollTop > 100) return;
+        const cursor = this.nextCursor();
+        if (!cursor) return;
+
+        this.loadingOlder.set(true);
+        try {
+            const res = await this.chatService.getMessages(this.activeConversation()._id, cursor);
+            const older = res.messages || [];
+            if (older.length) {
+                const prevHeight = el.scrollHeight;
+                this.chatService.messages.update(list => [...older, ...list]);
+                this.hasMoreOlder.set(res.hasMore);
+                this.nextCursor.set(res.nextCursor);
+                setTimeout(() => {
+                    el.scrollTop = el.scrollHeight - prevHeight;
+                }, 0);
+            } else {
+                this.hasMoreOlder.set(false);
+            }
+        } catch { }
+        this.loadingOlder.set(false);
     }
 
     onTyping() {

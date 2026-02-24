@@ -26,7 +26,7 @@
     <div class="interest-grid">
         @for (p of sentProfiles(); track p._id || p.profileId || $index) {
         <div class="interest-card">
-            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="" class="card-avatar">
+            <img loading="lazy" [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="" class="card-avatar">
             <div class="card-info">
                 <h3>{{ p.fullName || 'N/A' }}</h3>
                 <p class="card-meta">{{ p.city || '' }} · {{ p.occupation || '' }}</p>
@@ -51,7 +51,7 @@
     <div class="interest-grid">
         @for (p of receivedProfiles(); track p._id || p.profileId || $index) {
         <div class="interest-card">
-            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="" class="card-avatar">
+            <img loading="lazy" [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="" class="card-avatar">
             <div class="card-info">
                 <h3>{{ p.fullName || 'N/A' }}</h3>
                 <p class="card-meta">{{ p.city || '' }} · {{ p.occupation || '' }}</p>

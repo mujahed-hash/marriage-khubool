@@ -3,7 +3,7 @@
     justify-content: center;
     min-height: 100vh;
     background-color: #fff7e6;
-    padding-top: var(--navbar-height, 4.5rem);
+    /* padding-top: var(--navbar-height, 4.5rem) !important; REMOVED: Sticky navbar handles clearance */
     box-sizing: border-box;
     position: relative;
     width: 100%;
@@ -39,6 +39,7 @@
     .center-content {
         margin-left: 0;
         margin-right: 0;
-        padding: 1rem;
+        padding: 0.5rem;
+        margin-top: 0 !important;
     }
 }

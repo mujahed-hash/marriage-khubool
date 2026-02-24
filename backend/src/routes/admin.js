@@ -9,10 +9,16 @@ const Interest = require('../models/Interest');
 const AdminAuditLog = require('../models/AdminAuditLog');
 const PlatformSettings = require('../models/PlatformSettings');
 const Announcement = require('../models/Announcement');
+const Conversation = require('../models/Conversation');
+const Message = require('../models/Message');
+const { generateToken } = require('../controllers/authController');
 const router = express.Router();
 
 // All routes are admin-only
 router.use(adminAuth);
+
+const MAX_LIMIT = 100;
+function safeLimit(val, defaultVal = 20) { return Math.min(Number(val) || defaultVal, MAX_LIMIT); }
 
 // ─── GET /api/admin/stats ───────────────────────────────────────────────────
 router.get('/stats', async (req, res) => {
@@ -80,6 +86,8 @@ router.get('/stats', async (req, res) => {
 router.get('/users', async (req, res) => {
     try {
         const { page = 1, limit = 20, tier, verified, suspended, search } = req.query;
+        const safePage = Math.max(Number(page) || 1, 1);
+        const lim = safeLimit(limit, 20);
         const filter = {};
         if (tier) filter.membershipTier = tier;
         if (verified !== undefined) filter.verified = verified === 'true';
@@ -96,9 +104,9 @@ router.get('/users', async (req, res) => {
             filter.$or = or;
         }
 
-        const skip = (Number(page) - 1) * Number(limit);
+        const skip = (safePage - 1) * lim;
         const [users, total] = await Promise.all([
-            User.find(filter).select('-password').sort({ createdAt: -1 }).skip(skip).limit(Number(limit)).lean(),
+            User.find(filter).select('-password').sort({ createdAt: -1 }).skip(skip).limit(lim).lean(),
             User.countDocuments(filter)
         ]);
 
@@ -115,7 +123,7 @@ router.get('/users', async (req, res) => {
             profile: profileMap[u._id.toString()] || null
         }));
 
-        res.json({ users: enriched, total, page: Number(page), pages: Math.ceil(total / Number(limit)) });
+        res.json({ users: enriched, total, page: safePage, pages: Math.ceil(total / lim) });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -217,6 +225,8 @@ router.delete('/users/:id', async (req, res) => {
 router.get('/profiles', async (req, res) => {
     try {
         const { page = 1, limit = 20, gender, state, tier, isActive, search } = req.query;
+        const safePage = Math.max(Number(page) || 1, 1);
+        const lim = safeLimit(limit, 20);
         const filter = {};
         if (gender) filter.gender = gender;
         if (state) filter.state = state;
@@ -232,9 +242,9 @@ router.get('/profiles', async (req, res) => {
             filter.$or = or;
         }
 
-        const skip = (Number(page) - 1) * Number(limit);
+        const skip = (safePage - 1) * lim;
 
-        let query = Profile.find(filter).sort({ createdAt: -1 }).skip(skip).limit(Number(limit));
+        let query = Profile.find(filter).sort({ createdAt: -1 }).skip(skip).limit(lim);
         if (tier) {
             // Join with User to filter by tier
             const userIds = (await User.find({ membershipTier: tier }).select('_id')).map(u => u._id);
@@ -242,11 +252,11 @@ router.get('/profiles', async (req, res) => {
         }
 
         const [profiles, total] = await Promise.all([
-            Profile.find(filter).populate('userId', 'fullName email membershipTier verified isSuspended').sort({ createdAt: -1 }).skip(skip).limit(Number(limit)),
+            Profile.find(filter).populate('userId', 'fullName email membershipTier verified isSuspended').sort({ createdAt: -1 }).skip(skip).limit(lim),
             Profile.countDocuments(filter)
         ]);
 
-        res.json({ profiles, total, page: Number(page), pages: Math.ceil(total / Number(limit)) });
+        res.json({ profiles, total, page: safePage, pages: Math.ceil(total / lim) });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -295,23 +305,25 @@ router.put('/profiles/:id/feature', async (req, res) => {
 router.get('/reports', async (req, res) => {
     try {
         const { page = 1, limit = 20, status } = req.query;
+        const safePage = Math.max(Number(page) || 1, 1);
+        const lim = safeLimit(limit, 20);
         const filter = {};
         if (status && status !== '') filter.status = status;
         else filter.$or = [{ status: 'pending' }, { status: null }, { status: { $exists: false } }];
 
-        const skip = (Number(page) - 1) * Number(limit);
+        const skip = (safePage - 1) * lim;
         const [reports, total] = await Promise.all([
             Report.find(filter)
                 .populate('reporterId', 'fullName email')
                 .populate('reportedProfileId', 'fullName profileId profilePhotoUrl userId')
                 .sort({ createdAt: -1 })
                 .skip(skip)
-                .limit(Number(limit))
+                .limit(lim)
                 .lean(),
             Report.countDocuments(filter)
         ]);
 
-        res.json({ reports, total, page: Number(page), pages: Math.ceil(total / Number(limit)) });
+        res.json({ reports, total, page: safePage, pages: Math.ceil(total / lim) });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -382,17 +394,19 @@ router.get('/export/orders', async (req, res) => {
 router.get('/orders', async (req, res) => {
     try {
         const { page = 1, limit = 20, status, plan } = req.query;
+        const safePage = Math.max(Number(page) || 1, 1);
+        const lim = safeLimit(limit, 20);
         const filter = {};
         if (status) filter.status = status;
         if (plan) filter.plan = plan;
 
-        const skip = (Number(page) - 1) * Number(limit);
+        const skip = (safePage - 1) * lim;
         const [orders, total] = await Promise.all([
             MembershipOrder.find(filter)
                 .populate('userId', 'fullName email membershipTier')
                 .sort({ createdAt: -1 })
                 .skip(skip)
-                .limit(Number(limit))
+                .limit(lim)
                 .lean(),
             MembershipOrder.countDocuments(filter)
         ]);
@@ -409,8 +423,8 @@ router.get('/orders', async (req, res) => {
         res.json({
             orders,
             total,
-            page: Number(page),
-            pages: Math.ceil(total / Number(limit)),
+            page: safePage,
+            pages: Math.ceil(total / lim),
             revenueThisMonth: revenueThisMonth[0]?.total || 0,
             revenueTotal: revenueTotal[0]?.total || 0
         });
@@ -603,6 +617,8 @@ router.delete('/announcements/:id', async (req, res) => {
 router.get('/audit-log', async (req, res) => {
     try {
         const { page = 1, limit = 50, action, adminId, fromDate, toDate } = req.query;
+        const safePage = Math.max(Number(page) || 1, 1);
+        const lim = safeLimit(limit, 50);
         const filter = {};
         if (action) filter.action = action;
         if (adminId) filter.adminId = adminId;
@@ -612,18 +628,18 @@ router.get('/audit-log', async (req, res) => {
             if (toDate) filter.createdAt.$lte = new Date(toDate);
         }
 
-        const skip = (Number(page) - 1) * Number(limit);
+        const skip = (safePage - 1) * lim;
         const [logs, total] = await Promise.all([
             AdminAuditLog.find(filter)
                 .populate('adminId', 'fullName email')
                 .sort({ createdAt: -1 })
                 .skip(skip)
-                .limit(Number(limit))
+                .limit(lim)
                 .lean(),
             AdminAuditLog.countDocuments(filter)
         ]);
 
-        res.json({ logs, total, page: Number(page), pages: Math.ceil(total / Number(limit)) });
+        res.json({ logs, total, page: safePage, pages: Math.ceil(total / lim) });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -633,6 +649,8 @@ router.get('/audit-log', async (req, res) => {
 router.get('/interests', async (req, res) => {
     try {
         const { page = 1, limit = 30, status, fromDate, toDate } = req.query;
+        const safePage = Math.max(Number(page) || 1, 1);
+        const lim = safeLimit(limit, 30);
         const filter = {};
         if (status) filter.status = status;
         if (fromDate || toDate) {
@@ -641,19 +659,19 @@ router.get('/interests', async (req, res) => {
             if (toDate) filter.createdAt.$lte = new Date(toDate);
         }
 
-        const skip = (Number(page) - 1) * Number(limit);
+        const skip = (safePage - 1) * lim;
         const [interests, total] = await Promise.all([
             Interest.find(filter)
                 .populate('fromUserId', 'fullName email')
                 .populate('toProfileId', 'fullName profileId profilePhotoUrl userId')
                 .sort({ createdAt: -1 })
                 .skip(skip)
-                .limit(Number(limit))
+                .limit(lim)
                 .lean(),
             Interest.countDocuments(filter)
         ]);
 
-        res.json({ interests, total, page: Number(page), pages: Math.ceil(total / Number(limit)) });
+        res.json({ interests, total, page: safePage, pages: Math.ceil(total / lim) });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -713,6 +731,97 @@ router.get('/export/profiles', async (req, res) => {
         res.setHeader('Content-Type', 'text/csv');
         res.setHeader('Content-Disposition', 'attachment; filename=profiles.csv');
         res.send(csv);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// ─── GET /api/admin/conversations ───────────────────────────────────────────
+router.get('/conversations', async (req, res) => {
+    try {
+        const { page = 1, limit = 20, userId } = req.query;
+        const safePage = Math.max(Number(page) || 1, 1);
+        const lim = safeLimit(limit, 20);
+        const filter = {};
+        if (userId) {
+            filter.participants = userId;
+        }
+
+        const skip = (safePage - 1) * lim;
+        const [conversations, total] = await Promise.all([
+            Conversation.find(filter)
+                .populate('participants', 'fullName email')
+                .sort({ lastMessageAt: -1 })
+                .skip(skip)
+                .limit(lim)
+                .lean(),
+            Conversation.countDocuments(filter)
+        ]);
+
+        res.json({ conversations, total, page: safePage, pages: Math.ceil(total / lim) });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// ─── GET /api/admin/conversations/:id/messages ──────────────────────────────
+router.get('/conversations/:id/messages', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const conversation = await Conversation.findById(id).populate('participants', 'fullName email');
+        if (!conversation) return res.status(404).json({ message: 'Conversation not found.' });
+
+        const messages = await Message.find({ conversationId: id }).sort({ createdAt: 1 }).lean();
+
+        // Audit this sensitive action
+        const participants = conversation.participants.map(p => p.email).join(', ');
+        await logAdminAction({
+            adminId: req.user._id,
+            action: 'view_conversation',
+            resource: 'conversation',
+            resourceId: id,
+            details: { participants },
+            req
+        });
+
+        res.json({ conversation, messages });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// ─── POST /api/admin/impersonate/:userId ────────────────────────────────────
+router.post('/impersonate/:userId', async (req, res) => {
+    try {
+        const targetUser = await User.findById(req.params.userId);
+        if (!targetUser) return res.status(404).json({ message: 'User not found.' });
+        if (targetUser.isAdmin) return res.status(403).json({ message: 'Cannot impersonate an administrator.' });
+
+        const token = generateToken(targetUser._id);
+
+        await logAdminAction({
+            adminId: req.user._id,
+            action: 'impersonate_user',
+            resource: 'user',
+            resourceId: targetUser._id,
+            details: { email: targetUser.email, fullName: targetUser.fullName },
+            req
+        });
+
+        res.json({
+            token,
+            user: {
+                id: targetUser._id,
+                email: targetUser.email,
+                fullName: targetUser.fullName,
+                gender: targetUser.gender,
+                membershipTier: targetUser.membershipTier,
+                verified: targetUser.verified,
+                isAdmin: targetUser.isAdmin,
+                isSuspended: targetUser.isSuspended,
+                isImpersonated: true
+            }
+        });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

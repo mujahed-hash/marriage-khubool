@@ -87,6 +87,7 @@ import { environment } from '../../../environments/environment';
                                         <button class="btn-action green" (click)="verify(u)" title="Verify">✓</button>
                                     }
                                     <button class="btn-action" [class.warn]="!u.isSuspended" [class.green]="u.isSuspended" (click)="suspend(u)" [title]="u.isSuspended ? 'Unsuspend' : 'Suspend'">{{ u.isSuspended ? '🔓' : '🔒' }}</button>
+                                    <button class="btn-action blue" (click)="impersonate(u)" title="Impersonate User">👤</button>
                                     <button class="btn-action red" (click)="confirmDelete(u)" title="Delete">🗑</button>
                                 </div>
                             </td>
@@ -161,6 +162,11 @@ import { environment } from '../../../environments/environment';
                             <option value="crown">Crown</option>
                         </select>
                         <button class="btn-tier" (click)="applyTier()">Apply</button>
+                    </div>
+
+                    <h4 class="section-title">Account Actions</h4>
+                    <div class="account-actions">
+                        <button class="btn-full-profile blue" (click)="impersonate(detailUser()?.user)">Impersonate User Session</button>
                     </div>
                 </div>
             </div>
@@ -420,8 +426,11 @@ td { padding:0.85rem 1rem; border-top:1px solid #334155; color:#f1f5f9; font-siz
 .btn-action { width:30px; height:30px; border-radius:6px; border:none; cursor:pointer; font-size:0.85rem; background:#334155; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
 .btn-action.green { background:#064e3b; color:#4ade80; }
 .btn-action.warn { background:#451a03; color:#fb923c; }
-.btn-action.red { background:#450a0a; color:#f87171; }
+.btn-action.blue { background:#1e3a8a; color:#60a5fa; }
 .btn-action:hover { transform:translateY(-1px); }
+.btn-full-profile.blue { border-color:#3b82f6; background:rgba(59,130,246,0.1); color:#3b82f6; }
+.btn-full-profile.blue:hover { background:rgba(59,130,246,0.2); }
+.account-actions { width:100%; padding-top:1rem; }
 .pagination { display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem; border-top:1px solid #334155; }
 .btn-page { padding:0.4rem 0.9rem; border-radius:6px; border:1px solid #334155; background:#0f172a; color:#94a3b8; font-size:0.85rem; cursor:pointer; }
 .btn-page:disabled { opacity:0.4; cursor:not-allowed; }
@@ -582,6 +591,18 @@ export class UsersComponent implements OnInit {
         this.deleteTarget.set(null);
         this.showToast('User deleted.');
         this.load();
+    }
+
+    async impersonate(user: any) {
+        if (!user) return;
+        try {
+            const res = await this.api.impersonateUser(user._id);
+            const url = `${environment.frontendUrl}/login?token=${res.token}`;
+            window.open(url, '_blank');
+            this.showToast(`Impersonating ${user.fullName}...`);
+        } catch (e: any) {
+            this.showToast(e.error?.message || 'Impersonation failed.');
+        }
     }
 
     // View user detail

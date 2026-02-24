@@ -18,7 +18,7 @@
             @for (conv of conversations(); track conv._id) {
             <div class="conversation-item" [class.active]="activeConversation()?._id === conv._id"
                 (click)="selectConversation(conv)">
-                <img [src]="(conv.otherUser?.profilePhotoUrl | photoUrl) || getPlaceholderImg(conv.otherUser?.gender)"
+                <img loading="lazy" [src]="(conv.otherUser?.profilePhotoUrl | photoUrl) || getPlaceholderImg(conv.otherUser?.gender)"
                     alt="" class="conv-avatar">
                 <div class="conv-info">
                     <h4>{{ conv.otherUser?.fullName || 'Unknown' }}</h4>
@@ -49,7 +49,7 @@
             <button class="btn-back" (click)="activeConversation.set(null)">
                 <i class="fa-solid fa-arrow-left"></i>
             </button>
-            <img [src]="(activeConversation().otherUser?.profilePhotoUrl | photoUrl) || getPlaceholderImg(activeConversation().otherUser?.gender)"
+            <img loading="lazy" [src]="(activeConversation().otherUser?.profilePhotoUrl | photoUrl) || getPlaceholderImg(activeConversation().otherUser?.gender)"
                 alt="" class="header-avatar">
             <div class="header-info">
                 <h3>{{ activeConversation().otherUser?.fullName || 'Unknown' }}</h3>
@@ -62,7 +62,10 @@
         </div>
 
         <!-- Messages -->
-        <div class="messages-container" #messagesContainer>
+        <div class="messages-container" #messagesContainer (scroll)="onMessagesScroll()">
+            @if (loadingOlder()) {
+            <div class="load-older"><span class="spinner-small"></span> Loading older messages...</div>
+            }
             @for (msg of chatService.messages(); track msg._id || $index) {
             <div class="message-bubble" [class.mine]="msg.senderId === currentUserId"
                 [class.theirs]="msg.senderId !== currentUserId">

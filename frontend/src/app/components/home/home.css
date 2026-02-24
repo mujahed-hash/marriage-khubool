@@ -76,6 +76,29 @@
     text-align: center;
 }
 
+.diamond-card-guest,
+.gold-card-guest {
+    text-decoration: none;
+    color: inherit;
+}
+
+.diamond-card-guest:hover,
+.gold-card-guest:hover {
+    opacity: 0.9;
+}
+
+.card-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e5e7eb;
+    border-radius: 50%;
+    font-size: 3rem;
+    color: #9ca3af;
+    height: 160px;
+    width: 160px;
+}
+
 /* Mobile Overrides */
 @media (max-width: 768px) {
     .cover-pic1 {
@@ -99,8 +122,9 @@
     }
 
     .cards-container {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        padding-inline: 0.5rem;
     }
 
     #create-profile {

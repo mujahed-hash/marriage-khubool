@@ -347,8 +347,17 @@
 
 /* Mobile responsive */
 @media (max-width: 768px) {
+    .chat-container {
+        height: calc(100vh - 6rem);
+        border-radius: 8px;
+        width: 100%;
+        border: none;
+    }
+
     .chat-sidebar {
         width: 100%;
+        min-width: 0;
+        border-right: none;
     }
 
     .chat-sidebar.hidden-on-mobile {

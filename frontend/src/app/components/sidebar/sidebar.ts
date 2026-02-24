@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth';
 import { VisitorService } from '../../services/visitor.service';
+import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,6 +15,7 @@ import { VisitorService } from '../../services/visitor.service';
 export class SidebarComponent implements OnInit {
   visitorCount = 0;
   private visitorService = inject(VisitorService);
+  public layoutService = inject(LayoutService);
 
   constructor(
     private authService: AuthService,
@@ -37,5 +39,6 @@ export class SidebarComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
     this.visitorCount = 0;
+    this.layoutService.closeSidebar();
   }
 }

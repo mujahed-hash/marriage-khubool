@@ -36,9 +36,6 @@ export class UserProfileComponent implements OnInit {
     showReportModal = signal(false);
     reportReason = '';
 
-    // Requirements modal
-    showRequirementsModal = signal(false);
-
     // Match breakdown modal
     showMatchBreakdownModal = signal(false);
     matchBreakdown = signal<{ matchScore: number; breakdown: { label: string; matched: boolean; yourPreference: string | null; theirValue: string | null }[] } | null>(null);
@@ -207,6 +204,10 @@ export class UserProfileComponent implements OnInit {
 
     scrollToBiodata() {
         document.getElementById('biodata')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    scrollToRequirements() {
+        document.getElementById('requirements')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     async openMatchBreakdown() {

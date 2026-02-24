@@ -6,6 +6,7 @@ import { ThemeService } from '../../services/theme';
 import { AuthService } from '../../services/auth';
 import { VisitorService } from '../../services/visitor.service';
 import { NotificationService } from '../../services/notification.service';
+import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,13 +17,13 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class NavbarComponent implements OnInit {
   dropdownOpen = false;
-  menuOpen = signal(false);
   searchQuery = '';
   visitorCount = 0;
   notificationCount = signal(0);
 
   private visitorService = inject(VisitorService);
   private notificationService = inject(NotificationService);
+  public layoutService = inject(LayoutService);
 
   constructor(
     public themeService: ThemeService,
@@ -56,7 +57,7 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleMenu() {
-    this.menuOpen.update(v => !v);
+    this.layoutService.toggleSidebar();
   }
 
   onSearch() {

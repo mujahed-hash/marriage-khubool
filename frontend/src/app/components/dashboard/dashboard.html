@@ -2,20 +2,15 @@
     <div class="profile-nav">
         <a routerLink="/my-photos"><i class="fa-solid fa-file-image"></i> My Photos</a>
         <a routerLink="/my-requirements"><i class="fa-solid fa-file-circle-check"></i> My Requirements</a>
-        <a href="javascript:void(0)" (click)="openRequirementsModal()"><i class="fa-solid fa-file-lines"></i> View
-            Biodata</a>
-    </div>
-    <span class="edit-del-profile">
+        <a href="javascript:void(0)" (click)="openRequirementsModal()"><i class="fa-solid fa-file-lines"></i> View Biodata</a>
         <a routerLink="/shortlist"><i class="fa-solid fa-bookmark"></i> Shortlisted Profiles</a>
         <a routerLink="/interests"><i class="fa-solid fa-heart"></i> My Interests</a>
         <a routerLink="/create-profile"><i class="fa-solid fa-file-pen"></i> Edit Profile</a>
-        <a href="javascript:void(0)" (click)="openDeleteModal()"><i class="fa-solid fa-file-circle-minus"></i> Delete
-            Profile</a>
-    </span>
-    <h4 id="profile-id">Profile ID: {{ profile.profileId || 'N/A' }} <i class="fa-solid fa-circle-check"
-            *ngIf="profile.verificationDocUrl"></i></h4>
+        <a href="javascript:void(0)" (click)="openDeleteModal()"><i class="fa-solid fa-file-circle-minus"></i> Delete Profile</a>
+        <span class="profile-id-inline">Profile ID: {{ profile.profileId || 'N/A' }} <i class="fa-solid fa-circle-check" *ngIf="profile.verificationDocUrl"></i></span>
+    </div>
     <div class="displaypic-container">
-        <img [src]="(profile.profilePhotoUrl | photoUrl) || getPlaceholderImg(profile.gender)" alt="profile"
+        <img loading="lazy" [src]="(profile.profilePhotoUrl | photoUrl) || getPlaceholderImg(profile.gender)" alt="profile"
             class="displaypic">
         <h1 class="name">{{ profile.fullName || 'N/A' }}<span class="material-symbols-outlined"
                 id="verfied">verified</span></h1>

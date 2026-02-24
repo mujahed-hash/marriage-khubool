@@ -9,9 +9,10 @@ router.use(protect);
 // GET /api/notifications – list user's notifications
 router.get('/', async (req, res) => {
     try {
+        const limit = Math.min(Number(req.query.limit) || 50, 100);
         const notifications = await Notification.find({ userId: req.user._id })
             .sort({ createdAt: -1 })
-            .limit(50)
+            .limit(limit)
             .lean();
         const unreadCount = await Notification.countDocuments({ userId: req.user._id, read: false });
         res.json({ notifications, unreadCount });

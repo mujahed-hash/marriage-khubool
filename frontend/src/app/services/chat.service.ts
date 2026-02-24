@@ -77,7 +77,10 @@ export class ChatService {
         return this.api.post('/chat/conversations', { profileId });
     }
 
-    async getMessages(conversationId: string): Promise<any> {
-        return this.api.get(`/chat/conversations/${conversationId}/messages`);
+    async getMessages(conversationId: string, before?: string): Promise<{ messages: any[]; hasMore: boolean; nextCursor: string | null }> {
+        const params: Record<string, string> = {};
+        if (before) params['before'] = before;
+        const res = await this.api.get<any>(`/chat/conversations/${conversationId}/messages`, Object.keys(params).length ? params : undefined);
+        return { messages: res.messages || [], hasMore: res.hasMore ?? false, nextCursor: res.nextCursor ?? null };
     }
 }

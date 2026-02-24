@@ -16,7 +16,7 @@
     <div class="visitor-list">
         @for (v of visitors(); track v.viewedAt) {
         <div class="visitor-card">
-            <img [src]="v.viewerProfile?.profilePhotoUrl || getPlaceholderImg(v.viewer?.gender)" alt="Visitor"
+            <img loading="lazy" [src]="v.viewerProfile?.profilePhotoUrl || getPlaceholderImg(v.viewer?.gender)" alt="Visitor"
                 class="visitor-avatar">
             <div class="visitor-info">
                 <h3>{{ v.viewerProfile?.fullName || v.viewer?.fullName || 'Unknown' }}</h3>

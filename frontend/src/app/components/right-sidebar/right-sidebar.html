@@ -8,7 +8,7 @@
             <div class="image-content">
                 <span class="overlay" [ngClass]="getTierOverlayClass($any(p).membershipTier)"></span>
                 <div class="card-image">
-                    <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="profile"
+                    <img loading="lazy" [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="profile"
                         class="card-image">
                 </div>
             </div>

@@ -1,6 +1,7 @@
 const express = require('express');
 const profileController = require('../controllers/profileController');
 const { protect, optionalProtect } = require('../middleware/auth');
+const { guestProfileListLimiter } = require('../middleware/guestRateLimit');
 const upload = require('../middleware/upload');
 const ProfileVisitor = require('../models/ProfileVisitor');
 const Profile = require('../models/Profile');
@@ -19,8 +20,9 @@ router.get('/me/visitors', protect, async (req, res) => {
     try {
         const myProfile = await Profile.findOne({ userId: req.user._id });
         if (!myProfile) return res.json({ visitors: [] });
+        const limit = Math.min(Number(req.query.limit) || 50, 100);
         const visitors = await ProfileVisitor.find({ profileId: myProfile._id })
-            .sort({ viewedAt: -1 }).limit(50)
+            .sort({ viewedAt: -1 }).limit(limit)
             .populate({ path: 'viewerId', model: 'User', select: 'fullName email gender membershipTier' });
         const enriched = [];
         for (const v of visitors) {
@@ -40,7 +42,7 @@ router.put('/me/photos/:photoId/primary', protect, profileController.setPrimaryP
 router.delete('/me/photos/:photoId', protect, profileController.deletePhoto);
 router.delete('/me', protect, profileController.deleteMyProfile);
 router.get('/sample', profileController.getSampleProfile);
-router.get('/list', optionalProtect, profileController.getProfiles);
+router.get('/list', guestProfileListLimiter, optionalProtect, profileController.getProfiles);
 // --- Antigravity: Record profile view (before /:id) ---
 router.post('/:id/view', protect, async (req, res) => {
     try {
@@ -89,7 +91,7 @@ router.get('/:id/actions', protect, async (req, res) => {
     }
 });
 
-router.get('/:id', profileController.getProfileById);
+router.get('/:id', protect, profileController.getProfileById);
 
 // PUT /api/profiles/me/deactivate – deactivate profile
 router.put('/me/deactivate', protect, async (req, res) => {

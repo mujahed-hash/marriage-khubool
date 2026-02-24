@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,33 @@ export class LoginComponent {
   error = '';
   loading = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private api: ApiService
+  ) {
+    this.checkImpersonation();
+  }
+
+  async checkImpersonation() {
+    const token = this.route.snapshot.queryParamMap.get('token');
+    if (token) {
+      this.loading = true;
+      try {
+        this.api.setToken(token);
+        const ok = await this.authService.refreshSession();
+        if (ok) {
+          this.router.navigate(['/']);
+          return;
+        }
+      } catch (e) {
+        console.error('Impersonation failed:', e);
+      } finally {
+        this.loading = false;
+      }
+    }
+  }
 
   async onLogin() {
     this.error = '';
@@ -25,7 +52,8 @@ export class LoginComponent {
     try {
       const result = await this.authService.login(this.email, this.password);
       if (result.ok) {
-        this.router.navigate(['/']);
+        const redirect = this.route.snapshot.queryParamMap.get('redirect');
+        this.router.navigateByUrl(redirect && redirect.startsWith('/') ? redirect : '/');
       } else {
         this.error = result.error || 'Invalid email or password';
       }

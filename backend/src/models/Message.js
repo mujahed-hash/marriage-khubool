@@ -8,5 +8,6 @@ const messageSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 messageSchema.index({ conversationId: 1, createdAt: 1 });
+messageSchema.index({ conversationId: 1, createdAt: -1 }); // For cursor-based "load older" queries
 
 module.exports = mongoose.model('Message', messageSchema);

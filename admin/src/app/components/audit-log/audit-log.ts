@@ -24,6 +24,8 @@ import { AdminApiService } from '../../services/admin-api';
             <option value="create_announcement">Create Announcement</option>
             <option value="update_announcement">Update Announcement</option>
             <option value="delete_announcement">Delete Announcement</option>
+            <option value="view_conversation">View Conversation</option>
+            <option value="impersonate_user">Impersonate User</option>
         </select>
         <input type="date" [(ngModel)]="filterFromDate" (ngModelChange)="load()" class="date-filter" />
         <input type="date" [(ngModel)]="filterToDate" (ngModelChange)="load()" class="date-filter" />
@@ -108,7 +110,7 @@ export class AuditLogComponent implements OnInit {
     filterFromDate = '';
     filterToDate = '';
 
-    constructor(private api: AdminApiService) {}
+    constructor(private api: AdminApiService) { }
 
     ngOnInit() { this.load(); }
 
@@ -143,6 +145,7 @@ export class AuditLogComponent implements OnInit {
         if (d.title) parts.push(d.title);
         if (d.maintenanceMode !== undefined) parts.push('maintenance: ' + d.maintenanceMode);
         if (d.maxPhotosPerUser !== undefined) parts.push('maxPhotos: ' + d.maxPhotosPerUser);
+        if (d.participants) parts.push('with: ' + d.participants);
         return parts.length ? parts.join(', ') : JSON.stringify(d);
     }
 }

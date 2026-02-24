@@ -16,7 +16,7 @@
     <div class="shortlist-grid">
         @for (p of profiles(); track p._id) {
         <div class="shortlist-card">
-            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="Profile"
+            <img loading="lazy" [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="Profile"
                 class="card-avatar">
             <div class="card-info">
                 <h3>{{ p.fullName || 'N/A' }}</h3>

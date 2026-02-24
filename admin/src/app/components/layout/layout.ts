@@ -77,6 +77,7 @@ export class LayoutComponent {
         { label: 'Reports', icon: '🚩', route: '/reports' },
         { label: 'Revenue', icon: '💳', route: '/orders' },
         { label: 'Interests', icon: '💑', route: '/interests' },
+        { label: 'Chats', icon: '💬', route: '/conversations' },
         { label: 'Settings', icon: '⚙️', route: '/settings' },
         { label: 'Audit Log', icon: '📋', route: '/audit-log' },
         { label: 'Announcements', icon: '📢', route: '/announcements' },

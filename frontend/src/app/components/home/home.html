@@ -1,7 +1,7 @@
 <div class="center-page-content">
     <div class="cover-pic">
-        <img src="assets/cover.png" alt="Cover Pic" class="cover-pic1">
-        <img src="assets/cover-pic2.png" alt="Cover Pic" class="cover-pic2">
+        <img loading="lazy" src="assets/cover.png" alt="Cover Pic" class="cover-pic1">
+        <img loading="lazy" src="assets/cover-pic2.png" alt="Cover Pic" class="cover-pic2">
     </div>
     <span id="create-profile">
         <h1>Create a Profile to post an Ad & Find a Perfect Match Today! <i class="fa-solid fa-star"></i></h1>
@@ -10,21 +10,39 @@
         <a routerLink="/create-profile"><i class="fa-regular fa-pen-to-square"></i> Create Profile</a>
     </span>
     <div class="membership">
-        <img src="assets/membershippic.jpg" alt="membership" class="membership-img1">
-        <img src="assets/membershipic2.png" alt="membership" class="membership-img2">
+        <img loading="lazy" src="assets/membershippic.jpg" alt="membership" class="membership-img1">
+        <img loading="lazy" src="assets/membershipic2.png" alt="membership" class="membership-img2">
         <a routerLink="/membership" class="visit-plans-btn">View Membership Plans</a>
     </div>
     <div class="profile-cards-container">
         <h1 class="profile-card-h1 diamond-heading"><i class="fa-solid fa-gem"></i> Diamond profiles</h1>
-        <div class="diamond-profile-cards profile-cards">
+        <div class="diamond-profile-cards profile-cards" appInfiniteScroll [isLoading]="diamondLoading"
+            [hasMore]="diamondHasMore" (scrolled)="onDiamondScroll()"
+            style="width:100%; max-height: 800px; overflow-y: auto; overflow-x: hidden;">
             <div class="cards-container diamond-cc">
+                @if (isGuest) {
+                @for (id of diamondIds(); track id) {
+                <a [routerLink]="getLoginRedirect(id)" class="card diamond-card diamond-card-guest">
+                    <div class="image-content">
+                        <span class="overlay diamond-overlay"></span>
+                        <div class="card-image card-image-placeholder">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Member</h2>
+                        <p>Login to view profile</p>
+                    </div>
+                </a>
+                }
+                } @else {
                 @for (p of diamondProfiles(); track p._id || $index) {
                 <div class="card diamond-card">
                     <div class="image-content">
                         <span class="overlay diamond-overlay"></span>
                         <div class="card-image">
-                            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="profile"
-                                class="card-image">
+                            <img loading="lazy" [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)"
+                                alt="profile" class="card-image">
                         </div>
                     </div>
                     <div class="card-content">
@@ -41,11 +59,13 @@
                     </div>
                 </div>
                 }
-                @empty {
+                }
+                @if (!isGuest && diamondProfiles().length === 0) {
                 <div class="card diamond-card">
                     <div class="image-content">
                         <span class="overlay diamond-overlay"></span>
-                        <div class="card-image"><img src="assets/groom.png" alt="groom" class="card-image"></div>
+                        <div class="card-image"><img loading="lazy" src="assets/groom.png" alt="groom"
+                                class="card-image"></div>
                     </div>
                     <div class="card-content">
                         <h2 class="full-name card-name">Mohammed Khan</h2>
@@ -57,24 +77,62 @@
                     </div>
                 </div>
                 }
+                @if (isGuest && diamondIds().length === 0 && !diamondLoading) {
+                <div class="card diamond-card">
+                    <div class="image-content">
+                        <span class="overlay diamond-overlay"></span>
+                        <div class="card-image"><img loading="lazy" src="assets/groom.png" alt="groom"
+                                class="card-image"></div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">No profiles yet</h2>
+                        <a class="diamond-view-profile" routerLink="/profiles/diamond">View Profiles</a>
+                    </div>
+                </div>
+                }
             </div>
+
+            @if (diamondLoading) {
+            <div class="loading-spinner-container" style="text-align: center; margin: 1rem 0; width: 100%;">
+                <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: var(--diamond-color)"></i>
+                <p style="margin-top: 5px; color: #666;">Loading more diamond profiles...</p>
+            </div>
+            }
         </div>
         <div class="more-profiles diamond-more-profiles">
-            <a routerLink="/profiles/diamond"
-                class="more-profiles more-diamond-profiles diamond-profile-styled-link">View More Profiles</a>
+            <a routerLink="/search" class="more-profiles more-diamond-profiles diamond-profile-styled-link">Search All
+                Profiles</a>
         </div>
     </div>
     <div class="profile-cards-container">
         <h1 class="profile-card-h1 gold-heading"><i class="fa-solid fa-trophy"></i> Gold profiles</h1>
-        <div class="gold-profile-cards profile-cards">
+        <div class="gold-profile-cards profile-cards" appInfiniteScroll [isLoading]="goldLoading"
+            [hasMore]="goldHasMore" (scrolled)="onGoldScroll()"
+            style="width:100%; max-height: 800px; overflow-y: auto; overflow-x: hidden;">
             <div class="cards-container gold-cc">
+                @if (isGuest) {
+                @for (id of goldIds(); track id) {
+                <a [routerLink]="getLoginRedirect(id)" class="card gold-card gold-card-guest">
+                    <div class="image-content">
+                        <span class="overlay gold-overlay"></span>
+                        <div class="card-image card-image-placeholder">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">Member</h2>
+                        <p>Login to view profile</p>
+                    </div>
+                </a>
+                }
+                } @else {
                 @for (p of goldProfiles(); track p._id || $index) {
                 <div class="card gold-card">
                     <div class="image-content">
                         <span class="overlay gold-overlay"></span>
                         <div class="card-image">
-                            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="profile"
-                                class="card-image">
+                            <img loading="lazy" [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)"
+                                alt="profile" class="card-image">
                         </div>
                     </div>
                     <div class="card-content">
@@ -90,11 +148,13 @@
                     </div>
                 </div>
                 }
-                @empty {
+                }
+                @if (!isGuest && goldProfiles().length === 0) {
                 <div class="card gold-card">
                     <div class="image-content">
                         <span class="overlay gold-overlay"></span>
-                        <div class="card-image"><img src="assets/groom.png" alt="groom" class="card-image"></div>
+                        <div class="card-image"><img loading="lazy" src="assets/groom.png" alt="groom"
+                                class="card-image"></div>
                     </div>
                     <div class="card-content">
                         <h2 class="full-name card-name">Mohammed Khan</h2>
@@ -106,10 +166,30 @@
                     </div>
                 </div>
                 }
+                @if (isGuest && goldIds().length === 0 && !goldLoading) {
+                <div class="card gold-card">
+                    <div class="image-content">
+                        <span class="overlay gold-overlay"></span>
+                        <div class="card-image"><img loading="lazy" src="assets/groom.png" alt="groom"
+                                class="card-image"></div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="full-name card-name">No profiles yet</h2>
+                        <a class="gold-view-profile" routerLink="/profiles/gold">View Profiles</a>
+                    </div>
+                </div>
+                }
             </div>
+
+            @if (goldLoading) {
+            <div class="loading-spinner-container" style="text-align: center; margin: 1rem 0; width: 100%;">
+                <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: var(--gold-color)"></i>
+                <p style="margin-top: 5px; color: #666;">Loading more gold profiles...</p>
+            </div>
+            }
         </div>
         <div class="more-profiles gold-more-profiles">
-            <a routerLink="/profiles/gold" class="more-profiles more-gold-profiles gold-profile-styled-link">View More
+            <a routerLink="/search" class="more-profiles more-gold-profiles gold-profile-styled-link">Search All
                 Profiles</a>
         </div>
     </div>

@@ -6,21 +6,24 @@ import { ProfileService } from '../../services/profile';
 import { MatchService } from '../../services/match.service';
 import { AuthService } from '../../services/auth';
 import { Profile } from '../../models/profile';
+import { InfiniteScrollDirective } from '../../directives/infinite-scroll.directive';
 
 @Component({
     selector: 'app-profile-list',
     standalone: true,
-    imports: [CommonModule, RouterModule, PhotoUrlPipe],
+    imports: [CommonModule, RouterModule, PhotoUrlPipe, InfiniteScrollDirective],
     templateUrl: './profile-list.html',
     styleUrl: './profile-list.css'
 })
 export class ProfileListComponent implements OnInit {
     tier = '';
     profiles = signal<Partial<Profile>[]>([]);
+    profileIds = signal<string[]>([]);
     total = signal(0);
-    page = signal(1);
-    pages = signal(1);
     limit = 12;
+    currentPage = 1;
+    isLoading = false;
+    hasMore = true;
     matchScores = signal<Record<string, number | null>>({});
 
     private route = inject(ActivatedRoute);
@@ -28,26 +31,57 @@ export class ProfileListComponent implements OnInit {
     private matchService = inject(MatchService);
     private authService = inject(AuthService);
 
+    get isGuest(): boolean {
+        return !this.authService.isAuthenticated();
+    }
+
     ngOnInit() {
         this.route.params.subscribe(params => {
             this.tier = params['tier'] || 'gold';
-            this.page.set(1);
-            this.load();
+            this.resetAndLoad();
         });
+    }
+
+    resetAndLoad() {
+        this.currentPage = 1;
+        this.hasMore = true;
+        this.profiles.set([]);
+        this.profileIds.set([]);
+        this.load();
     }
 
     load() {
         if (!this.tier) return;
+        if (this.isLoading || !this.hasMore) return;
+        this.isLoading = true;
         this.profileService.getProfiles({
             tier: this.tier,
-            page: this.page(),
+            page: this.currentPage,
             limit: this.limit
         }).then(res => {
-            this.profiles.set(res.profiles || []);
+            const resAny = res as { profiles?: Partial<Profile>[]; profileIds?: string[]; total?: number };
+            if (this.isGuest && resAny.profileIds) {
+                this.profileIds.update(prev => [...prev, ...(resAny.profileIds || [])]);
+            } else {
+                const list = res.profiles || [];
+                this.profiles.update(prev => [...prev, ...list]);
+                this.loadMatchScores(list);
+            }
             this.total.set(res.total ?? 0);
-            this.pages.set(res.pages ?? 1);
-            this.loadMatchScores(res.profiles || []);
-        }, () => {});
+            const count = (resAny.profileIds || res.profiles || []).length;
+            this.hasMore = count === this.limit;
+            this.isLoading = false;
+        }, () => {
+            this.isLoading = false;
+            this.hasMore = false;
+        });
+    }
+
+    onScrollLoadMore() {
+        if (!this.isLoading && this.hasMore) {
+            this.currentPage++;
+            this.load();
+        }
     }
 
     private async loadMatchScores(profiles: Partial<Profile>[]) {
@@ -56,18 +90,12 @@ export class ProfileListComponent implements OnInit {
             const ids = profiles.map(p => p._id).filter(Boolean) as string[];
             if (ids.length === 0) return;
             const res = await this.matchService.getMatchScoresBatch(ids);
-            this.matchScores.set(res.scores || {});
+            this.matchScores.update(prev => ({ ...prev, ...res.scores }));
         } catch { }
     }
 
     getMatchScore(profileId: string): number | null {
         return this.matchScores()[profileId] ?? null;
-    }
-
-    goToPage(p: number) {
-        if (p < 1 || p > this.pages()) return;
-        this.page.set(p);
-        this.load();
     }
 
     get tierTitle(): string {
@@ -87,5 +115,9 @@ export class ProfileListComponent implements OnInit {
 
     getPlaceholderImg(gender?: string): string {
         return gender === 'female' ? 'assets/bride.png' : 'assets/groom.png';
+    }
+
+    getLoginRedirect(profileId: string): string {
+        return `/login?redirect=${encodeURIComponent('/profile/' + profileId)}`;
     }
 }

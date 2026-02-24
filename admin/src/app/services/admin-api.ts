@@ -85,4 +85,11 @@ export class AdminApiService {
     createAnnouncement(data: any): Promise<any> { return this.post('/announcements', data); }
     updateAnnouncement(id: string, data: any): Promise<any> { return this.put(`/announcements/${id}`, data); }
     deleteAnnouncement(id: string): Promise<any> { return this.delete(`/announcements/${id}`); }
+
+    // Impersonation
+    impersonateUser(userId: string): Promise<any> { return this.post(`/impersonate/${userId}`); }
+
+    // Conversation Audit
+    getConversations(params?: any): Promise<any> { return this.get('/conversations', params); }
+    getConversationMessages(id: string): Promise<any> { return this.get(`/conversations/${id}/messages`); }
 }

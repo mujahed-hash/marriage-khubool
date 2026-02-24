@@ -100,6 +100,10 @@ const profileSchema = new mongoose.Schema({
     timestamps: true
 });
 
+// Compound indexes for list/search queries
+profileSchema.index({ isActive: 1, membershipTier: 1, featured: -1, createdAt: -1 });
+profileSchema.index({ isActive: 1, gender: 1, state: 1, createdAt: -1 });
+
 // Generate profile ID before save
 profileSchema.pre('save', function (next) {
     if (!this.profileId) {

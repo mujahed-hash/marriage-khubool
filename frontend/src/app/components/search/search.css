@@ -114,6 +114,50 @@
     margin-top: 2rem;
 }
 
+.result-card-guest {
+    text-decoration: none;
+    color: inherit;
+}
+
+.result-card-guest:hover {
+    opacity: 0.9;
+}
+
+/* View Profile button - ensure always visible (bronze fallback, search scope) */
+.view-profile-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 8px;
+    border: none;
+}
+
+.bronze-view-profile {
+    background-color: #8a5a44;
+}
+
+.bronze-view-profile:hover {
+    background-color: #6d4736;
+}
+
+.card-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e5e7eb;
+    border-radius: 50%;
+    font-size: 3rem;
+    color: #9ca3af;
+    height: 160px;
+    width: 160px;
+}
+
 @media (max-width: 768px) {
     .search-input-group {
         flex-direction: column;

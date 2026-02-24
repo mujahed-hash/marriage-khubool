@@ -21,6 +21,7 @@ export const routes: Routes = [
             { path: 'reports', loadComponent: () => import('./components/reports/reports').then(m => m.ReportsComponent) },
             { path: 'orders', loadComponent: () => import('./components/orders/orders').then(m => m.OrdersComponent) },
             { path: 'interests', loadComponent: () => import('./components/interests/interests').then(m => m.InterestsComponent) },
+            { path: 'conversations', loadComponent: () => import('./components/conversations/conversations').then(m => m.ConversationsComponent) },
             { path: 'settings', loadComponent: () => import('./components/settings/settings').then(m => m.SettingsComponent) },
             { path: 'audit-log', loadComponent: () => import('./components/audit-log/audit-log').then(m => m.AuditLogComponent) },
             { path: 'announcements', loadComponent: () => import('./components/announcements/announcements').then(m => m.AnnouncementsComponent) },

@@ -5,6 +5,7 @@ const Photo = require('../models/Photo');
 const User = require('../models/User');
 const sampleProfile = require('../data/sampleProfile');
 const { resolveProfileById } = require('../helpers/profiles');
+const { logGuestActivity } = require('../helpers/guestActivity');
 
 const UPLOADS_DIR = path.join(__dirname, '../../uploads');
 if (!fs.existsSync(UPLOADS_DIR)) {
@@ -51,7 +52,21 @@ exports.getProfileById = async (req, res) => {
             return res.status(404).json({ message: 'Profile not found.' });
         }
         const populated = await Profile.findById(profile._id)
-            .populate('userId', 'fullName email membershipTier verified');
+            .populate('userId', 'fullName email membershipTier verified')
+            .lean();
+
+        const viewerTier = (req.user?.membershipTier || 'bronze').toString().toLowerCase();
+        const fullAccessTiers = ['diamond', 'crown'];
+        const hasFullAccess = fullAccessTiers.includes(viewerTier);
+
+        if (!hasFullAccess && viewerTier === 'bronze') {
+            delete populated.email;
+            delete populated.contactNo;
+            delete populated.alternateNo;
+            populated.profileLimited = true;
+            populated.contactLocked = true;
+        }
+
         res.json(populated);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -160,18 +175,49 @@ exports.setPrimaryPhoto = async (req, res) => {
 exports.getProfiles = async (req, res) => {
     try {
         const { tier, search, state, gender, page = 1, limit = 20 } = req.query;
-        const query = {};
+        // Hard limit cap to prevent server overload
+        const safeLimit = Math.min(Number(limit) || 20, 60);
+        const safePage = Math.max(Number(page) || 1, 1);
+
+        const query = { isActive: true }; // Only show active profiles
         if (tier) query.membershipTier = tier;
         if (state) query.state = state;
         if (gender) query.gender = gender;
 
-        // When logged in: show only opposite gender (male sees female, female sees male)
-        if (req.user) {
-            const myProfile = await Profile.findOne({ userId: req.user._id }).select('gender');
-            if (myProfile?.gender) {
-                const opposite = myProfile.gender.toLowerCase() === 'male' ? 'female' : 'male';
-                query.gender = opposite;
+        // Guest: return profile IDs only (no photos, names, PII)
+        if (!req.user) {
+            logGuestActivity(req, '/profiles/list', { tier: tier || null, hasSearch: !!search });
+            if (search) {
+                query.$or = [
+                    { fullName: new RegExp(search, 'i') },
+                    { city: new RegExp(search, 'i') },
+                    { state: new RegExp(search, 'i') },
+                    { occupation: new RegExp(search, 'i') }
+                ];
             }
+            const total = await Profile.countDocuments(query);
+            const ids = await Profile.find(query)
+                .select('_id profileId')
+                .limit(safeLimit)
+                .skip((safePage - 1) * safeLimit)
+                .sort({ featured: -1, createdAt: -1 })
+                .lean();
+            const profileIds = ids.map(p => (p.profileId || p._id).toString());
+            return res.json({
+                profiles: [],
+                profileIds,
+                total,
+                page: safePage,
+                limit: safeLimit,
+                pages: Math.ceil(total / safeLimit)
+            });
+        }
+
+        // When logged in: show only opposite gender
+        const myProfile = await Profile.findOne({ userId: req.user._id }).select('gender');
+        if (myProfile?.gender) {
+            const opposite = myProfile.gender.toLowerCase() === 'male' ? 'female' : 'male';
+            query.gender = opposite;
         }
         if (search) {
             query.$or = [
@@ -181,15 +227,17 @@ exports.getProfiles = async (req, res) => {
                 { occupation: new RegExp(search, 'i') }
             ];
         }
-        const skip = (parseInt(page) - 1) * parseInt(limit);
+        const skip = (safePage - 1) * safeLimit;
         const profiles = await Profile.find(query)
             .select('fullName profileId profilePhotoUrl dateOfBirth height occupation city state membershipTier gender')
-            .limit(parseInt(limit))
+            .limit(safeLimit)
             .skip(skip)
-            .sort({ createdAt: -1 });
+            .sort({ featured: -1, createdAt: -1 }); // Rank featured higher
+
         const total = await Profile.countDocuments(query);
-        res.json({ profiles, total, page: parseInt(page), pages: Math.ceil(total / parseInt(limit)) });
+        res.json({ profiles, total, page: safePage, limit: safeLimit, pages: Math.ceil(total / safeLimit) });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+

@@ -100,7 +100,7 @@ body {
   /* Super high z-index to stay on top of everything */
   font-family: 'Arial, sans-serif';
   transition: background-color 0.3s ease;
-  height: 4.5rem;
+  height: var(--navbar-height, 4.5rem);
   /* Explicit fixed height for predictable layout */
 }
 
@@ -227,13 +227,9 @@ body {
   margin-top: 10px;
   border-radius: 8px;
   overflow: hidden;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  /* Removed visibility:hidden and opacity:0 to prevent invisible dropdown on mobile */
   transform: translateY(10px);
   /* Adds a subtle upward motion */
-  opacity: 0;
-  /* Initially hidden */
-  visibility: hidden;
-  /* Hidden until triggered */
 }
 
 .dropdown-content a {
@@ -570,8 +566,7 @@ main {
   justify-content: space-between;
   overflow: hidden;
   /* margin-top: -1rem;  REMOVED: Caused overlap with header */
-  padding-top: 4.5rem;
-  /* Added padding to clear the fixed navbar globally */
+  /* padding-top: var(--navbar-height, 4.5rem); REMOVED: Clearance handled by .main-layout */
 }
 
 .leftsidebar {
@@ -580,10 +575,10 @@ main {
   flex-direction: column;
   align-items: center;
   position: fixed;
-  top: 4.5rem;
+  top: var(--navbar-height, 4.5rem);
   /* Sit exactly below navbar */
   left: 0;
-  height: calc(100vh - 4.5rem);
+  height: calc(100vh - var(--navbar-height, 4.5rem));
   width: 10%;
   /* margin-top: 7rem; REMOVED */
   box-shadow: 0 3px 15px rgba(255, 0, 0, 0.2);
@@ -623,20 +618,18 @@ main {
 }
 
 .rightsidebar {
-  display: block;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: fixed;
-  top: 4.5rem;
-  /* Sit exactly below navbar */
+  top: var(--navbar-height, 4.5rem);
   right: 0;
-  height: calc(100vh - 4.5rem);
-  width: 18%;
-  /* margin-top: 7rem; REMOVED */
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  height: calc(100vh - var(--navbar-height, 4.5rem));
+  width: 20%;
+  box-shadow: -3px 0 15px rgba(0, 0, 0, 0.1);
   background-color: #fef4db;
-  z-index: 5;
+  z-index: 50;
+  padding: 1rem;
   overflow-y: auto;
 }
 

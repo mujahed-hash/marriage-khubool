@@ -6,7 +6,7 @@
             </button>
             <div class="logo">
                 <a routerLink="/">
-                    <img src="assets/logo.png" alt="Khubool Hai">
+                    <img loading="lazy" src="assets/logo.png" alt="Khubool Hai">
                 </a>
             </div>
         </div>
@@ -16,8 +16,9 @@
             <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
         <div class="icon-bar">
-            <i class="fa-solid fa-heart hidden-mobile"></i>
-            <i class="fa-solid fa-comments hidden-mobile"></i>
+            <a routerLink="/shortlist" class="icon-link hidden-mobile" title="Shortlist"><i
+                    class="fa-solid fa-heart"></i></a>
+            <a routerLink="/chat" class="icon-link hidden-mobile" title="Chat"><i class="fa-solid fa-comments"></i></a>
             @if (authService.isAuthenticated()) {
             <div class="dropdown notification-dropdown">
                 <a routerLink="/notifications" (click)="dropdownOpen = false" class="notification-bell"
@@ -29,10 +30,14 @@
                 </a>
             </div>
             }
-            <div class="dropdown">
-                <span (click)="toggleDropdown()">
-                    <a href="javascript:void(0)" id="userButton"><i class="fa-solid fa-circle-user"></i></a>
-                </span>
+            <div class="dropdown" #dropdownRef>
+                <div class="dropdown-backdrop" *ngIf="dropdownOpen" (click)="dropdownOpen = false"
+                    (touchstart)="dropdownOpen = false"></div>
+                <button type="button" class="icon-btn" (click)="toggleDropdown()"
+                    (touchstart)="toggleDropdown(); $event.preventDefault(); $event.stopPropagation()" id="userButton"
+                    aria-label="User menu">
+                    <i class="fa-solid fa-circle-user"></i>
+                </button>
                 <div class="dropdown-content" [class.show]="dropdownOpen">
                     <a routerLink="/" class="nav-link" (click)="dropdownOpen = false"><i class="fa-solid fa-house"></i>
                         Homepage</a>
@@ -61,32 +66,4 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu Drawer -->
-    <div class="mobile-menu-overlay" *ngIf="menuOpen()" (click)="toggleMenu()">
-        <div class="mobile-menu" (click)="$event.stopPropagation()">
-            <div class="mobile-menu-header">
-                <img src="assets/logo.png" alt="Logo">
-                <button class="close-btn" (click)="toggleMenu()">✕</button>
-            </div>
-            <div class="mobile-menu-links">
-                <a routerLink="/" (click)="toggleMenu()"><i class="fa-solid fa-house"></i> Home</a>
-                <ng-container *ngIf="authService.isAuthenticated(); else mobileAuth">
-                    <a routerLink="/my-profile" (click)="toggleMenu()"><i class="fa-solid fa-user"></i> My Profile</a>
-                    <a routerLink="/search" (click)="toggleMenu()"><i class="fa-solid fa-magnifying-glass"></i>
-                        Search</a>
-                    <a routerLink="/shortlist" (click)="toggleMenu()"><i class="fa-solid fa-heart"></i> Shortlist</a>
-                    <a routerLink="/interests" (click)="toggleMenu()"><i class="fa-solid fa-star"></i> Interests</a>
-                    <a routerLink="/chat" (click)="toggleMenu()"><i class="fa-solid fa-comments"></i> Chat</a>
-                    <a routerLink="/membership" (click)="toggleMenu()"><i class="fa-solid fa-crown"></i> Membership</a>
-                    <a routerLink="/settings" (click)="toggleMenu()"><i class="fa-solid fa-gear"></i> Settings</a>
-                    <a href="javascript:void(0)" (click)="logout(); toggleMenu()"><i class="fa-solid fa-power-off"></i>
-                        Logout</a>
-                </ng-container>
-                <ng-template #mobileAuth>
-                    <a routerLink="/login" (click)="toggleMenu()"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
-                    <a routerLink="/register" (click)="toggleMenu()"><i class="fa-solid fa-user-plus"></i> Register</a>
-                </ng-template>
-            </div>
-        </div>
-    </div>
 </header>

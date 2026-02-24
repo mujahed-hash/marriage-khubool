@@ -21,7 +21,7 @@
                     <p>Your profile is now live. We're searching for your perfect match...</p>
                     <div class="matching-loader">
                         <div class="pulse-ring"></div>
-                        <img [src]="imagePreview() || 'assets/groom.png'" class="user-preview">
+                        <img loading="lazy" [src]="imagePreview() || 'assets/groom.png'" class="user-preview">
                     </div>
                     <p class="redirect-hint">Redirecting to dashboard...</p>
                 </div>
@@ -308,7 +308,7 @@
 
                         <ng-container *ngIf="imagePreview()">
                             <div class="preview-container">
-                                <img [src]="imagePreview()" class="image-preview">
+                                <img loading="lazy" [src]="imagePreview()" class="image-preview">
                                 <div class="preview-overlay">
                                     <i class="fa-solid fa-camera-rotate"></i>
                                     <span>Change Photo</span>

@@ -52,7 +52,50 @@
 }
 
 @media (max-width: 768px) {
+  .mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
   .leftsidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    /* Hidden by default */
+    width: 250px;
+    height: 100vh;
+    z-index: 1000;
+    background-color: #fef4db;
+    transition: left 0.3s ease;
+    padding-top: 10px;
+  }
+
+  .leftsidebar.mobile-open {
+    left: 0;
+    /* Slide in */
+  }
+
+  .mobile-close-btn {
+    display: flex;
+    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 15px;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-overlay {
     display: none;
+  }
+
+  .mobile-close-btn {
+    display: none !important;
   }
 }

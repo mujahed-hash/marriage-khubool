@@ -1,11 +1,28 @@
-<div class="profile-list-container">
+<div class="profile-list-container" appInfiniteScroll [isLoading]="isLoading" [hasMore]="hasMore"
+    (scrolled)="onScrollLoadMore()">
     <h1 class="profile-list-heading" [ngClass]="'tier-' + tier">
         <i [class]="tierIcon"></i> {{ tierTitle }}
     </h1>
+    @if (isGuest && total() > 0) {
+    <p class="profile-list-guest-hint">{{ total() }} members in this tier. Login to view profiles.</p>
+    }
     <div class="profile-list-content">
+        @if (isGuest) {
+        @for (id of profileIds(); track id) {
+        <a [routerLink]="getLoginRedirect(id)" class="profile-list-card profile-list-card-guest">
+            <div class="profile-list-img profile-list-placeholder">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="profile-list-info">
+                <h3>Member</h3>
+                <p>Login to view profile</p>
+            </div>
+        </a>
+        }
+        } @else {
         @for (p of profiles(); track p._id || p.profileId || $index) {
         <a [routerLink]="['/profile', p.profileId || p._id]" class="profile-list-card">
-            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="" class="profile-list-img">
+            <img loading="lazy" [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="" class="profile-list-img">
             <div class="profile-list-info">
                 @if (p._id && getMatchScore(p._id) != null) {
                 <span class="match-badge">{{ getMatchScore(p._id!) }}% Match</span>
@@ -18,19 +35,18 @@
             </div>
         </a>
         }
-        @empty {
-        <p>No {{ tier }} profiles yet.</p>
+        }
+        @if (!isGuest && profiles().length === 0 && !isLoading) {
+        <p class="profile-list-empty">No {{ tier }} profiles yet.</p>
+        }
+        @if (isGuest && profileIds().length === 0 && total() === 0 && !isLoading) {
+        <p class="profile-list-empty">No {{ tier }} profiles yet.</p>
         }
     </div>
-    @if (pages() > 1) {
-    <div class="pagination">
-        <button (click)="goToPage(page() - 1)" [disabled]="page() <= 1">
-            <i class="fa-solid fa-chevron-left"></i> Prev
-        </button>
-        <span class="page-info">Page {{ page() }} of {{ pages() }} ({{ total() }} total)</span>
-        <button (click)="goToPage(page() + 1)" [disabled]="page() >= pages()">
-            Next <i class="fa-solid fa-chevron-right"></i>
-        </button>
+    @if (isLoading) {
+    <div class="profile-list-loading">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        <span>Loading more profiles...</span>
     </div>
     }
 </div>

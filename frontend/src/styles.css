@@ -27,6 +27,19 @@
   --transition-speed: 0.3s;
 }
 
+/* Responsive navbar height */
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --navbar-height: 3.25rem;
+  }
+}
+
 /* Base mobile-first adjustments */
 * {
   box-sizing: border-box;

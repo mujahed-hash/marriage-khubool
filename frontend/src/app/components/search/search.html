@@ -1,40 +1,111 @@
-<div class="search-container">
-    <h1 class="search-heading"><i class="fa-solid fa-magnifying-glass"></i> Search Profiles</h1>
-    <form class="search-form" (ngSubmit)="onSearch()">
-        <div class="search-input-group">
-            <input type="text" [(ngModel)]="searchQuery" name="searchQuery"
-                placeholder="Search by name, city, occupation..." class="search-input" />
-            <select [(ngModel)]="filterState" name="filterState" class="search-filter">
-                <option value="">All States</option>
-                @for (s of states; track s) {
-                <option [value]="s">{{ stateLabels[s] || s }}</option>
-                }
-            </select>
-            <select [(ngModel)]="filterGender" name="filterGender" class="search-filter">
-                <option value="">All Genders</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="others">Others</option>
-            </select>
-            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
-        </div>
-    </form>
-    <div class="search-results">
-        @for (p of results(); track p._id || p.profileId || $index) {
-        <a [routerLink]="['/profile', p.profileId || p._id]" class="search-result-card">
-            <img [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="" class="search-result-img">
-            <div class="search-result-info">
-                <h3>{{ p.fullName || 'Profile' }}</h3>
-                <p>DOB: {{ p.dateOfBirth || 'N/A' }}</p>
-                <p>{{ p.occupation || 'N/A' }}</p>
-                <p>Location: {{ p.city || p.state || 'N/A' }}</p>
+<div class="search-page-content" appInfiniteScroll [isLoading]="isLoading" [hasMore]="hasMore"
+    (scrolled)="onScrollLoadMore()">
+    <div class="search-header">
+        <h1>Find Your Perfect Match</h1>
+        <p>Use the filters below to refine your search.</p>
+    </div>
+
+    <!-- Antigravity: Search Form -->
+    <div class="search-form-container">
+        <form (ngSubmit)="onSearch()" class="search-form">
+            <div class="input-group">
+                <i class="fa-solid fa-magnifying-glass icon"></i>
+                <input type="text" placeholder="Search by name, occupation, or city..." name="searchQuery"
+                    [(ngModel)]="searchQuery" class="search-input" />
             </div>
-        </a>
-        }
-        @empty {
-        @if (hasSearched) {
-        <p class="search-empty">No profiles found.</p>
-        }
+
+            <div class="filters-row">
+                <div class="select-wrapper">
+                    <select name="state" [(ngModel)]="filterState" class="filter-select">
+                        <option value="">Any State</option>
+                        @for (state of states; track state) {
+                        <option [value]="stateLabels[state]">{{ stateLabels[state] }}</option>
+                        }
+                    </select>
+                </div>
+                <div class="select-wrapper">
+                    <select name="gender" [(ngModel)]="filterGender" class="filter-select">
+                        <option value="">Any Gender</option>
+                        <option value="male">Groom (Male)</option>
+                        <option value="female">Bride (Female)</option>
+                    </select>
+                </div>
+                <button type="submit" class="search-button">
+                    Search Profiles
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Search Results -->
+    @if (hasSearched) {
+    <div class="results-container">
+        <h2 class="results-count">
+            @if (isGuest) {
+            {{ resultIds().length }} {{ resultIds().length === 1 ? 'match' : 'matches' }} — Login to view profiles
+            } @else {
+            {{ results().length }} {{ results().length === 1 ? 'result' : 'results' }} found
+            }
+        </h2>
+
+        <div class="cards-container">
+            @if (isGuest) {
+            @for (id of resultIds(); track id) {
+            <a [routerLink]="getLoginRedirect(id)" class="card result-card result-card-guest">
+                <div class="image-content">
+                    <span class="overlay result-overlay"></span>
+                    <div class="card-image card-image-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="full-name card-name">Member</h2>
+                    <p>Login to view profile</p>
+                </div>
+            </a>
+            }
+            } @else {
+            @for (p of results(); track p._id || $index) {
+            <div class="card result-card">
+                <div class="image-content">
+                    <span class="overlay result-overlay" [ngClass]="p.membershipTier + '-overlay'"></span>
+                    <div class="card-image">
+                        <img loading="lazy" [src]="(p.profilePhotoUrl | photoUrl) || getPlaceholderImg(p.gender)" alt="profile"
+                            class="card-image">
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="full-name card-name">{{ p.fullName || 'Profile' }}</h2>
+                    <p class="dob">DOB: {{ p.dateOfBirth || 'N/A' }}</p>
+                    <p class="occupation">{{ p.occupation || 'N/A' }}</p>
+                    <p class="height">Height: {{ p.height || 'N/A' }}</p>
+                    <p class="state">Location: {{ p.city || p.state || 'N/A' }}</p>
+                    <a class="view-profile-btn" [ngClass]="getTierViewClass(p.membershipTier)"
+                        [routerLink]="['/profile', p.profileId || p._id]">View Profile</a>
+                </div>
+            </div>
+            }
+            }
+            @if (!isGuest && results().length === 0 && !isLoading) {
+            <div class="no-results">
+                <i class="fa-solid fa-user-slash no-results-icon"></i>
+                <p>No profiles found matching your criteria. Try adjusting your filters.</p>
+            </div>
+            }
+            @if (isGuest && resultIds().length === 0 && !isLoading) {
+            <div class="no-results">
+                <i class="fa-solid fa-user-slash no-results-icon"></i>
+                <p>No profiles found matching your criteria. Try adjusting your filters.</p>
+            </div>
+            }
+        </div>
+
+        @if (isLoading) {
+        <div class="loading-spinner-container" style="text-align: center; margin: 2rem 0;">
+            <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: var(--primary-color)"></i>
+            <p style="margin-top: 10px; color: #666;">Loading more profiles...</p>
+        </div>
         }
     </div>
+    }
 </div>

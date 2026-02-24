@@ -30,13 +30,13 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server, {
     cors: {
-        origin: ['http://localhost:4200', 'http://localhost:4400', 'http://127.0.0.1:4200', 'http://127.0.0.1:4400', 'http://localhost:4401', 'http://127.0.0.1:4401'],
+        origin: ['http://localhost:4200', 'http://localhost:4400', 'http://127.0.0.1:4200', 'http://127.0.0.1:4400', 'http://localhost:4401', 'http://127.0.0.1:4401', 'https://khuboolhai.com', 'https://www.khuboolhai.com', 'https://admin.khuboolhai.com'],
         methods: ['GET', 'POST']
     }
 });
 
 // Middleware
-app.use(cors({ origin: ['http://localhost:4200', 'http://localhost:4400', 'http://127.0.0.1:4200', 'http://127.0.0.1:4400', 'http://localhost:4401', 'http://127.0.0.1:4401'] }));
+app.use(cors({ origin: ['http://localhost:4200', 'http://localhost:4400', 'http://127.0.0.1:4200', 'http://127.0.0.1:4400', 'http://localhost:4401', 'http://127.0.0.1:4401', 'https://khuboolhai.com', 'https://www.khuboolhai.com', 'https://admin.khuboolhai.com'] }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/uploads', express.static('uploads'));

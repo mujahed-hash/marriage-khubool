@@ -1,0 +1,1 @@
+import{a as n}from"./chunk-DQJ6WRPO.js";import{L as r}from"./chunk-AY3CH6AK.js";var i=class e{transform(t){return!t||t==="public"?null:t.startsWith("http")?t:`${n.uploadsBaseUrl}${t}`}static \u0275fac=function(p){return new(p||e)};static \u0275pipe=r({name:"photoUrl",type:e,pure:!0})};export{i as a};

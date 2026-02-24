@@ -1,1 +1,0 @@
-import{b as o}from"./chunk-YRFZ7VUJ.js";import{n as t,r as e}from"./chunk-AY3CH6AK.js";var s=class i{api=e(o);getMyVisitors(){return this.api.get("/profiles/me/visitors")}recordVisit(r){return this.api.post(`/profiles/${r}/view`,{})}static \u0275fac=function(a){return new(a||i)};static \u0275prov=t({token:i,factory:i.\u0275fac,providedIn:"root"})};export{s as a};

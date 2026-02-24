@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://localhost:5006/api',
-    backendUrl: 'http://localhost:5006/',
+    apiUrl: 'https://khuboolhai.com/api',
+    backendUrl: 'https://khuboolhai.com/',
     frontendUrl: 'https://khuboolhai.com'
 };

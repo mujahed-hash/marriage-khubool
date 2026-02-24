@@ -1,0 +1,490 @@
+/*** NAVBAR RESPONSIVENESS**/
+/* Tablet (768px and above) */
+/* Tablet screens ke liye (768px - 1024px) */
+
+@media (max-width: 1024px) {
+  .profile-nav {
+    flex-direction: row;
+    /* Maintain row on larger screens */
+    padding: 40px;
+    gap: 1rem;
+    font-size: 22px;
+  }
+
+  .profile-nav a {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+  /* Removed aggressive global reset */
+  * {
+    box-sizing: border-box;
+  }
+
+
+  .nav {
+    flex-direction: row;
+    /* Row layout maintain rahega */
+    padding: 0.7rem;
+    /* Padding ko thoda zyada rakha */
+  }
+
+  .logo {
+    width: 30%;
+    height: 100px;
+  }
+
+  .search-bar {
+    width: 40%;
+    /* Search bar ka width tablet ke liye adjust kiya */
+    margin: 0 1rem;
+    /* Margin ko set kiya for spacing */
+    display: flex;
+  }
+
+  .icon-bar {
+    width: 30%;
+  }
+
+  #create-profile {
+    padding: 1.5rem;
+    margin: 1.5rem;
+  }
+
+  #create-profile h1 {
+    font-size: 1.5rem;
+  }
+
+  #create-profile p {
+    font-size: 1rem;
+  }
+
+  #create-profile a {
+    font-size: 1.3rem;
+    padding: 10px 30px;
+  }
+
+  .membership img {
+    height: 220px;
+    margin-left: -2rem;
+  }
+
+
+}
+
+/* Mobile screens ke liye (max-width: 768px) */
+@media (max-width: 480px) {
+
+  /* Removed aggressive global reset to preserve layout padding */
+  * {
+    box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    overflow-x: hidden;
+    background-color: #fff;
+  }
+
+  /* Removed conflicting .nav rule to prevent component override */
+
+
+  .logo {
+    width: 25%;
+    /* Adjusted the logo container width */
+  }
+
+  .icon-bar {
+    font-size: 2.5vh;
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .search-bar,
+  .rightsidebar {
+    display: none;
+  }
+
+  .center-page {
+    width: 100%;
+    height: auto;
+    overflow-x: hidden;
+    background-color: white;
+  }
+
+  .cover-pic1 {
+    display: none;
+  }
+
+  .cover-pic2 {
+    display: block;
+    margin-top: 5px;
+    width: 100%;
+  }
+
+  #create-profile {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  #create-profile h1 {
+    font-size: 1.2rem;
+  }
+
+  #create-profile p {
+    font-size: 0.9rem;
+  }
+
+  #create-profile a {
+    font-size: 1.2rem;
+    padding: 8px 25px;
+  }
+
+  .membership {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center align for mobile */
+    width: 100%;
+    height: auto;
+    margin: 1rem;
+  }
+
+  .membership-img1 {
+    display: none;
+    /* Hide for mobile */
+  }
+
+  .membership-img2 {
+    display: inline-block;
+    /* Show for mobile */
+    max-width: 100%;
+    /* Responsive width */
+  }
+
+  .visit-plans-btn {
+    font-size: 1rem;
+    padding: 10px 16px;
+    margin-top: 1em;
+  }
+
+  /*profile cards*/
+  .profile-cards-container {
+    background-color: #fff;
+  }
+
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 15px 5px;
+    width: 100%;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+    padding: 0;
+    border: 1px solid silver;
+    box-shadow: none;
+  }
+
+  .card:hover {
+    box-shadow: none;
+  }
+
+  .card-image {
+    height: 130px;
+    width: 130px;
+  }
+
+  .profile-card-h1 {
+    font-size: 4vw;
+    padding: 0;
+  }
+
+  .center-content {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0.5rem;
+  }
+
+  .card-content p {
+    font-size: 8px;
+    padding: 0;
+    margin: 0;
+    color: black;
+    text-align: start
+  }
+
+  .card-content h2 {
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
+
+  .card-content a {
+    text-decoration: none;
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .more-profiles {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .diamond-more-profiles a {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  /******* Creating - profiles ****/
+
+  #create-profile {
+    padding: 1rem;
+    margin: 1rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    /* Full width for mobile */
+    background-color: white;
+  }
+
+  #create-profile h1 {
+    font-size: 1.2rem;
+    /* Smaller heading for mobile */
+    text-align: center;
+    /* Center align heading */
+  }
+
+  #create-profile p {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  #create-profile a {
+    font-size: 1.2rem;
+    padding: 8px 25px;
+  }
+
+  .creating-pro-section {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .instructions {
+    margin-top: 1rem;
+    gap: 0.5rem;
+  }
+
+  .upload-container {
+    width: 100%;
+    /* Full width for mobile */
+    padding: 10px;
+  }
+
+  .profile-photo-section h3 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .preview-container {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    /* Limit the height for mobile */
+  }
+
+  .create-profile {
+    padding: 2rem 1rem;
+    gap: 1rem;
+  }
+
+  .create-personal-details,
+  .create-contact-details,
+  .create-education-occupation-details,
+  .create-family-details,
+  .address,
+  .partner-requirement,
+  .profile-photo-section,
+  .siblings-section {
+    padding: 1rem;
+    box-shadow: none;
+    /* Remove shadow for cleaner mobile look */
+    width: 100%;
+    /* Full width for mobile */
+  }
+
+  .create-input,
+  .sibling {
+    flex-direction: column;
+    /* Stacked layout for mobile */
+  }
+
+  .create-input label,
+  .sibling label {
+    width: 100%;
+    /* Full width labels */
+  }
+
+  .create-input input,
+  .create-input select,
+  .create-input textarea,
+  .sibling input,
+  .sibling select,
+  .sibling textarea {
+    width: 100%;
+    /* Full width inputs */
+    padding: 0.8rem;
+    /* Adjust padding for better touch interaction */
+    font-size: 1rem;
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .controls button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  button[type="button"] {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+    margin: 0.5rem 0;
+    width: 100%;
+    /* Full width buttons */
+    text-align: center;
+  }
+
+  #siblings-container h3,
+  .profile-photo-section h3 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .photo-privacy {
+    flex-direction: column;
+    /* Stacked layout for privacy section */
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  #siblingsubmit {
+    width: 100%;
+    padding: 0.7rem 0;
+    text-align: center;
+  }
+
+
+
+  /**** MY PROFILE ****/
+  .myprofilesection {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+
+  }
+
+  .profile-nav {
+    font-size: 12px;
+    /* Further reduce font size for very small screens */
+    width: 80vw;
+    height: 200px;
+  }
+
+  .profile-nav a {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  .displaypic {
+    width: 150px;
+    height: 150px;
+    /* Even smaller for extra small screens */
+  }
+
+  .displaypic-container h1 {
+    font-size: 1.5rem;
+    /* Smaller font for mobile */
+  }
+
+  .edit-del-profile a {
+    padding: 5px 10px;
+    font-size: 12px;
+    /* Smaller font for buttons */
+  }
+
+
+
+
+  section h2 {
+    font-size: 1rem;
+  }
+
+  section p {
+    font-size: 0.9rem;
+  }
+
+  .personal-details,
+  .education-occupation,
+  .contact-details,
+  .family-details,
+  .residential-address {
+    padding: 10px;
+    box-sizing: border-box;
+    width: 95%;
+  }
+
+  /*****BOTTOM-NAVBA ****/
+  .bottom-nav-bar {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #ddd;
+    height: 50px;
+  }
+
+
+  .bottom-nav-bar a {
+    padding: 10px 0;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    flex-grow: 1;
+  }
+
+  .bottom-nav-bar a:hover {
+    background-color: #eee;
+  }
+
+  .bottom-nav-bar .active {
+    color: #b40e0e;
+    background-color: #f9f9f9;
+  }
+
+  .bottom-nav-bar i {
+    display: block;
+    font-size: 24px;
+  }
+
+  .icon {
+    display: block;
+    font-size: 24px;
+  }
+}
